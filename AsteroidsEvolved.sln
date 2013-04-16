@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsteroidsEvolved", "AsteroidsEvolved\AsteroidsEvolved\AsteroidsEvolved.csproj", "{EF7F4596-0B74-4FD3-B86C-984A9224ABB5}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "AsteroidsEvolvedContent", "AsteroidsEvolved\AsteroidsEvolvedContent\AsteroidsEvolvedContent.contentproj", "{BE9FD06D-DBBE-4C7F-890F-53650A8C2784}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF7F4596-0B74-4FD3-B86C-984A9224ABB5}.Debug|x86.ActiveCfg = Debug|x86
+		{EF7F4596-0B74-4FD3-B86C-984A9224ABB5}.Debug|x86.Build.0 = Debug|x86
+		{EF7F4596-0B74-4FD3-B86C-984A9224ABB5}.Release|x86.ActiveCfg = Release|x86
+		{EF7F4596-0B74-4FD3-B86C-984A9224ABB5}.Release|x86.Build.0 = Release|x86
+		{BE9FD06D-DBBE-4C7F-890F-53650A8C2784}.Debug|x86.ActiveCfg = Debug|x86
+		{BE9FD06D-DBBE-4C7F-890F-53650A8C2784}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
