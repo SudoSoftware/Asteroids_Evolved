@@ -9,7 +9,6 @@ namespace AsteroidsEvolved
 			base(model)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
-			rotation.Y = MathHelper.ToRadians(180.0f);
 		}
 
 

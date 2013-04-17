@@ -15,96 +15,77 @@ namespace AsteroidsEvolved
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
-		public WorldObject(Model model) :
-			this(model, new Vector3())
-		{ }
-
-
-
-		public WorldObject(Model model, Vector3 position)
+		public WorldObject(Model model)
 		{
 			this.model = model;
-
 			Debug.Assert(model.Meshes.Count == 1);
+			
 			BoundingBox boundingBox = createBoundingBox();
-
 			Vector3 scale = boundingBox.Max - boundingBox.Min;
-			scale.X = 1 / scale.X;
-			scale.Y = 1 / scale.Y;
-			scale.Z = 1 / scale.Z;
+			scale.X = GameParameters.MODEL_SIZE / scale.X;
+			scale.Y = GameParameters.MODEL_SIZE / scale.Y;
+			scale.Z = GameParameters.MODEL_SIZE / scale.Z;
+
+			System.Diagnostics.Debug.WriteLine(boundingBox);
 
 			modelScale = Matrix.CreateScale(scale);
 			boundingBox.Min *= scale;
 			boundingBox.Max *= scale;
-			
+
+			System.Diagnostics.Debug.WriteLine(boundingBox);
+			System.Diagnostics.Debug.WriteLine(boundingBox.Max - boundingBox.Min);
+
 			manifests.Add(new Manifestation(new Vector3(), boundingBox, this));
-			manifests.Add(new Manifestation(new Vector3(-GameParameters.WORLD_BOUNDS.Width, -GameParameters.WORLD_BOUNDS.Height, 0), boundingBox, this));
-			manifests.Add(new Manifestation(new Vector3(manifests[1].position.X, 0, 0), boundingBox, this));
-			manifests.Add(new Manifestation(new Vector3(0, manifests[1].position.Y, 0), boundingBox, this));
+			for (int j = 0; j < 3; j++)
+				manifests.Add(new Manifestation(new Vector3(float.MinValue, float.MinValue, 0), boundingBox, this));
 		}
 
 
 
 		public virtual void update(GameTime gameTime)
 		{
-			int count = 0;
 			for (int j = 0; j < manifests.Count; j++)
 			{
-				//if (outsideWorldBounds(manifest.get2DBounds()))
-				//	manifest.visible = false;
-				//else
-				//	manifest.visible = true;
+				BoundingBox boundingBox = manifests[j].getBoundingBox();
+				if (outsideWorldBounds(boundingBox))
+					manifests[j].visible = false;
+				else
+					manifests[j].visible = true;
 
 				//find the main ship currently entirely on the screen
-				Rectangle bounds = manifests[j].get2DBounds();
-				
-				if (GameParameters.WORLD_BOUNDS.Contains(bounds))
+				if (insideWorldBounds(boundingBox))
 				{
-					//manifests[(j + 1) % manifests.Count].position.X = bounds.Left;
-					manifests[(j + 1) % manifests.Count].position.Y = bounds.Top;
+					float offsetX = (manifests[j].position.X >= 0) ? manifests[j].position.X - GameParameters.WORLD_BOUNDS.Width : manifests[j].position.X + GameParameters.WORLD_BOUNDS.Width;
+					float offsetY = (manifests[j].position.Y >= 0) ? manifests[j].position.Y - GameParameters.WORLD_BOUNDS.Height : manifests[j].position.Y + GameParameters.WORLD_BOUNDS.Height;
 
-					if (bounds.Top >= 0)
-					{
-						manifests[(j + 2) % manifests.Count].position.Y = bounds.Top - GameParameters.WORLD_BOUNDS.Height;
-						manifests[(j + 3) % manifests.Count].position.Y = bounds.Top - GameParameters.WORLD_BOUNDS.Height;
-					}
-					else
-					{
-						manifests[(j + 2) % manifests.Count].position.Y = bounds.Top + GameParameters.WORLD_BOUNDS.Height;
-						manifests[(j + 3) % manifests.Count].position.Y = bounds.Top + GameParameters.WORLD_BOUNDS.Height;
-					}
+					manifests[(j + 1) % manifests.Count].position.X = manifests[j].position.X;
+					manifests[(j + 1) % manifests.Count].position.Y = offsetY;
 
-					if (bounds.Left >= 0)
-					{
-						manifests[(j + 2) % manifests.Count].position.X = bounds.Left - GameParameters.WORLD_BOUNDS.Width;
-						manifests[(j + 3) % manifests.Count].position.X = bounds.Left - GameParameters.WORLD_BOUNDS.Width;
-					}
-					else
-					{
-						manifests[(j + 2) % manifests.Count].position.X = bounds.Left + GameParameters.WORLD_BOUNDS.Width;
-						manifests[(j + 3) % manifests.Count].position.X = bounds.Left + GameParameters.WORLD_BOUNDS.Width;
-					}
+					manifests[(j + 2) % manifests.Count].position.X = offsetX;
+					manifests[(j + 2) % manifests.Count].position.Y = offsetY;
 
-
-					//System.Diagnostics.Debug.WriteLine(bounds);
-					count++;
+					manifests[(j + 3) % manifests.Count].position.X = offsetX;
+					manifests[(j + 3) % manifests.Count].position.Y = manifests[j].position.Y;
 				}
-				
 
 				manifests[j].update();
 			}
-			System.Diagnostics.Debug.WriteLine(count);
 		}
 
 
 
-		public bool outsideWorldBounds(Rectangle rect)
+		public bool insideWorldBounds(BoundingBox box)
 		{
-			//System.Diagnostics.Debug.WriteLine(rect);
-			return rect.Left < GameParameters.WORLD_BOUNDS.Left
-				|| rect.Right > GameParameters.WORLD_BOUNDS.Right
-				|| rect.Top < GameParameters.WORLD_BOUNDS.Top
-				|| rect.Bottom > GameParameters.WORLD_BOUNDS.Bottom;
+			return box.Min.X > GameParameters.WORLD_BOUNDS.Left && box.Max.X < GameParameters.WORLD_BOUNDS.Right
+				&& box.Min.Y > GameParameters.WORLD_BOUNDS.Top && box.Max.Y < GameParameters.WORLD_BOUNDS.Bottom;
+		}
+
+
+		
+		public bool outsideWorldBounds(BoundingBox box)
+		{
+			return box.Min.X > GameParameters.WORLD_BOUNDS.Right || box.Max.X < GameParameters.WORLD_BOUNDS.Left
+				|| box.Min.Y > GameParameters.WORLD_BOUNDS.Bottom || box.Max.Y < GameParameters.WORLD_BOUNDS.Top;
 		}
 
 
@@ -130,7 +111,7 @@ namespace AsteroidsEvolved
 				foreach (BasicEffect effect in model.Meshes[0].Effects)
 				{
 					effect.EnableDefaultLighting();
-					effect.World = manifest.worldMatrix;
+					effect.World = manifest.getWorldMatrix();
 					effect.View = camera.getView();
 					effect.Projection = camera.getProjection();
 				}
@@ -214,17 +195,18 @@ namespace AsteroidsEvolved
 		protected class Manifestation
 		{
 			public Vector3 position;
-			public Matrix worldMatrix;
-			public BoundingBox bounds;
 			public bool visible = true;
 
 			private WorldObject parent;
+			private Matrix worldMatrix;
+			private BoundingBox boundingBox;
 
 
 			public Manifestation(Vector3 position, BoundingBox boundingBox, WorldObject parent)
 			{
 				this.position = position;
 				this.parent = parent;
+				this.boundingBox = boundingBox;
 			}
 
 
@@ -236,9 +218,19 @@ namespace AsteroidsEvolved
 
 
 
-			public Rectangle get2DBounds()
+			public Matrix getWorldMatrix()
 			{
-				return new Rectangle((int)position.X - 1, (int)position.Y - 1, 2, 2);
+				return worldMatrix;
+			}
+
+
+
+			public BoundingBox getBoundingBox()
+			{
+				BoundingBox bb = boundingBox;
+				bb.Min += position;
+				bb.Max += position;
+				return bb;
 			}
 		}
 	}

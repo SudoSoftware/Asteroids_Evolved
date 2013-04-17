@@ -19,13 +19,13 @@ namespace AsteroidsEvolved.World
 		public void update(GameTime gameTime)
 		{
 			if (Keyboard.GetState().IsKeyDown(Keys.Up))
-				ship.translate(0, 0.05f);
+				ship.translate(0, 3.0f);
 			if (Keyboard.GetState().IsKeyDown(Keys.Down))
-				ship.translate(0, -0.05f);
+				ship.translate(0, -3.0f);
 			if (Keyboard.GetState().IsKeyDown(Keys.Left))
-				ship.translate(0.05f, 0);
+				ship.translate(-3.0f, 0);
 			if (Keyboard.GetState().IsKeyDown(Keys.Right))
-				ship.translate(-0.05f, 0);
+				ship.translate(3.0f, 0);
 
 			ship.update(gameTime);
 		}
