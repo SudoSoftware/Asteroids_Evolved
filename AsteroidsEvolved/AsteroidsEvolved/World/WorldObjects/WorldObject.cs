@@ -28,9 +28,9 @@ namespace AsteroidsEvolved
 			modelScale = Matrix.CreateScale(1.0f / model.Meshes[0].BoundingSphere.Radius);
 			
 			manifests.Add(new Manifestation(new Vector3(), this));
-			manifests.Add(new Manifestation(new Vector3(0, -0.5f, 0), this));
-			manifests.Add(new Manifestation(new Vector3(-0.5f, 0, 0), this));
-			manifests.Add(new Manifestation(new Vector3(-0.5f, -0.5f, 0), this));
+			manifests.Add(new Manifestation(new Vector3(-GameParameters.WORLD_BOUNDS.Width, -GameParameters.WORLD_BOUNDS.Height, 0), this)); //todo: remove /3
+			manifests.Add(new Manifestation(new Vector3(manifests[1].position.X, 0, 0), this));
+			manifests.Add(new Manifestation(new Vector3(0, manifests[1].position.Y, 0), this));
 		}
 
 
@@ -38,7 +38,25 @@ namespace AsteroidsEvolved
 		public virtual void update(GameTime gameTime)
 		{
 			foreach (Manifestation manifest in manifests)
+			{
+				if (outsideWorldBounds(manifest.get2DBounds()))
+					manifest.visible = false;
+				else
+					manifest.visible = true;
+
 				manifest.update();
+			}
+
+		}
+
+
+
+		public bool outsideWorldBounds(Rectangle rect)
+		{
+			return rect.Left < GameParameters.WORLD_BOUNDS.Left
+				|| rect.Right > GameParameters.WORLD_BOUNDS.Right
+				|| rect.Top < GameParameters.WORLD_BOUNDS.Top
+				|| rect.Bottom > GameParameters.WORLD_BOUNDS.Bottom;
 		}
 
 
@@ -53,10 +71,14 @@ namespace AsteroidsEvolved
 		}
 
 
+
 		public void draw(Camera camera)
 		{
 			foreach (Manifestation manifest in manifests)
 			{
+				if (!manifest.visible)
+					continue;
+
 				foreach (BasicEffect effect in model.Meshes[0].Effects)
 				{
 					effect.EnableDefaultLighting();
@@ -96,7 +118,7 @@ namespace AsteroidsEvolved
 		{
 			public Vector3 position;
 			public Matrix worldMatrix;
-			public bool visible;
+			public bool visible = true;
 
 			private WorldObject parent;
 
@@ -107,16 +129,18 @@ namespace AsteroidsEvolved
 				this.parent = parent;
 			}
 
+
+
 			public void update()
 			{
 				worldMatrix = parent.modelScale * parent.getRotationMatrix() * Matrix.CreateTranslation(position);
 			}
 
 
+
 			public Rectangle get2DBounds()
 			{
-				float radius = parent.model.Meshes[0].BoundingSphere.Radius;
-				return new Rectangle((int)(position.X - radius), (int)(position.Y - radius), (int)(radius * 2), (int)(radius * 2));
+				return new Rectangle((int)position.X - 1, (int)position.Y - 1, 2, 2);
 			}
 		}
 	}

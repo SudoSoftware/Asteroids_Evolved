@@ -109,11 +109,12 @@
   <ItemGroup>
     <Compile Include="World\Camera.cs" />
     <Compile Include="GameParameters.cs" />
-    <Compile Include="WorldObjects\WorldObject.cs" />
+    <Compile Include="World\Scene.cs" />
+    <Compile Include="World\WorldObjects\WorldObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AsteroidsEntry.cs" />
     <Compile Include="AsteroidsGame.cs" />
-    <Compile Include="WorldObjects\Ship.cs" />
+    <Compile Include="World\WorldObjects\Ship.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

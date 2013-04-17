@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using AsteroidsEvolved.World;
 
 namespace AsteroidsEvolved
 {
@@ -9,13 +10,14 @@ namespace AsteroidsEvolved
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		private Camera camera;
-		private Ship ship;
-
+		Scene scene;
 
 		public AsteroidsGame()
 		{
 			graphics = new GraphicsDeviceManager(this);
+			graphics.PreferredBackBufferHeight = GameParameters.SCREEN_SIZE.Height;
+			graphics.PreferredBackBufferWidth = GameParameters.SCREEN_SIZE.Width;
+			graphics.IsFullScreen = true;
 			Content.RootDirectory = "Content";
 		}
 
@@ -31,8 +33,10 @@ namespace AsteroidsEvolved
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-			ship = new Ship(Content.Load<Model>(GameParameters.SHIP_MODEL));
-			camera = new Camera(graphics);
+
+			scene = new Scene(new Camera(graphics));
+			scene.setShip(new Ship(Content.Load<Model>(GameParameters.SHIP_MODEL)));
+			
 		}
 
 
@@ -45,24 +49,12 @@ namespace AsteroidsEvolved
 
 		protected override void Update(GameTime gameTime)
 		{
-			handleInput();
-			
-
-			ship.update(gameTime);
-
-
-			base.Update(gameTime);
-		}
-
-
-
-		private void handleInput()
-		{
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
 				this.Exit();
 
-			if (Keyboard.GetState().IsKeyDown(Keys.Up))
-				ship.moveForward();
+			scene.update(gameTime);
+
+			base.Update(gameTime);
 		}
 
 
@@ -71,29 +63,9 @@ namespace AsteroidsEvolved
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			ship.draw(camera);
+			scene.draw();
 
 			base.Draw(gameTime);
-		}
-
-
-
-		private void DrawModel(Model DrawMe, Matrix world)
-		{
-			// Draw the model. A model can have multiple meshes, so loop.
-			foreach (ModelMesh Mesh in DrawMe.Meshes)
-			{
-				// This is where the mesh orientation is set, as well as our camera and projection.
-				foreach (BasicEffect effect in Mesh.Effects)
-				{
-					effect.EnableDefaultLighting();
-					effect.World = world;
-					effect.View = camera.getView();
-					effect.Projection = camera.getProjection();
-				}
-				
-				Mesh.Draw();
-			}
 		}
 	}
 }
