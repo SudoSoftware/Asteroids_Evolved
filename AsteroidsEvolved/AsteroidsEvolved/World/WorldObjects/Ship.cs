@@ -23,9 +23,7 @@ namespace AsteroidsEvolved
 
 		public void moveForward()
 		{
-			translate(0, 0.1f);
-			//position.Y += 0.1f;
-			//System.Diagnostics.Debug.WriteLine(position);
+			//translate(0, 0.1f);
 		}
 	}
 }
