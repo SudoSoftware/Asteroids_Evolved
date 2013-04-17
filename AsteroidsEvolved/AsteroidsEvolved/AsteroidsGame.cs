@@ -45,8 +45,8 @@ namespace AsteroidsEvolved
 
 		protected override void Update(GameTime gameTime)
 		{
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-				this.Exit();
+			handleInput();
+			
 
 			ship.update(gameTime);
 
@@ -56,11 +56,22 @@ namespace AsteroidsEvolved
 
 
 
+		private void handleInput()
+		{
+			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+				this.Exit();
+
+			if (Keyboard.GetState().IsKeyDown(Keys.Up))
+				ship.moveForward();
+		}
+
+
+
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			DrawModel(ship.getModel(), ship.getWorldMatrix());
+			ship.draw(camera);
 
 			base.Draw(gameTime);
 		}
