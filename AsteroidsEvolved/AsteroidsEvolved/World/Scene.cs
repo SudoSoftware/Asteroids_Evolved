@@ -18,8 +18,6 @@ namespace AsteroidsEvolved.World
 
 		public void update(GameTime gameTime)
 		{
-			
-
 			ship.update(gameTime);
 		}
 
