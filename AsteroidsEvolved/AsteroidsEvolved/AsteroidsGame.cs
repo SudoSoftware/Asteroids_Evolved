@@ -15,9 +15,10 @@ namespace AsteroidsEvolved
 		public AsteroidsGame()
 		{
 			graphics = new GraphicsDeviceManager(this);
-			graphics.PreferredBackBufferHeight = GameParameters.WORLD_BOUNDS.Height;
-			graphics.PreferredBackBufferWidth = GameParameters.WORLD_BOUNDS.Width;
+			graphics.PreferredBackBufferHeight = GameParameters.World.BOUNDS.Height;
+			graphics.PreferredBackBufferWidth = GameParameters.World.BOUNDS.Width;
 			graphics.IsFullScreen = true;
+			graphics.PreferMultiSampling = true;
 			Content.RootDirectory = "Content";
 		}
 
@@ -35,7 +36,7 @@ namespace AsteroidsEvolved
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			scene = new Scene(new Camera(graphics));
-			scene.setShip(new Ship(Content.Load<Model>(GameParameters.SHIP_MODEL)));
+			scene.setShip(new Ship(Content.Load<Model>(GameParameters.Ship.MODEL)));
 			
 		}
 

@@ -13,7 +13,7 @@ namespace AsteroidsEvolved
 			view = Matrix.CreateLookAt(eyePos, Vector3.Zero, upVector);
 
 			//projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90.0f), graphics.GraphicsDevice.Viewport.AspectRatio, float.MinValue, float.MaxValue);
-			projection = Matrix.CreateOrthographic(GameParameters.WORLD_BOUNDS.Width, GameParameters.WORLD_BOUNDS.Height, float.MinValue, float.MaxValue);
+			projection = Matrix.CreateOrthographic(GameParameters.World.BOUNDS.Width, GameParameters.World.BOUNDS.Height, float.MinValue, float.MaxValue);
 		}
 
 

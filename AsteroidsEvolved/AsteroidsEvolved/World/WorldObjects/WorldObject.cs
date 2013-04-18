@@ -6,38 +6,40 @@ using System;
 
 namespace AsteroidsEvolved
 {
-	class WorldObject
+	abstract class WorldObject
 	{
 		protected Model model;
-		protected Vector3 rotation;
 		protected Matrix modelScale;
+		private BoundingBox modelBounds;
 
+		protected Vector3 rotation;
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
-		public WorldObject(Model model)
+		public WorldObject(Model model, float size)
 		{
 			this.model = model;
-			Debug.Assert(model.Meshes.Count == 1);
-			
-			BoundingBox boundingBox = createBoundingBox();
-			Vector3 scale = boundingBox.Max - boundingBox.Min;
-			scale.X = GameParameters.MODEL_SIZE / scale.X;
-			scale.Y = GameParameters.MODEL_SIZE / scale.Y;
-			scale.Z = GameParameters.MODEL_SIZE / scale.Z;
 
-			System.Diagnostics.Debug.WriteLine(boundingBox);
+			Debug.Assert(model.Meshes.Count == 1);
+			modelBounds = createBoundingBox();
+
+			Vector3 scale = modelBounds.Max - modelBounds.Min;
+			scale.X = size / scale.X;
+			scale.Y = size / scale.Y;
+			scale.Z = size / scale.Z;
+
+			System.Diagnostics.Debug.WriteLine(modelBounds);
 
 			modelScale = Matrix.CreateScale(scale);
-			boundingBox.Min *= scale;
-			boundingBox.Max *= scale;
+			modelBounds.Min *= scale;
+			modelBounds.Max *= scale;
 
-			System.Diagnostics.Debug.WriteLine(boundingBox);
-			System.Diagnostics.Debug.WriteLine(boundingBox.Max - boundingBox.Min);
+			System.Diagnostics.Debug.WriteLine(modelBounds);
+			System.Diagnostics.Debug.WriteLine(modelBounds.Max - modelBounds.Min);
 
-			manifests.Add(new Manifestation(new Vector3(), boundingBox, this));
+			manifests.Add(new Manifestation(new Vector3(), this));
 			for (int j = 0; j < 3; j++)
-				manifests.Add(new Manifestation(new Vector3(float.MinValue, float.MinValue, 0), boundingBox, this));
+				manifests.Add(new Manifestation(new Vector3(float.MinValue, float.MinValue, 0), this));
 		}
 
 
@@ -46,17 +48,11 @@ namespace AsteroidsEvolved
 		{
 			for (int j = 0; j < manifests.Count; j++)
 			{
-				BoundingBox boundingBox = manifests[j].getBoundingBox();
-				if (outsideWorldBounds(boundingBox))
-					manifests[j].visible = false;
-				else
-					manifests[j].visible = true;
-
 				//find the main ship currently entirely on the screen
-				if (insideWorldBounds(boundingBox))
+				if (insideWorldBounds(manifests[j].getBoundingBox()))
 				{
-					float offsetX = (manifests[j].position.X >= 0) ? manifests[j].position.X - GameParameters.WORLD_BOUNDS.Width : manifests[j].position.X + GameParameters.WORLD_BOUNDS.Width;
-					float offsetY = (manifests[j].position.Y >= 0) ? manifests[j].position.Y - GameParameters.WORLD_BOUNDS.Height : manifests[j].position.Y + GameParameters.WORLD_BOUNDS.Height;
+					float offsetX = (manifests[j].position.X >= 0) ? manifests[j].position.X - GameParameters.World.BOUNDS.Width : manifests[j].position.X + GameParameters.World.BOUNDS.Width;
+					float offsetY = (manifests[j].position.Y >= 0) ? manifests[j].position.Y - GameParameters.World.BOUNDS.Height : manifests[j].position.Y + GameParameters.World.BOUNDS.Height;
 
 					manifests[(j + 1) % manifests.Count].position.X = manifests[j].position.X;
 					manifests[(j + 1) % manifests.Count].position.Y = offsetY;
@@ -69,33 +65,6 @@ namespace AsteroidsEvolved
 				}
 
 				manifests[j].update();
-			}
-		}
-
-
-
-		public bool insideWorldBounds(BoundingBox box)
-		{
-			return box.Min.X > GameParameters.WORLD_BOUNDS.Left && box.Max.X < GameParameters.WORLD_BOUNDS.Right
-				&& box.Min.Y > GameParameters.WORLD_BOUNDS.Top && box.Max.Y < GameParameters.WORLD_BOUNDS.Bottom;
-		}
-
-
-		
-		public bool outsideWorldBounds(BoundingBox box)
-		{
-			return box.Min.X > GameParameters.WORLD_BOUNDS.Right || box.Max.X < GameParameters.WORLD_BOUNDS.Left
-				|| box.Min.Y > GameParameters.WORLD_BOUNDS.Bottom || box.Max.Y < GameParameters.WORLD_BOUNDS.Top;
-		}
-
-
-
-		public void translate(float diffX, float diffY)
-		{
-			foreach (Manifestation manifest in manifests)
-			{
-				manifest.position.X += diffX;
-				manifest.position.Y += diffY;
 			}
 		}
 
@@ -118,6 +87,42 @@ namespace AsteroidsEvolved
 
 				model.Meshes[0].Draw();
 			}
+		}
+
+
+
+		public void translate(float diffX, float diffY)
+		{
+			foreach (Manifestation manifest in manifests)
+			{
+				manifest.position.X += diffX;
+				manifest.position.Y += diffY;
+			}
+		}
+
+
+
+		public void rotate(float diffX, float diffY, float diffZ)
+		{
+			rotation.X += diffX;
+			rotation.Y += diffY;
+			rotation.Z += diffZ;
+		}
+
+
+
+		public bool insideWorldBounds(BoundingBox box)
+		{
+			return box.Min.X > GameParameters.World.BOUNDS.Left && box.Max.X < GameParameters.World.BOUNDS.Right
+				&& box.Min.Y > GameParameters.World.BOUNDS.Top && box.Max.Y < GameParameters.World.BOUNDS.Bottom;
+		}
+
+
+
+		public bool outsideWorldBounds(BoundingBox box)
+		{
+			return box.Min.X > GameParameters.World.BOUNDS.Right || box.Max.X < GameParameters.World.BOUNDS.Left
+				|| box.Min.Y > GameParameters.World.BOUNDS.Bottom || box.Max.Y < GameParameters.World.BOUNDS.Top;
 		}
 		
 
@@ -196,17 +201,14 @@ namespace AsteroidsEvolved
 		{
 			public Vector3 position;
 			public bool visible = true;
-
 			private WorldObject parent;
 			private Matrix worldMatrix;
-			private BoundingBox boundingBox;
 
 
-			public Manifestation(Vector3 position, BoundingBox boundingBox, WorldObject parent)
+			public Manifestation(Vector3 position, WorldObject parent)
 			{
 				this.position = position;
 				this.parent = parent;
-				this.boundingBox = boundingBox;
 			}
 
 
@@ -214,6 +216,11 @@ namespace AsteroidsEvolved
 			public void update()
 			{
 				worldMatrix = parent.modelScale * parent.getRotationMatrix() * Matrix.CreateTranslation(position);
+
+				/*if (parent.outsideWorldBounds(getBoundingBox()))
+					visible = false;
+				else
+					visible = true;*/
 			}
 
 
@@ -227,7 +234,7 @@ namespace AsteroidsEvolved
 
 			public BoundingBox getBoundingBox()
 			{
-				BoundingBox bb = boundingBox;
+				BoundingBox bb = parent.modelBounds;
 				bb.Min += position;
 				bb.Max += position;
 				return bb;
