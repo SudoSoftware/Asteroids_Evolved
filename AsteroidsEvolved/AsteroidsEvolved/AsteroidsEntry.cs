@@ -2,7 +2,8 @@ using System;
 
 namespace AsteroidsEvolved
 {
-#if WINDOWS || XBOX
+	#if WINDOWS || XBOX
+
     static class AsteroidsEntry
     {
         /// <summary>
@@ -16,6 +17,7 @@ namespace AsteroidsEvolved
             }
         }
     }
-#endif
+
+	#endif
 }
 

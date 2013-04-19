@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using AsteroidsEvolved.World;
 using AsteroidsEvolved.Threading;
 using AsteroidsEvolved.Threading.WorkItems;
+using System.Collections.Generic;
 
 namespace AsteroidsEvolved
 {
@@ -14,6 +15,7 @@ namespace AsteroidsEvolved
 
 		Scene scene;
 		ThreadPool threading = ThreadPool.getInstance();
+
 
 		public AsteroidsGame()
 		{
@@ -29,8 +31,13 @@ namespace AsteroidsEvolved
 
 		protected override void Initialize()
 		{
-			//todo: assemble WorkItems here
-			threading.startWork();
+			spriteBatch = new SpriteBatch(GraphicsDevice);
+
+			scene = new Scene(new Camera(graphics));
+			scene.setShip(new Ship(Content.Load<Model>(GameParameters.Ship.MODEL)));
+
+			queueUpdatingShip();
+			threading.startWork(); //comment out to switch back to regular XNA cycle
 
 			base.Initialize();
 		}
@@ -38,18 +45,22 @@ namespace AsteroidsEvolved
 
 	
 		protected override void LoadContent()
-		{
-			spriteBatch = new SpriteBatch(GraphicsDevice);
-
-			scene = new Scene(new Camera(graphics));
-			scene.setShip(new Ship(Content.Load<Model>(GameParameters.Ship.MODEL)));
-			
-		}
+		{ } //content already loaded in Initialize function
 
 
 
 		protected override void UnloadContent()
 		{
+			Content.Unload();
+		}
+
+
+
+		public void queueUpdatingShip()
+		{
+			List<WorldObject> ships = new List<WorldObject>();
+			ships.Add(scene.getShip());
+			threading.enqueueWorkItem(new WorldObjectUpdater(ships));
 		}
 
 		
@@ -58,8 +69,8 @@ namespace AsteroidsEvolved
 		{
 			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
 				this.Exit();
-			
-			scene.update();
+
+			//scene.getShip().update(gameTime.ElapsedGameTime); //uncomment out to switch back to regular XNA cycle
 
 			base.Update(gameTime);
 		}

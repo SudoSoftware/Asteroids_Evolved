@@ -3,22 +3,22 @@ using Microsoft.Xna.Framework;
 
 namespace AsteroidsEvolved
 {
+	//note that values that affect variables such as movement, turn rate, etc are in units per millisecond
 	class GameParameters
 	{
 		public class Ship
 		{
 			public static readonly String MODEL = "Models/p1_wedge";
 			public static readonly float SIZE = 32;
-			public static readonly float ACCELERATION = 0.2f;
-			public static readonly float TURN_RATE = 0.03f;
-			public static readonly float SLOW_RATE = 0.05f;
+			public static readonly float ACCELERATION = 0.015f;
+			public static readonly float TURN_RATE = 0.002f;
+			public static readonly float SLOW_RATE = 0.004f;
 		}
 
 
 
 		public class Rocket
 		{
-			public static readonly String MODEL = "Models/DERP";
 			public static readonly float SIZE = 32;
 		}
 

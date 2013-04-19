@@ -17,16 +17,16 @@ namespace AsteroidsEvolved.World
 
 
 
-		public void update()
+		public void draw()
 		{
-			ship.update(new TimeSpan());
+			ship.draw(camera);
 		}
 
 
 
-		public void draw()
+		public Ship getShip()
 		{
-			ship.draw(camera);
+			return ship;
 		}
 
 
