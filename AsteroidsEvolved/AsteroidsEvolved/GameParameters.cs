@@ -24,6 +24,13 @@ namespace AsteroidsEvolved
 
 
 
+		public class Asteroid
+		{
+			public static readonly float SIZE = 32;
+		}
+
+
+
 		public class World
 		{
 			public static readonly Rectangle BOUNDS = new Rectangle(-1024 / 2, -768 / 2, 1024, 768);

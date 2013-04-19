@@ -32,6 +32,13 @@ namespace AsteroidsEvolved.Threading
 
 
 
+		public void start()
+		{
+			thread.Start();
+		}
+
+
+
 		public void terminate()
 		{
 			done = true;

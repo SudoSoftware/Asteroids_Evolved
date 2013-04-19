@@ -21,7 +21,7 @@ namespace AsteroidsEvolved
 
 
 
-		public override void update(GameTime gameTime)
+		public override void update()
 		{
 			if (Keyboard.GetState().IsKeyDown(Keys.Up))
 				accelerate();
@@ -33,7 +33,7 @@ namespace AsteroidsEvolved
 			velocity = Math.Max(velocity - GameParameters.Ship.SLOW_RATE, 0);
 			translate(movementVector.X * velocity, -movementVector.Y * velocity);
 
-			base.update(gameTime);
+			base.update();
 		}
 
 

@@ -44,7 +44,7 @@ namespace AsteroidsEvolved
 
 
 
-		public virtual void update(GameTime gameTime)
+		public virtual void update()
 		{
 			for (int j = 0; j < manifests.Count; j++)
 			{

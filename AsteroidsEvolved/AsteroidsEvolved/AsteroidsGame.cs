@@ -53,7 +53,7 @@ namespace AsteroidsEvolved
 			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
 				this.Exit();
 
-			scene.update(gameTime);
+			scene.update();
 
 			base.Update(gameTime);
 		}

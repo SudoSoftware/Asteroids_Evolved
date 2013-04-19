@@ -25,6 +25,15 @@ namespace AsteroidsEvolved.Threading
 
 
 
+		public void startWork()
+		{
+			WorkerThread[] array = threadQueue.ToArray();
+			foreach (WorkerThread wt in array)
+				wt.start();
+		}
+
+
+
 		public void terminate()
 		{
 			if (instance == null)
