@@ -6,13 +6,13 @@ namespace AsteroidsEvolved.Threading
 	class ThreadPool
 	{
 		private static ThreadPool instance;
-		private Queue<WorkerThread> threadQueue;
-		private ConcurrentMultiqueue<WorkItem> workQueue;
+		private Queue<WorkerThread> threadQueue = new Queue<WorkerThread>();
+		private ConcurrentMultiqueue<WorkItem> workQueue = new ConcurrentMultiqueue<WorkItem>();
 
 
 		protected ThreadPool(int numberOfThreads)
 		{
-			for (int j = 0; j < numberOfThreads + 4; j++)
+			for (int j = 0; j < numberOfThreads; j++)
 				threadQueue.Enqueue(new WorkerThread(workQueue));
 		}
 
@@ -25,12 +25,23 @@ namespace AsteroidsEvolved.Threading
 
 
 
-		public static void terminate()
+		public void terminate()
 		{
 			if (instance == null)
 				return;
 
-			//TODO
+			List<WorkerThread> threads = new List<WorkerThread>(threadQueue.Count);
+			while (threadQueue.Count > 0)
+			{
+				WorkerThread wt = threadQueue.Dequeue();
+				wt.terminate();
+				threads.Add(wt);
+			}
+
+			foreach (WorkerThread tw in threads)
+				tw.join();
+
+			instance = null;
 		}
 
 
@@ -44,8 +55,5 @@ namespace AsteroidsEvolved.Threading
 			instance = new ThreadPool(availableThreads);
 			return instance;
 		}
-
-
-
 	}
 }

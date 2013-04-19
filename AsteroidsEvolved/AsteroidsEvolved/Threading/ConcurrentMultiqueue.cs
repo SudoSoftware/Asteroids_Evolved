@@ -5,14 +5,14 @@ namespace AsteroidsEvolved.Threading
 {
 	class ConcurrentMultiqueue<T>
 	{
-		List<T> queue = new List<T>();
+		Queue<T> queue = new Queue<T>();
 		Mutex mutex = new Mutex();
 
 
 		public T enqueue(T val)
 		{
 			mutex.WaitOne();
-			queue.Add(val);
+			queue.Enqueue(val);
 			mutex.ReleaseMutex();
 
 			return val;
@@ -20,13 +20,13 @@ namespace AsteroidsEvolved.Threading
 
 
 
-		public bool dequeue(T item)
+		public T dequeue()
 		{
 			mutex.WaitOne();
-			bool success = queue.Remove(item);
+			T value = (queue.Count == 0) ? default(T) : queue.Dequeue();
 			mutex.ReleaseMutex();
 
-			return success;
+			return value;
 		}
 	}
 }
