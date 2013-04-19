@@ -2,6 +2,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using AsteroidsEvolved.World;
+using AsteroidsEvolved.Threading;
+using AsteroidsEvolved.Threading.WorkItems;
 
 namespace AsteroidsEvolved
 {
@@ -11,6 +13,7 @@ namespace AsteroidsEvolved
 		SpriteBatch spriteBatch;
 
 		Scene scene;
+		ThreadPool threading = ThreadPool.getInstance();
 
 		public AsteroidsGame()
 		{
@@ -26,6 +29,9 @@ namespace AsteroidsEvolved
 
 		protected override void Initialize()
 		{
+			//todo: assemble WorkItems here
+			threading.startWork();
+
 			base.Initialize();
 		}
 
@@ -52,7 +58,7 @@ namespace AsteroidsEvolved
 		{
 			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
 				this.Exit();
-
+			
 			scene.update();
 
 			base.Update(gameTime);

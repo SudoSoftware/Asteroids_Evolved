@@ -108,14 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Threading\ConcurrentMultiqueue.cs" />
-    <Compile Include="Threading\WorkItems\AsteroidUpdater.cs" />
     <Compile Include="Threading\WorkItems\CollisionDetector.cs" />
     <Compile Include="Threading\WorkItems\ParticleEffectsUpdater.cs" />
-    <Compile Include="Threading\WorkItems\RocketUpdater.cs" />
-    <Compile Include="Threading\WorkItems\ShipUpdater.cs" />
     <Compile Include="Threading\ThreadPool.cs" />
     <Compile Include="Threading\WorkerThread.cs" />
     <Compile Include="Threading\WorkItems\WorkItem.cs" />
+    <Compile Include="Threading\WorkItems\WorldObjectUpdater.cs" />
     <Compile Include="World\Camera.cs" />
     <Compile Include="GameParameters.cs" />
     <Compile Include="World\Scene.cs" />

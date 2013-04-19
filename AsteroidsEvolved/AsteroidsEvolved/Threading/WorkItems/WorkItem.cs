@@ -5,7 +5,7 @@ namespace AsteroidsEvolved.Threading
 	{
 		public abstract void execute();
 
-		public void complete()
+		public void complete() //todo: is this necessary?
 		{ }
 	}
 }

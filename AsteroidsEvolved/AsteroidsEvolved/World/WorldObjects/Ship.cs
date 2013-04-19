@@ -7,8 +7,6 @@ namespace AsteroidsEvolved
 {
 	class Ship : WorldObject
 	{
-		
-
 		public Vector2 movementVector = new Vector2(0, -1);
 		public float velocity = 0;
 
@@ -21,7 +19,7 @@ namespace AsteroidsEvolved
 
 
 
-		public override void update()
+		public override void update(TimeSpan elapsedGameTime)
 		{
 			if (Keyboard.GetState().IsKeyDown(Keys.Up))
 				accelerate();
@@ -33,7 +31,7 @@ namespace AsteroidsEvolved
 			velocity = Math.Max(velocity - GameParameters.Ship.SLOW_RATE, 0);
 			translate(movementVector.X * velocity, -movementVector.Y * velocity);
 
-			base.update();
+			base.update(elapsedGameTime);
 		}
 
 

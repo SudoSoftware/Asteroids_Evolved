@@ -11,10 +11,10 @@ namespace AsteroidsEvolved.Threading.WorkItems
 		}
 
 
-
+		//note, if the Particle (or whatever its eventual name is) is a WorldObject, and there's no need to do anything else except call .update, using the regular WorldObjectUpdater class instead would be a better idea. Then this class could be deleted to avoid code redundancy/duplication.
 		public override void execute()
 		{
-
+			
 		}
 	}
 }

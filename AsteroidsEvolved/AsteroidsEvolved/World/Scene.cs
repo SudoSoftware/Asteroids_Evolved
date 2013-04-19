@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace AsteroidsEvolved.World
@@ -18,7 +19,7 @@ namespace AsteroidsEvolved.World
 
 		public void update()
 		{
-			ship.update();
+			ship.update(new TimeSpan());
 		}
 
 

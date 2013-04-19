@@ -26,6 +26,7 @@ namespace AsteroidsEvolved.Threading
 				{
 					item.execute();
 					item.complete();
+					workQueue.enqueue(item); //todo: belongs here?
 				}
 			}
 		}

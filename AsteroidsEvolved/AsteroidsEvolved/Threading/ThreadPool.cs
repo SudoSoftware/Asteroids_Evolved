@@ -55,7 +55,7 @@ namespace AsteroidsEvolved.Threading
 
 
 
-		public ThreadPool getInstance()
+		public static ThreadPool getInstance()
 		{
 			if (instance != null)
 				return instance;
