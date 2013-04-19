@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using AsteroidsEvolved.World.WorldObjects;
 
 namespace AsteroidsEvolved.Threading.WorkItems
 {
 	class WorldObjectUpdater : WorkItem
 	{
 		private List<WorldObject> objs;
-		private DateTime lastExecuted;
+		private DateTime lastExecuted = DateTime.Now;
 
 
 		public WorldObjectUpdater(List<WorldObject> objs)

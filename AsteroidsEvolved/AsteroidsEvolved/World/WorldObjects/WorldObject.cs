@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System;
 
-namespace AsteroidsEvolved
+namespace AsteroidsEvolved.World.WorldObjects
 {
 	abstract class WorldObject
 	{
@@ -16,7 +16,7 @@ namespace AsteroidsEvolved
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
-		public WorldObject(Model model, float size)
+		public WorldObject(Model model, Vector3 initialLocation, float size)
 		{
 			this.model = model;
 
@@ -37,7 +37,7 @@ namespace AsteroidsEvolved
 			System.Diagnostics.Debug.WriteLine(modelBounds);
 			System.Diagnostics.Debug.WriteLine(modelBounds.Max - modelBounds.Min);
 
-			manifests.Add(new Manifestation(new Vector3(), this));
+			manifests.Add(new Manifestation(initialLocation, this));
 			for (int j = 0; j < 3; j++)
 				manifests.Add(new Manifestation(new Vector3(float.MinValue, float.MinValue, 0), this));
 		}

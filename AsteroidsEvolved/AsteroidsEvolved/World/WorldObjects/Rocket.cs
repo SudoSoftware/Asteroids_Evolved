@@ -1,11 +1,12 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace AsteroidsEvolved.World.WorldObjects
 {
 	class Rocket : WorldObject
 	{
-		public Rocket(Model model) :
-			base(model, GameParameters.Rocket.SIZE)
+		public Rocket(Model model, Vector3 location) :
+			base(model, location, GameParameters.Rocket.SIZE)
 		{
 			
 		}

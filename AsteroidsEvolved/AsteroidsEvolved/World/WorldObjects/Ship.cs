@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace AsteroidsEvolved
+namespace AsteroidsEvolved.World.WorldObjects
 {
 	class Ship : WorldObject
 	{
@@ -12,7 +12,7 @@ namespace AsteroidsEvolved
 
 
 		public Ship(Model model) :
-			base(model, GameParameters.Ship.SIZE)
+			base(model, new Vector3(), GameParameters.Ship.SIZE)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
 		}
@@ -21,14 +21,12 @@ namespace AsteroidsEvolved
 
 		public override void update(TimeSpan elapsedGameTime)
 		{
-			if (Keyboard.GetState().IsKeyDown(Keys.Up))
+			if (GameParameters.keyboardState.IsKeyDown(Keys.Up))
 				accelerate(elapsedGameTime);
-			if (Keyboard.GetState().IsKeyDown(Keys.Left))
+			if (GameParameters.keyboardState.IsKeyDown(Keys.Left))
 				turnLeft(elapsedGameTime);
-			if (Keyboard.GetState().IsKeyDown(Keys.Right))
+			if (GameParameters.keyboardState.IsKeyDown(Keys.Right))
 				turnRight(elapsedGameTime);
-
-			System.Diagnostics.Debug.WriteLine(elapsedGameTime.TotalMilliseconds + "	" + movementVector + "	" + velocity);
 
 			velocity = Math.Max(velocity - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
 			translate(movementVector.X * velocity, -movementVector.Y * velocity);
@@ -40,7 +38,6 @@ namespace AsteroidsEvolved
 
 		public void turnLeft(TimeSpan elapsedGameTime)
 		{
-			System.Diagnostics.Debug.WriteLine("turning left");
 			rotation.Z += (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.TURN_RATE;
 
 			double theta = Math.Atan2(movementVector.X, movementVector.Y);
@@ -54,7 +51,6 @@ namespace AsteroidsEvolved
 
 		public void turnRight(TimeSpan elapsedGameTime)
 		{
-			System.Diagnostics.Debug.WriteLine("turning right");
 			rotation.Z -= (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.TURN_RATE;
 
 			double theta = Math.Atan2(movementVector.X, movementVector.Y);
@@ -68,7 +64,6 @@ namespace AsteroidsEvolved
 
 		public void accelerate(TimeSpan elapsedGameTime)
 		{
-			System.Diagnostics.Debug.WriteLine("accelerating");
 			velocity = Math.Min(velocity + (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.ACCELERATION, GameParameters.World.SPEED_LIMIT);
 		}
 	}

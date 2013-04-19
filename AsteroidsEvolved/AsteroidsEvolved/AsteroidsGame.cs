@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using AsteroidsEvolved.World;
+using AsteroidsEvolved.World.WorldObjects;
 using AsteroidsEvolved.Threading;
 using AsteroidsEvolved.Threading.WorkItems;
-using System.Collections.Generic;
 
 namespace AsteroidsEvolved
 {
@@ -34,9 +35,9 @@ namespace AsteroidsEvolved
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			scene = new Scene(new Camera(graphics));
-			scene.setShip(new Ship(Content.Load<Model>(GameParameters.Ship.MODEL)));
+			addShip();
+			addAsteroids();
 
-			queueUpdatingShip();
 			threading.startWork(); //comment out to switch back to regular XNA cycle
 
 			base.Initialize();
@@ -56,21 +57,39 @@ namespace AsteroidsEvolved
 
 
 
-		public void queueUpdatingShip()
+		public void addShip()
 		{
-			List<WorldObject> ships = new List<WorldObject>();
-			ships.Add(scene.getShip());
-			threading.enqueueWorkItem(new WorldObjectUpdater(ships));
+			List<WorldObject> objs = new List<WorldObject>();
+			Ship ship = new Ship(Content.Load<Model>(GameParameters.Ship.MODEL));
+			
+			scene.setShip(ship);
+			objs.Add(ship);
+			threading.enqueueWorkItem(new WorldObjectUpdater(objs));
+		}
+
+
+
+		public void addAsteroids()
+		{
+			List<WorldObject> objs = new List<WorldObject>();
+			Asteroid asteroid = new Asteroid(Content.Load<Model>(GameParameters.Asteroid.MODEL), new Vector3(200, 200, 0));
+
+			scene.addAsteroid(asteroid);
+			objs.Add(asteroid);
+			threading.enqueueWorkItem(new WorldObjectUpdater(objs));
 		}
 
 		
 
 		protected override void Update(GameTime gameTime)
 		{
-			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-				this.Exit();
+			GameParameters.keyboardState = Keyboard.GetState();
 
-			//scene.getShip().update(gameTime.ElapsedGameTime); //uncomment out to switch back to regular XNA cycle
+			if (GameParameters.keyboardState.IsKeyDown(Keys.Escape))
+			{
+				threading.terminate();
+				this.Exit();
+			}
 
 			base.Update(gameTime);
 		}

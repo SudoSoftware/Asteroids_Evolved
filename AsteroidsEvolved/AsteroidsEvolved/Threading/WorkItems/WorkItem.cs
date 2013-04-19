@@ -8,7 +8,7 @@ namespace AsteroidsEvolved.Threading
 
 		public void complete()
 		{
-			Thread.Sleep(16); //sleep to keep at a sane update rate
+			Thread.Sleep(10); //sleep to keep at a sane update rate
 		}
 	}
 }

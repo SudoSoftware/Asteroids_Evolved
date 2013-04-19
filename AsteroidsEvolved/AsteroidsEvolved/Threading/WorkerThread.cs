@@ -4,6 +4,7 @@ namespace AsteroidsEvolved.Threading
 {
 	class WorkerThread
 	{
+		private static int instanceCount = 0;
 		private ConcurrentMultiqueue<WorkItem> workQueue;
 		private Thread thread;
 		private bool done = false;
@@ -13,6 +14,7 @@ namespace AsteroidsEvolved.Threading
 		{
 			workQueue = queue;
 			thread = new Thread(new ThreadStart(run));
+			thread.Name = "" + (instanceCount++);
 		}
 
 
@@ -26,7 +28,7 @@ namespace AsteroidsEvolved.Threading
 				{
 					item.execute();
 					item.complete();
-					workQueue.enqueue(item); //todo: belongs here?
+					workQueue.enqueue(item);
 				}
 			}
 		}

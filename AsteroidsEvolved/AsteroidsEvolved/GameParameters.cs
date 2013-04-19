@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace AsteroidsEvolved
 {
@@ -26,6 +27,7 @@ namespace AsteroidsEvolved
 
 		public class Asteroid
 		{
+			public static readonly String MODEL = "Models/asteroid_10_bjs3d_fbx";
 			public static readonly float SIZE = 32;
 		}
 
@@ -36,5 +38,9 @@ namespace AsteroidsEvolved
 			public static readonly Rectangle BOUNDS = new Rectangle(-1024 / 2, -768 / 2, 1024, 768);
 			public static readonly float SPEED_LIMIT = 25f;
 		}
+
+
+
+		public static KeyboardState keyboardState = Keyboard.GetState();
 	}
 }

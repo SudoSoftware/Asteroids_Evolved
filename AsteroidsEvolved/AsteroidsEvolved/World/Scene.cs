@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AsteroidsEvolved.World.WorldObjects;
+using System.Collections.Generic;
 
 namespace AsteroidsEvolved.World
 {
@@ -8,6 +10,7 @@ namespace AsteroidsEvolved.World
 	{
 		private Camera camera;
 		private Ship ship;
+		private List<Asteroid> asteroids = new List<Asteroid>();
 
 
 		public Scene(Camera camera)
@@ -20,6 +23,9 @@ namespace AsteroidsEvolved.World
 		public void draw()
 		{
 			ship.draw(camera);
+
+			foreach (Asteroid asteroid in asteroids)
+				asteroid.draw(camera);
 		}
 
 
@@ -34,6 +40,13 @@ namespace AsteroidsEvolved.World
 		public void setShip(Ship newShip)
 		{
 			ship = newShip;
+		}
+
+
+
+		public void addAsteroid(Asteroid asteroid)
+		{
+			asteroids.Add(asteroid);
 		}
 	}
 }
