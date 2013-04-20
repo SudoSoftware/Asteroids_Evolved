@@ -56,8 +56,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\asteroid_10_bjs3d_fbx.FBX">
-      <Name>asteroid_10_bjs3d_fbx</Name>
+    <Compile Include="Models\asteroid10.FBX">
+      <Name>asteroid10</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\LargeRocket.fbx">
+      <Name>LargeRocket</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\ShockwaveRocket.fbx">
+      <Name>ShockwaveRocket</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\UFO2.fbx">
+      <Name>UFO2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

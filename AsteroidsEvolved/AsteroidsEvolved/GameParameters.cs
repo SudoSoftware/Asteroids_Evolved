@@ -10,7 +10,7 @@ namespace AsteroidsEvolved
 		public class Ship
 		{
 			public static readonly String MODEL = "Models/p1_wedge";
-			public static readonly float SIZE = 32;
+			public static readonly float SIZE = 24;
 			public static readonly float ACCELERATION = 0.015f;
 			public static readonly float TURN_RATE = 0.002f;
 			public static readonly float SLOW_RATE = 0.004f;
@@ -20,6 +20,7 @@ namespace AsteroidsEvolved
 
 		public class Rocket
 		{
+			public static readonly String MODEL = "Models/ShockwaveRocket"; //ShockwaveRocket looks better than LargeRocket
 			public static readonly float SIZE = 32;
 		}
 
@@ -27,7 +28,15 @@ namespace AsteroidsEvolved
 
 		public class Asteroid
 		{
-			public static readonly String MODEL = "Models/asteroid_10_bjs3d_fbx";
+			public static readonly String MODEL = "Models/asteroid10";
+			public static readonly float SIZE = 32;
+		}
+
+
+
+		public class UFO
+		{
+			public static readonly String MODEL = "Models/UFO2";
 			public static readonly float SIZE = 32;
 		}
 

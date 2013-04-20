@@ -16,25 +16,27 @@ namespace AsteroidsEvolved.World.WorldObjects
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
-		public WorldObject(Model model, Vector3 initialLocation, float size)
+		public WorldObject(Model model, Vector3 initialLocation, float size):
+			this(model, initialLocation, new Vector3(size, size, size))
+		{}
+
+		public WorldObject(Model model, Vector3 initialLocation, Vector3 desiredBounds)
 		{
 			this.model = model;
-
-			Debug.Assert(model.Meshes.Count == 1);
+			//System.Diagnostics.Debug.WriteLine(model.Meshes.Count);
+			//Debug.Assert(model.Meshes.Count == 1);
 			modelBounds = createBoundingBox();
 
 			Vector3 scale = modelBounds.Max - modelBounds.Min;
-			scale.X = size / scale.X;
-			scale.Y = size / scale.Y;
-			scale.Z = size / scale.Z;
-
-			System.Diagnostics.Debug.WriteLine(modelBounds);
+			scale.X = desiredBounds.X / scale.X;
+			scale.Y = desiredBounds.Y / scale.Y;
+			scale.Z = desiredBounds.Z / scale.Z;
 
 			modelScale = Matrix.CreateScale(scale);
 			modelBounds.Min *= scale;
 			modelBounds.Max *= scale;
 
-			System.Diagnostics.Debug.WriteLine(modelBounds);
+			System.Diagnostics.Debug.WriteLine(desiredBounds + "	" + modelBounds);
 			System.Diagnostics.Debug.WriteLine(modelBounds.Max - modelBounds.Min);
 
 			manifests.Add(new Manifestation(initialLocation, this));
@@ -77,15 +79,18 @@ namespace AsteroidsEvolved.World.WorldObjects
 				if (!manifest.visible)
 					continue;
 
-				foreach (BasicEffect effect in model.Meshes[0].Effects)
+				foreach (ModelMesh mesh in model.Meshes)
 				{
-					effect.EnableDefaultLighting();
-					effect.World = manifest.getWorldMatrix();
-					effect.View = camera.getView();
-					effect.Projection = camera.getProjection();
-				}
+					foreach (BasicEffect effect in mesh.Effects)
+					{
+						effect.EnableDefaultLighting();
+						effect.World = manifest.getWorldMatrix();
+						effect.View = camera.getView();
+						effect.Projection = camera.getProjection();
+					}
 
-				model.Meshes[0].Draw();
+					mesh.Draw();
+				}
 			}
 		}
 
