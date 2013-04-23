@@ -17,7 +17,7 @@ namespace AsteroidsEvolved.World.WorldObjects
             directionVector = heading;
             directionVector.Normalize();
 
-            rotation.Z = (float)Math.Atan2(directionVector.Y, directionVector.X);
+            rotation.Z = (float)Math.Atan2(-directionVector.Y, directionVector.X) - MathHelper.PiOver2;
 
             movementVector = inertia + directionVector*GameParameters.Rocket.SPEED;
 		}

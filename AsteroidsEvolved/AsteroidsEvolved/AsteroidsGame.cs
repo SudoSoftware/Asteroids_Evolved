@@ -34,8 +34,10 @@ namespace AsteroidsEvolved
 		{
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameParameters.cmanager = Content;
+            GameParameters.sbatch = spriteBatch;
+            Texture2D background = Content.Load<Texture2D>(GameParameters.World.BACKGROUND);
 
-			scene = new Scene(new Camera(graphics));
+			scene = new Scene(new Camera(graphics), background);
 			addShip();
 			addAsteroids();
             //addRocket();

@@ -32,10 +32,20 @@ namespace AsteroidsEvolved
 		{
 			if (GameParameters.keyboardState.IsKeyDown(Keys.Up))
 				accelerate(elapsedGameTime);
+
             if (GameParameters.keyboardState.IsKeyDown(Keys.Left))
-				turnLeft(elapsedGameTime);
-            if (GameParameters.keyboardState.IsKeyDown(Keys.Right))
-				turnRight(elapsedGameTime);
+            {
+                turnLeft(elapsedGameTime);
+                rotation.Y = MathHelper.ToRadians(10f);
+            }
+            else if (GameParameters.keyboardState.IsKeyDown(Keys.Right))
+            {
+                turnRight(elapsedGameTime);
+                rotation.Y = MathHelper.ToRadians(-10f);
+            }
+            else
+                rotation.Y = 0f;
+
             if (GameParameters.keyboardState.IsKeyDown(Keys.Space))
                 fire(elapsedGameTime);
 

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 using AsteroidsEvolved.Threading;
 
 namespace AsteroidsEvolved
@@ -47,14 +48,16 @@ namespace AsteroidsEvolved
 
 
 		public class World
-		{
-			public static readonly Rectangle BOUNDS = new Rectangle(-1024 / 2, -768 / 2, 1024, 768);
+        {
+            public static readonly String BACKGROUND = "Textures/starfield";
+			public static readonly Rectangle BOUNDS = new Rectangle(-1920 / 2, -1080 / 2, 1920, 1080);
 			public static readonly float SPEED_LIMIT = 8f;
 		}
 
 
 
 		public static KeyboardState keyboardState = Keyboard.GetState();
+        public static SpriteBatch sbatch;
         public static ContentManager cmanager;
         public static ThreadPool threading;
 	}
