@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using AsteroidsEvolved.Threading;
 
 namespace AsteroidsEvolved
 {
@@ -23,6 +25,7 @@ namespace AsteroidsEvolved
 			public static readonly String MODEL = "Models/ShockwaveRocket"; //ShockwaveRocket looks better than LargeRocket
 			public static readonly float SIZE = 8;
             public static readonly float SPEED = 2f;
+            public static readonly TimeSpan lifeDuration = new TimeSpan(0, 0, 5);
 		}
 
 
@@ -52,5 +55,7 @@ namespace AsteroidsEvolved
 
 
 		public static KeyboardState keyboardState = Keyboard.GetState();
+        public static ContentManager cmanager;
+        public static ThreadPool threading;
 	}
 }

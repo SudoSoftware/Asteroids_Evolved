@@ -32,13 +32,15 @@ namespace AsteroidsEvolved
 
 		protected override void Initialize()
 		{
-			spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            GameParameters.cmanager = Content;
 
 			scene = new Scene(new Camera(graphics));
 			addShip();
 			addAsteroids();
-            addRocket();
+            //addRocket();
 
+            GameParameters.threading = threading;
 			threading.startWork(); //comment out to switch back to regular XNA cycle
 
 			base.Initialize();
@@ -61,7 +63,7 @@ namespace AsteroidsEvolved
 		public void addShip()
 		{
 			List<WorldObject> objs = new List<WorldObject>();
-			Ship ship = new Ship(Content.Load<Model>(GameParameters.Ship.MODEL));
+			Ship ship = new Ship(scene, Content.Load<Model>(GameParameters.Ship.MODEL));
 			
 			scene.setShip(ship);
 			objs.Add(ship);
@@ -73,7 +75,7 @@ namespace AsteroidsEvolved
 		public void addAsteroids()
 		{
 			List<WorldObject> objs = new List<WorldObject>();
-			Asteroid asteroid = new Asteroid(Content.Load<Model>(GameParameters.Asteroid.MODEL), new Vector3(200, 200, 0));
+			Asteroid asteroid = new Asteroid(scene, Content.Load<Model>(GameParameters.Asteroid.MODEL), new Vector3(200, 200, 0));
 
 			scene.addAsteroid(asteroid);
 			objs.Add(asteroid);
@@ -85,7 +87,7 @@ namespace AsteroidsEvolved
         public void addRocket()
         {
             List<WorldObject> objs = new List<WorldObject>();
-            Rocket rocket = new Rocket(Content.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(200, 200, 0), new Vector2(0, 0), new Vector2(1, -1));
+            Rocket rocket = new Rocket(scene, Content.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(200, 200, 0), new Vector2(0, 0), new Vector2(1, -1));
 
             scene.addRocket(rocket);
             objs.Add(rocket);

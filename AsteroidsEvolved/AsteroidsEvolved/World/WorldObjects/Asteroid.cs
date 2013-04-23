@@ -6,8 +6,8 @@ namespace AsteroidsEvolved.World.WorldObjects
 {
 	class Asteroid : WorldObject
 	{
-		public Asteroid(Model model, Vector3 location) :
-			base(model, location, GameParameters.Asteroid.SIZE)
+		public Asteroid(Scene scene, Model model, Vector3 location) :
+			base(scene, model, location, GameParameters.Asteroid.SIZE)
 		{
 			
 		}

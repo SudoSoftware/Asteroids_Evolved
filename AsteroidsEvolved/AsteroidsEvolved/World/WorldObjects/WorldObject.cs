@@ -8,6 +8,8 @@ namespace AsteroidsEvolved.World.WorldObjects
 {
 	abstract class WorldObject
 	{
+        protected Scene scene;
+
 		protected Model model;
 		protected Matrix modelScale;
 		private BoundingBox modelBounds;
@@ -16,9 +18,11 @@ namespace AsteroidsEvolved.World.WorldObjects
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
-		public WorldObject(Model model, Vector3 initialLocation, float size):
+		public WorldObject(Scene scene, Model model, Vector3 initialLocation, float size):
 			this(model, initialLocation, new Vector3(size, size, size))
-		{}
+		{
+            this.scene = scene;
+        }
 
 		public WorldObject(Model model, Vector3 initialLocation, Vector3 desiredBounds)
 		{

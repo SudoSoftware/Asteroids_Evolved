@@ -1,34 +1,29 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
+using AsteroidsEvolved.World.WorldObjects;
 
 namespace AsteroidsEvolved.World.WorldObjects
 {
-	class Rocket : WorldObject
-	{
+    class UFO : WorldObject
+    {
         public Vector2 movementVector = new Vector2(0, 0);
         public Vector2 directionVector = new Vector2(0, 0);
 
-        private TimeSpan destructTimer = new TimeSpan();
-
-		public Rocket(Scene scene, Model model, Vector3 location, Vector2 inertia, Vector2 heading) :
-			base(scene, model, location, GameParameters.Rocket.SIZE)
-		{
+        public UFO(Scene scene, Model model, Vector3 location, Vector2 inertia, Vector2 heading) :
+            base(scene, model, location, GameParameters.Rocket.SIZE)
+        {
             directionVector = heading;
             directionVector.Normalize();
 
             rotation.Z = (float)Math.Atan2(directionVector.Y, directionVector.X);
 
-            movementVector = inertia + directionVector*GameParameters.Rocket.SPEED;
-		}
+            movementVector = inertia + directionVector * GameParameters.Rocket.SPEED;
+        }
 
         public override void update(System.TimeSpan elapsedGameTime)
         {
-            destructTimer += elapsedGameTime.Duration();
-
-            if (destructTimer > GameParameters.Rocket.lifeDuration)
-                scene.killItem(this);
-
             translate(
                 movementVector.X,
                 -movementVector.Y
@@ -40,5 +35,5 @@ namespace AsteroidsEvolved.World.WorldObjects
 
             base.update(elapsedGameTime);
         }
-	}
+    }
 }

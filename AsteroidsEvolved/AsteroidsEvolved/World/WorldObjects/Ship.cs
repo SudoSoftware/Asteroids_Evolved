@@ -2,7 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using AsteroidsEvolved.World.WorldObjects;
+using AsteroidsEvolved.World;
+using AsteroidsEvolved.Threading.WorkItems;
 
 namespace AsteroidsEvolved
 {
@@ -11,8 +14,14 @@ namespace AsteroidsEvolved
 		public Vector2 movementVector = new Vector2(0, 0);
         public Vector2 directionVector = new Vector2(0, -1);
 
-		public Ship(Model model) :
-			base(model, new Vector3(), GameParameters.Ship.SIZE)
+        public Vector2 launcherPos = new Vector2();
+
+        public TimeSpan lastShot = new TimeSpan();
+        public TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
+
+
+		public Ship(Scene scene, Model model) :
+			base(scene, model, new Vector3(), GameParameters.Ship.SIZE)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
 		}
@@ -29,6 +38,8 @@ namespace AsteroidsEvolved
 				turnRight(elapsedGameTime);
             if (GameParameters.keyboardState.IsKeyDown(Keys.Space))
                 fire(elapsedGameTime);
+
+            lastShot += elapsedGameTime.Duration();
 
             //speed = Math.Max(speed - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
             //movementVector = movementVector * Math.Max(speed - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
@@ -88,9 +99,19 @@ namespace AsteroidsEvolved
 
         public void fire(TimeSpan elapsedGameTime)
         {
-            System.Diagnostics.Debug.WriteLine("firing");
+            if (lastShot > fireDelayTime)
+            {
+                System.Diagnostics.Debug.WriteLine("firing");
 
-            
+                List<WorldObject> objs = new List<WorldObject>();
+                Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(), movementVector, directionVector);
+
+                scene.addRocket(rocket);
+                objs.Add(rocket);
+                GameParameters.threading.enqueueWorkItem(new WorldObjectUpdater(objs));
+
+                lastShot = new TimeSpan();
+            }
         }
 	}
 }

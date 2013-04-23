@@ -25,6 +25,13 @@ namespace AsteroidsEvolved.Threading
 
 
 
+        public void dequeueWorkItem(WorkItem item)
+        {
+
+        }
+
+
+
 		public void startWork()
 		{
 			WorkerThread[] array = threadQueue.ToArray();

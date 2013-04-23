@@ -25,10 +25,10 @@ namespace AsteroidsEvolved.World
 		{
 			ship.draw(camera);
 
-			foreach (Asteroid asteroid in asteroids)
+			foreach (Asteroid asteroid in asteroids.ToArray())
 				asteroid.draw(camera);
 
-            foreach (Rocket rocket in rockets)
+            foreach (Rocket rocket in rockets.ToArray())
                 rocket.draw(camera);
 		}
 
@@ -57,7 +57,22 @@ namespace AsteroidsEvolved.World
 
         public void addRocket(Rocket rocket)
         {
+            // We can't have a whole bunch of rockets on the screen.
+            if (rockets.Count >= 5)
+                rockets.Remove(rockets[0]);
+
             rockets.Add(rocket);
+        }
+
+
+
+        public void killItem(WorldObject obj)
+        {
+            if (obj.GetType() == typeof(Asteroid))
+                asteroids.Remove((Asteroid)obj);
+
+            if (obj.GetType() == typeof(Rocket))
+                rockets.Remove((Rocket)obj);
         }
 	}
 }

@@ -21,7 +21,7 @@ namespace AsteroidsEvolved.Threading.WorkItems
 		{
 			DateTime now = DateTime.Now;
 
-			foreach (WorldObject obj in objs)
+			foreach (WorldObject obj in objs.ToArray())
 				obj.update(now - lastExecuted);
 
 			lastExecuted = now;
