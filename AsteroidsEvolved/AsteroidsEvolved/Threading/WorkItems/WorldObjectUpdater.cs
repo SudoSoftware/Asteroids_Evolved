@@ -6,11 +6,11 @@ namespace AsteroidsEvolved.Threading.WorkItems
 {
 	class WorldObjectUpdater : WorkItem
 	{
-		private List<WorldObject> objs;
+        private List<WorldObject> objs;
 		private DateTime lastExecuted = DateTime.Now;
 
 
-		public WorldObjectUpdater(List<WorldObject> objs)
+		public WorldObjectUpdater(ref List<WorldObject> objs)
 		{
 			this.objs = objs;
 		}

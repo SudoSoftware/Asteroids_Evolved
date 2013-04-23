@@ -27,7 +27,6 @@ namespace AsteroidsEvolved.Threading
 
         public void dequeueWorkItem(WorkItem item)
         {
-
         }
 
 

@@ -37,13 +37,13 @@ namespace AsteroidsEvolved
             GameParameters.sbatch = spriteBatch;
             Texture2D background = Content.Load<Texture2D>(GameParameters.World.BACKGROUND);
 
+            GameParameters.threading = threading;
+            threading.startWork(); //comment out to switch back to regular XNA cycle
+
 			scene = new Scene(new Camera(graphics), background);
 			addShip();
 			addAsteroids();
             //addRocket();
-
-            GameParameters.threading = threading;
-			threading.startWork(); //comment out to switch back to regular XNA cycle
 
 			base.Initialize();
 		}
@@ -69,7 +69,7 @@ namespace AsteroidsEvolved
 			
 			scene.setShip(ship);
 			objs.Add(ship);
-			threading.enqueueWorkItem(new WorldObjectUpdater(objs));
+			threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
 		}
 
 
@@ -81,7 +81,7 @@ namespace AsteroidsEvolved
 
 			scene.addAsteroid(asteroid);
 			objs.Add(asteroid);
-			threading.enqueueWorkItem(new WorldObjectUpdater(objs));
+			threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
 		}
 
 
@@ -93,7 +93,7 @@ namespace AsteroidsEvolved
 
             scene.addRocket(rocket);
             objs.Add(rocket);
-            threading.enqueueWorkItem(new WorldObjectUpdater(objs));
+            threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
         }
 
 		

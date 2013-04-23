@@ -19,11 +19,17 @@ namespace AsteroidsEvolved
         public TimeSpan lastShot = new TimeSpan();
         public TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
 
+        public List<WorldObject> rocketList = new List<WorldObject>();
+        public WorldObjectUpdater rocketPool;
+
 
 		public Ship(Scene scene, Model model) :
 			base(scene, model, new Vector3(), GameParameters.Ship.SIZE)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
+
+            rocketPool = new WorldObjectUpdater(ref rocketList);
+            GameParameters.threading.enqueueWorkItem(rocketPool);
 		}
 
 
@@ -45,6 +51,9 @@ namespace AsteroidsEvolved
             }
             else
                 rotation.Y = 0f;
+
+            if (GameParameters.keyboardState.IsKeyDown(Keys.Down))
+                movementVector = new Vector2();
 
             if (GameParameters.keyboardState.IsKeyDown(Keys.Space))
                 fire(elapsedGameTime);
@@ -113,12 +122,9 @@ namespace AsteroidsEvolved
             {
                 System.Diagnostics.Debug.WriteLine("firing");
 
-                List<WorldObject> objs = new List<WorldObject>();
                 Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(), movementVector, directionVector);
-
                 scene.addRocket(rocket);
-                objs.Add(rocket);
-                GameParameters.threading.enqueueWorkItem(new WorldObjectUpdater(objs));
+                rocketList.Add(rocket);
 
                 lastShot = new TimeSpan();
             }
