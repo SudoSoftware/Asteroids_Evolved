@@ -11,6 +11,7 @@ namespace AsteroidsEvolved.World
 		private Camera camera;
 		private Ship ship;
 		private List<Asteroid> asteroids = new List<Asteroid>();
+        private List<Rocket> rockets = new List<Rocket>();
 
 
 		public Scene(Camera camera)
@@ -26,6 +27,9 @@ namespace AsteroidsEvolved.World
 
 			foreach (Asteroid asteroid in asteroids)
 				asteroid.draw(camera);
+
+            foreach (Rocket rocket in rockets)
+                rocket.draw(camera);
 		}
 
 
@@ -48,5 +52,12 @@ namespace AsteroidsEvolved.World
 		{
 			asteroids.Add(asteroid);
 		}
+        
+
+
+        public void addRocket(Rocket rocket)
+        {
+            rockets.Add(rocket);
+        }
 	}
 }

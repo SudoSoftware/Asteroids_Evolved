@@ -8,11 +8,11 @@ namespace AsteroidsEvolved
 {
 	class Ship : WorldObject
 	{
-		public Vector2 movementVector = new Vector2(0, -1);
+		public Vector2 movementVector = new Vector2(0, 0);
         public Vector2 directionVector = new Vector2(0, -1);
 
 		public Ship(Model model) :
-			base(model, new Vector3(0, 0, 0), GameParameters.Ship.SIZE)
+			base(model, new Vector3(), GameParameters.Ship.SIZE)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
 		}
@@ -21,22 +21,22 @@ namespace AsteroidsEvolved
 
 		public override void update(TimeSpan elapsedGameTime)
 		{
-			if (Keyboard.GetState().IsKeyDown(Keys.Up))
+			if (GameParameters.keyboardState.IsKeyDown(Keys.Up))
 				accelerate(elapsedGameTime);
-			if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (GameParameters.keyboardState.IsKeyDown(Keys.Left))
 				turnLeft(elapsedGameTime);
-			if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (GameParameters.keyboardState.IsKeyDown(Keys.Right))
 				turnRight(elapsedGameTime);
+            if (GameParameters.keyboardState.IsKeyDown(Keys.Space))
+                fire(elapsedGameTime);
 
-            float speed = movementVector.Length();
-
-			System.Diagnostics.Debug.WriteLine(elapsedGameTime.TotalMilliseconds + "	" + movementVector + "	" + speed);
-
-			//speed = Math.Max(speed - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
-
+            //speed = Math.Max(speed - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
             //movementVector = movementVector * Math.Max(speed - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
 
-			translate(movementVector.X * speed, -movementVector.Y * speed);
+
+            System.Diagnostics.Debug.WriteLine(elapsedGameTime.TotalMilliseconds + "	" + movementVector + "	" + movementVector.Length());
+
+			translate(movementVector.X, -movementVector.Y);
 
 			base.update(elapsedGameTime);
 		}
@@ -83,5 +83,14 @@ namespace AsteroidsEvolved
                 movementVector = movementVector * GameParameters.World.SPEED_LIMIT;
             }
 		}
+
+
+
+        public void fire(TimeSpan elapsedGameTime)
+        {
+            System.Diagnostics.Debug.WriteLine("firing");
+
+            
+        }
 	}
 }

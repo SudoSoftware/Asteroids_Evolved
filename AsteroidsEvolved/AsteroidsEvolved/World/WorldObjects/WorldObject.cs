@@ -53,8 +53,11 @@ namespace AsteroidsEvolved.World.WorldObjects
 				//find the main ship currently entirely on the screen
 				if (insideWorldBounds(manifests[j].getBoundingBox()))
 				{
-					float offsetX = (manifests[j].position.X >= 0) ? manifests[j].position.X - GameParameters.World.BOUNDS.Width : manifests[j].position.X + GameParameters.World.BOUNDS.Width;
-					float offsetY = (manifests[j].position.Y >= 0) ? manifests[j].position.Y - GameParameters.World.BOUNDS.Height : manifests[j].position.Y + GameParameters.World.BOUNDS.Height;
+					float offsetX = (manifests[j].position.X >= 0) ?
+                        manifests[j].position.X- GameParameters.World.BOUNDS.Width : manifests[j].position.X + GameParameters.World.BOUNDS.Width;
+
+					float offsetY = (manifests[j].position.Y >= 0) ?
+                        manifests[j].position.Y - GameParameters.World.BOUNDS.Height : manifests[j].position.Y + GameParameters.World.BOUNDS.Height;
 
 					manifests[(j + 1) % manifests.Count].position.X = manifests[j].position.X;
 					manifests[(j + 1) % manifests.Count].position.Y = offsetY;

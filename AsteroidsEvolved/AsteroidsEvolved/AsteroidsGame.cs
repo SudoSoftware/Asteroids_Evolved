@@ -37,6 +37,7 @@ namespace AsteroidsEvolved
 			scene = new Scene(new Camera(graphics));
 			addShip();
 			addAsteroids();
+            addRocket();
 
 			threading.startWork(); //comment out to switch back to regular XNA cycle
 
@@ -79,8 +80,20 @@ namespace AsteroidsEvolved
 			threading.enqueueWorkItem(new WorldObjectUpdater(objs));
 		}
 
-		
 
+        
+        public void addRocket()
+        {
+            List<WorldObject> objs = new List<WorldObject>();
+            Rocket rocket = new Rocket(Content.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(200, 200, 0), new Vector2(0, 0), new Vector2(1, -1));
+
+            scene.addRocket(rocket);
+            objs.Add(rocket);
+            threading.enqueueWorkItem(new WorldObjectUpdater(objs));
+        }
+
+		
+        
 		protected override void Update(GameTime gameTime)
 		{
 			GameParameters.keyboardState = Keyboard.GetState();
