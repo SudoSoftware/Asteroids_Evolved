@@ -6,16 +6,16 @@ using AsteroidsEvolved.World;
 using AsteroidsEvolved.World.WorldObjects;
 using AsteroidsEvolved.Threading;
 using AsteroidsEvolved.Threading.WorkItems;
+using AsteroidsEvolved;
 
 namespace AsteroidsEvolved
 {
 	public class AsteroidsGame : Microsoft.Xna.Framework.Game
 	{
+        ScreenManager manager;
+
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-
-		Scene scene;
-		ThreadPool threading = ThreadPool.getInstance();
 
 
 		public AsteroidsGame()
@@ -37,13 +37,48 @@ namespace AsteroidsEvolved
             GameParameters.sbatch = spriteBatch;
             Texture2D background = Content.Load<Texture2D>(GameParameters.World.BACKGROUND);
 
-            GameParameters.threading = threading;
-            threading.startWork(); //comment out to switch back to regular XNA cycle
+            manager = new ScreenManager(this, graphics, Content, spriteBatch);
+            manager.RM.LoadResources("");
 
-			scene = new Scene(new Camera(graphics), background);
-			addShip();
-			addAsteroids();
-            //addRocket();
+            // Set up default key bindings.
+            UserInput.LeftKey = Keys.Left;
+            UserInput.RightKey = Keys.Right;
+            UserInput.UpKey = Keys.Up;
+            UserInput.DownKey = Keys.Down;
+            UserInput.EscKey = Keys.Escape;
+
+            //UserInput.alt_LeftKey = Keys.A;
+            //UserInput.alt_RightKey = Keys.D;
+            //UserInput.alt_UpKey = Keys.W;
+            //UserInput.alt_DownKey = Keys.D;
+
+            Vector2 SCREEN_PARAMETERS =
+                new Vector2(
+                    GameParameters.TARGET_RESOLUTION.X,
+                    GameParameters.TARGET_RESOLUTION.Y
+                );
+
+            MenuStyle style =
+                new MenuStyle(
+                    GameParameters.DEFAULT_TITLE_FACTOR * SCREEN_PARAMETERS,
+                    GameParameters.DEFAULT_MENU_FACTOR * SCREEN_PARAMETERS,
+                    GameParameters.DEFAULT_MENU_ITEM_DISPLACEMENT * SCREEN_PARAMETERS,
+                    "TitleFont",
+                    "MenuFont",
+                    GameParameters.DEFAULT_TITLE_COLOR,
+                    GameParameters.DEFAULT_MENU_COLOR,
+                    GameParameters.DEFAULT_SELECTED_ITEM_COLOR
+                );
+
+            MainMenuScreen main_menu =
+                new MainMenuScreen(manager, new ExitScreen(manager, null), style);
+            IntroScreen intro_screen = new IntroScreen(manager, main_menu, style.head_pos);
+
+
+            manager.AddScreen(new BackgroundScreen(manager, background));
+
+            manager.AddScreen(intro_screen);
+            manager.FocusScreen(intro_screen);
 
 			base.Initialize();
 		}
@@ -59,54 +94,14 @@ namespace AsteroidsEvolved
 		{
 			Content.Unload();
 		}
-
-
-
-		public void addShip()
-		{
-			List<WorldObject> objs = new List<WorldObject>();
-			Ship ship = new Ship(scene, Content.Load<Model>(GameParameters.Ship.MODEL));
-			
-			scene.setShip(ship);
-			objs.Add(ship);
-			threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
-		}
-
-
-
-		public void addAsteroids()
-		{
-			List<WorldObject> objs = new List<WorldObject>();
-			Asteroid asteroid = new Asteroid(scene, Content.Load<Model>(GameParameters.Asteroid.MODEL), new Vector3(200, 200, 0));
-
-			scene.addAsteroid(asteroid);
-			objs.Add(asteroid);
-			threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
-		}
-
-
-        
-        public void addRocket()
-        {
-            List<WorldObject> objs = new List<WorldObject>();
-            Rocket rocket = new Rocket(scene, Content.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(200, 200, 0), new Vector2(0, 0), new Vector2(1, -1));
-
-            scene.addRocket(rocket);
-            objs.Add(rocket);
-            threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
-        }
-
 		
+
         
 		protected override void Update(GameTime gameTime)
 		{
 			GameParameters.keyboardState = Keyboard.GetState();
 
-			if (GameParameters.keyboardState.IsKeyDown(Keys.Escape))
-			{
-				threading.terminate();
-				this.Exit();
-			}
+            manager.Update(gameTime);
 
 			base.Update(gameTime);
 		}
@@ -117,7 +112,8 @@ namespace AsteroidsEvolved
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			scene.draw();
+			//scene.draw();
+            manager.Draw();
 
 			base.Draw(gameTime);
 		}

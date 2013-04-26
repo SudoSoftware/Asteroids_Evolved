@@ -122,7 +122,7 @@ namespace AsteroidsEvolved
             {
                 System.Diagnostics.Debug.WriteLine("firing");
 
-                Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(), movementVector, directionVector);
+                Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), manifests[0].position, movementVector, directionVector);
                 scene.addRocket(rocket);
                 rocketList.Add(rocket);
 

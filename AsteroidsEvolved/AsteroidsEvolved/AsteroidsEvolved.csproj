@@ -107,6 +107,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScreenManager\Base\ResourceManager.cs" />
+    <Compile Include="ScreenManager\Base\Screen.cs" />
+    <Compile Include="ScreenManager\Base\ScreenManager.cs" />
+    <Compile Include="ScreenManager\Base\Soundtrack.cs" />
+    <Compile Include="ScreenManager\Base\SoundtrackManager.cs" />
+    <Compile Include="ScreenManager\Buttons\AddScreenButton.cs" />
+    <Compile Include="ScreenManager\Buttons\KeySelector.cs" />
+    <Compile Include="ScreenManager\Buttons\MenuQuitButton.cs" />
+    <Compile Include="ScreenManager\Buttons\ScrollButton.cs" />
+    <Compile Include="ScreenManager\Buttons\ToggleButton.cs" />
+    <Compile Include="ScreenManager\MenuSystem\MenuButton.cs" />
+    <Compile Include="ScreenManager\MenuSystem\MenuItem.cs" />
+    <Compile Include="ScreenManager\MenuSystem\MenuScreen.cs" />
+    <Compile Include="ScreenManager\MenuSystem\MenuStyle.cs" />
+    <Compile Include="ScreenManager\Screens\BackgroundScreen.cs" />
+    <Compile Include="ScreenManager\Screens\ControlsScreen.cs" />
+    <Compile Include="ScreenManager\Screens\CreditsScreen.cs" />
+    <Compile Include="ScreenManager\Screens\ExitScreen.cs" />
+    <Compile Include="ScreenManager\Screens\GameScreen.cs" />
+    <Compile Include="ScreenManager\Screens\IntroScreen.cs" />
+    <Compile Include="ScreenManager\Screens\MainMenuScreen.cs" />
+    <Compile Include="ScreenManager\Screens\OptionsScreen.cs" />
     <Compile Include="Threading\ConcurrentMultiqueue.cs" />
     <Compile Include="Threading\WorkItems\CollisionDetector.cs" />
     <Compile Include="Threading\WorkItems\ParticleEffectsUpdater.cs" />
@@ -114,10 +136,13 @@
     <Compile Include="Threading\WorkerThread.cs" />
     <Compile Include="Threading\WorkItems\WorkItem.cs" />
     <Compile Include="Threading\WorkItems\WorldObjectUpdater.cs" />
+    <Compile Include="UserInput.cs" />
     <Compile Include="World\Camera.cs" />
     <Compile Include="GameParameters.cs" />
     <Compile Include="World\Scene.cs" />
     <Compile Include="World\WorldObjects\Asteroid.cs" />
+    <Compile Include="World\WorldObjects\Particle.cs" />
+    <Compile Include="World\WorldObjects\ParticleEmitter.cs" />
     <Compile Include="World\WorldObjects\Rocket.cs" />
     <Compile Include="World\WorldObjects\UFO.cs" />
     <Compile Include="World\WorldObjects\WorldObject.cs" />

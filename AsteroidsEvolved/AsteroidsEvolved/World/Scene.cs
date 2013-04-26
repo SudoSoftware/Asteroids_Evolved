@@ -67,7 +67,9 @@ namespace AsteroidsEvolved.World
         {
             // We can't have a whole bunch of rockets on the screen.
             if (rockets.Count >= 5)
-                rockets.Remove(rockets[0]);
+                //rockets.Remove(rockets[0]);
+                // Do nothing instead.
+                return;
 
             rockets.Add(rocket);
         }
