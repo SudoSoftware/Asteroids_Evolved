@@ -26,28 +26,22 @@ namespace AsteroidsEvolved
             this.position = position;
 
             display_string =
-@"Library Computer Access/Retrival System
-USS Enterprise-D (NCC 1701-D)
-Current Bridge Crew:
-    Rear Admiral James T. Kirk
-    Captain Jean-Luc Picard
-    Commander William Riker
-    Acting Ensign Crusher
-    Ensign Victors
-    Ensign Michaelson
-Welcome to the Starfleet Planar Combat Simulator";
+@"Parker Michaelson and Jesse Victors present:
+                Asteroids: REDUX
+
+  Based on a Concept by Dr. J.D. Mathias";
 
             manager.FocusScreen(this);
         }
 
         public override void GotFocus()
         {
-            //if (MainMenuScreen.menu_theme == null)
-            //    MainMenuScreen.menu_theme =
-            //        manager.RM.Content.Load<Song>(GameParameters.DEFAULT_MENU_SONG);
+            if (MainMenuScreen.menu_theme == null)
+                MainMenuScreen.menu_theme =
+                    manager.RM.Content.Load<Song>(GameParameters.DEFAULT_MENU_THEME);
 
-            //MediaPlayer.Play(MainMenuScreen.menu_theme);
-            //manager.current_song = MainMenuScreen.menu_theme;
+            MediaPlayer.Play(MainMenuScreen.menu_theme);
+            manager.current_song = MainMenuScreen.menu_theme;
         }
 
         public override void ExitScreen()
@@ -73,10 +67,10 @@ Welcome to the Starfleet Planar Combat Simulator";
 
             sb.Begin();
             sb.DrawString(
-                (SpriteFont) manager.RM.FontHash["LcarsFont"],
+                (SpriteFont) manager.RM.FontHash["IntroFont"],
                 display_string,
                 position,
-                Color.Orange
+                Color.AntiqueWhite
             );
             sb.End();
         }

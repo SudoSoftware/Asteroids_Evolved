@@ -71,6 +71,7 @@ namespace AsteroidsEvolved
         public static readonly String DEFAULT_TITLE_FONT = "fonts/TitleFont";
         public static readonly String DEFAULT_MENU_FONT = "fonts/MenuFont";
         public static readonly String DEFAULT_LCARS_FONT = "fonts/LcarsFont";
+        public static readonly String DEFAULT_INTRO_FONT = "fonts/IntroFont";
         public static readonly String DEFAULT_MENU_BACKGROUND = "textures/starfield";
         public static readonly Microsoft.Xna.Framework.Color DEFAULT_TITLE_COLOR =
             Microsoft.Xna.Framework.Color.AntiqueWhite;
@@ -78,5 +79,8 @@ namespace AsteroidsEvolved
             Microsoft.Xna.Framework.Color.White;
         public static readonly Microsoft.Xna.Framework.Color DEFAULT_SELECTED_ITEM_COLOR =
             Microsoft.Xna.Framework.Color.Yellow;
+
+        //audio
+        public static readonly String DEFAULT_MENU_THEME = "audio/04. Another Mysterious Pipe Appeared";
 	}
 }

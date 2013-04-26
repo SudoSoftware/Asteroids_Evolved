@@ -24,25 +24,26 @@ namespace AsteroidsEvolved
 
 
             display_string =
-@"Library Computer Access/Retrival System
-USS Enterprise-D (NCC 1701-D)
-Processing Request 'GetCredits':
-Returned:
-    The Starfleet Planar Combat Simulator
-    was developed by:
-        Ensign Parker C. Michaelson
-        Ensign Jesse Victors
-        Commander James D. Mathias (supervisory)";
+@"Asteroids: REDUX
+        Producer: Dr. James Dean Mathias
+
+        Lead Programming: Parker Michaelson and
+            Jesse Victors
+
+        Lead Art: The Internet
+
+        Lead Story: What Story?
+        ";
         }
 
         public override void Draw()
         {
             SpriteBatch sb = manager.RM.SpriteB;
 
-            SpriteFont font = (SpriteFont) manager.RM.FontHash["LcarsFont"];
+            SpriteFont font = (SpriteFont) manager.RM.FontHash["IntroFont"];
 
             sb.Begin();
-            sb.DrawString(font, display_string, position, Color.Orange);
+            sb.DrawString(font, display_string, position, Color.AntiqueWhite);
             sb.End();
         }
     }

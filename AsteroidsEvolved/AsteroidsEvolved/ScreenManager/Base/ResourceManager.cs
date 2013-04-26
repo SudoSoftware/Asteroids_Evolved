@@ -102,7 +102,7 @@ namespace AsteroidsEvolved
             //HeadsUpDisplay.font = Content.Load<SpriteFont>(prefix + "temporaryFont");
 
             // Load up Soundtrack
-            //MainMenuScreen.menu_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_MENU_SONG);
+            MainMenuScreen.menu_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_MENU_THEME);
             //CentipedeGame.game_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_GAME_SONG);
 			//Shooter.rocketSpawnSound = Content.Load<SoundEffect>(prefix + GameParameters.DEFAULT_SHOOT_SOUND);
 
@@ -123,6 +123,11 @@ namespace AsteroidsEvolved
                 FontHash["LcarsFont"] = Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_LCARS_FONT);
             else
                 FontHash.Add("LcarsFont", Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_LCARS_FONT));
+            if (FontHash.ContainsKey("IntroFont"))
+
+                FontHash["IntroFont"] = Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_INTRO_FONT);
+            else
+                FontHash.Add("IntroFont", Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_INTRO_FONT));
         }
     }
 }

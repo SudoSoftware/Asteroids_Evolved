@@ -14,7 +14,7 @@ namespace AsteroidsEvolved
 {
     class MainMenuScreen : MenuScreen
     {
-        //public static Song menu_theme;
+        public static Song menu_theme;
 
         public MainMenuScreen(ScreenManager manager, Screen exit_screen, MenuStyle style)
             : base(manager, exit_screen, "Asteroids: REDUX", style)
@@ -25,38 +25,43 @@ namespace AsteroidsEvolved
                 )
             );
 
-        //    this.AddItem(
-        //        new AddScreenButton("High Scores", manager, typeof(HighScoresScreen),
-        //            new Object[] { manager, this, style }
-        //        )
-        //    );
+            this.AddItem(
+                new AddScreenButton("High Scores", manager, typeof(HighScoresScreen),
+                    new Object[] { manager, this, style }
+                )
+            );
 
-        //    this.AddItem(
-        //        new AddScreenButton("Options", manager, typeof(OptionsScreen),
-        //            new Object[] { manager, this, style }
-        //        )
-        //    );
+            //this.AddItem(
+            //    new AddScreenButton("Options", manager, typeof(OptionsScreen),
+            //        new Object[] { manager, this, style }
+            //    )
+            //);
 
             this.AddItem(
                 new AddScreenButton("Credits", manager, typeof(CreditsScreen),
-                    new Object[] { manager, this, style.head_pos }
+                    new Object[] { manager, this,
+                        new Vector2(
+                            GameParameters.TARGET_RESOLUTION.X * (float)1/8,
+                            GameParameters.TARGET_RESOLUTION.Y * (float)1/8
+                        )
+                    }
                 )
             );
 
             this.AddItem(new MenuQuitButton("Quit", this));
 
-        //    if (menu_theme == null)
-        //        menu_theme = manager.RM.Content.Load<Song>(
-        //            "default/" + Resources.GameParameters.DEFAULT_MENU_SONG
-        //        );
+            if (menu_theme == null)
+                menu_theme = manager.RM.Content.Load<Song>(
+                    "default/" + GameParameters.DEFAULT_MENU_THEME
+                );
         }
 
         public override void GotFocus()
         {
-            //if (manager.current_song != menu_theme)
-            //    MediaPlayer.Play(menu_theme);
+            if (manager.current_song != menu_theme)
+                MediaPlayer.Play(menu_theme);
 
-            //manager.current_song = menu_theme;
+            manager.current_song = menu_theme;
         }
 
         public override void  HandleInput(GameTime time, UserInput input)

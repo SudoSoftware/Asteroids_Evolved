@@ -72,7 +72,14 @@ namespace AsteroidsEvolved
 
             MainMenuScreen main_menu =
                 new MainMenuScreen(manager, new ExitScreen(manager, null), style);
-            IntroScreen intro_screen = new IntroScreen(manager, main_menu, style.head_pos);
+            IntroScreen intro_screen = new IntroScreen(
+                manager,
+                main_menu,
+                new Vector2(
+                    GameParameters.TARGET_RESOLUTION.X * (float)1/8,
+                    GameParameters.TARGET_RESOLUTION.Y * (float)3/8
+                    )
+                    );
 
 
             manager.AddScreen(new BackgroundScreen(manager, background));
