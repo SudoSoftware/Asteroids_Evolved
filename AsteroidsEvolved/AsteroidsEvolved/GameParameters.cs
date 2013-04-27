@@ -55,7 +55,6 @@ namespace AsteroidsEvolved
 			public static readonly float SIZE = 24;
 			public static readonly float ACCELERATION = 0.15f;
 			public static readonly float TURN_RATE = 0.002f;
-			public static readonly float SLOW_RATE = 0.004f;
 		}
 
 
