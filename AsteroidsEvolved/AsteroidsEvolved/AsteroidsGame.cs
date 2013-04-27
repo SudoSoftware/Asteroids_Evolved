@@ -120,9 +120,6 @@ namespace AsteroidsEvolved
         
 		protected override void Update(GameTime gameTime)
 		{
-			GameParameters.Player1.update();
-			GameParameters.Player2.update();
-
             manager.Update(gameTime);
 
 			base.Update(gameTime);

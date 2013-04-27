@@ -30,12 +30,7 @@ namespace AsteroidsEvolved
             AI=2
         }
 
-<<<<<<< HEAD
-        //M0ar player settings.
-        public static Player Player1 = new Player(Mode.HU);
-        public static Player Player2 = (new Player(Mode.NA)).mirror();
-=======
->>>>>>> refactoring user input
+
 
 		public class DefaultKeyBindings
 		{

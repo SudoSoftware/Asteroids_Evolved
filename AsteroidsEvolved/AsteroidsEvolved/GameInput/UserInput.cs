@@ -63,10 +63,6 @@ namespace AsteroidsEvolved.GameInput
 
 		public bool justPressed(InputType type)
 		{
-			if (currentState.Count > 0)
-				System.Diagnostics.Debug.WriteLine("CURRENT STATE WIN " + onNow(type) + "	" + !onLastTime(type));
-			if (onNow(type) && !onLastTime(type))
-				System.Diagnostics.Debug.WriteLine("***************************************");
 			return onNow(type) && !onLastTime(type);
 		}
 
