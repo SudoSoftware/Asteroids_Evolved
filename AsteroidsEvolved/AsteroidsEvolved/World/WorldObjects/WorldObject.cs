@@ -30,8 +30,6 @@ namespace AsteroidsEvolved.World.WorldObjects
 		public WorldObject(Model model, Vector3 initialLocation, Vector3 desiredBounds)
 		{
 			this.model = model;
-			//System.Diagnostics.Debug.WriteLine(model.Meshes.Count);
-			//Debug.Assert(model.Meshes.Count == 1);
 			modelBounds = createBoundingBox();
 
 			Vector3 scale = modelBounds.Max - modelBounds.Min;
@@ -43,12 +41,14 @@ namespace AsteroidsEvolved.World.WorldObjects
 			modelBounds.Min *= scale;
 			modelBounds.Max *= scale;
 
+			System.Diagnostics.Debug.WriteLine("Constructing new " + this);
 			System.Diagnostics.Debug.WriteLine(desiredBounds + "	" + modelBounds);
 			System.Diagnostics.Debug.WriteLine(modelBounds.Max - modelBounds.Min);
 
 			manifests.Add(new Manifestation(initialLocation, this));
 			for (int j = 0; j < 3; j++)
-				manifests.Add(new Manifestation(new Vector3(float.MinValue, float.MinValue, 0), this));
+				manifests.Add(new Manifestation(new Vector3(), this));
+			rearrangeManifests(0);
 		}
 
 

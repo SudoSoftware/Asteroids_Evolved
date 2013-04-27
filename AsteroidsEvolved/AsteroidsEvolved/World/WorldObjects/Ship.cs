@@ -14,14 +14,14 @@ namespace AsteroidsEvolved
 {
 	class Ship : WorldObject
 	{
-		public Vector2 movementVector = new Vector2(0, 0);
-        public Vector2 directionVector = new Vector2(0, -1);
+		private Vector2 movementVector = new Vector2(0, 0);
+		private Vector2 directionVector = new Vector2(0, -1);
 
-        public Vector2 launcherPos = new Vector2();
+		private Vector2 launcherPos = new Vector2();
 		public static SoundEffect pew;
 
-        public TimeSpan lastShot = new TimeSpan();
-        public TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
+		private DateTime lastShot = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
+		private TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
 
 
 		public Ship(Scene scene, Model model) :
@@ -119,16 +119,18 @@ namespace AsteroidsEvolved
 
         public void fire(TimeSpan elapsedGameTime)
         {
-            if (lastShot > fireDelayTime)
-            {
-                System.Diagnostics.Debug.WriteLine("firing");
+			if ((DateTime.Now - lastShot) >= fireDelayTime)
+			{
+				System.Diagnostics.Debug.WriteLine("firing");
 
-                Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), this, manifests[0].position, movementVector, directionVector);
-                scene.addRocket(rocket);
+				Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), this, manifests[0].position, movementVector, directionVector);
+				scene.addRocket(rocket);
 				pew.Play();
 
-                lastShot = new TimeSpan();
-            }
+				lastShot = DateTime.Now;
+			}
+			else
+				System.Diagnostics.Debug.WriteLine("too fast");
         }
 
 
