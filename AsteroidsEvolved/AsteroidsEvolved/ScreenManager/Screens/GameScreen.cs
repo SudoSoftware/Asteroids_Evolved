@@ -44,7 +44,7 @@ namespace AsteroidsEvolved
         }
 
 
-        public override void  HandleInput(GameTime time, UserInput input)
+        public override void HandleInput(GameTime time, UserInput input)
         {
             // Add control code here.
             base.HandleInput(time, input);
@@ -54,11 +54,8 @@ namespace AsteroidsEvolved
 
         public void addShip()
         {
-            List<WorldObject> objs = new List<WorldObject>();
             Ship ship = new Ship(scene, manager.RM.Content.Load<Model>(GameParameters.Ship.MODEL));
-
-            scene.setShip(ship);
-            objs.Add(ship);
+            scene.addShip(ship);
 			ThreadPool.getInstance().enqueueWorkItem(new ShipUpdater(scene));
         }
 
@@ -66,11 +63,8 @@ namespace AsteroidsEvolved
 
         public void addAsteroids()
         {
-            List<WorldObject> objs = new List<WorldObject>();
             Asteroid asteroid = new Asteroid(scene, manager.RM.Content.Load<Model>(GameParameters.Asteroid.MODEL), new Vector3(200, 200, 0));
-
             scene.addAsteroid(asteroid);
-            objs.Add(asteroid);
 			ThreadPool.getInstance().enqueueWorkItem(new AsteroidsUpdater(scene));
         }
 
@@ -78,11 +72,8 @@ namespace AsteroidsEvolved
 
         public void addRocket()
         {
-            List<WorldObject> objs = new List<WorldObject>();
             Rocket rocket = new Rocket(scene, manager.RM.Content.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(200, 200, 0), new Vector2(0, 0), new Vector2(1, -1));
-
             scene.addRocket(rocket);
-            objs.Add(rocket);
 			ThreadPool.getInstance().enqueueWorkItem(new RocketUpdater(scene));
         }
 

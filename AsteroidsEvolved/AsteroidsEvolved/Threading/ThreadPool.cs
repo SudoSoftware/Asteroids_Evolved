@@ -18,23 +18,23 @@ namespace AsteroidsEvolved.Threading
 
 
 
-		public WorkItem enqueueWorkItem(WorkItem item)
+		public void enqueueWorkItem(WorkItem item)
 		{
-			return workQueue.enqueue(item);
+			workQueue.enqueue(item);
 		}
 
 
 
-        public void dequeueWorkItem(WorkItem item)
+        public WorkItem dequeueWorkItem(WorkItem item)
         {
+			return workQueue.dequeue();
         }
 
 
 
 		public void startWork()
 		{
-			WorkerThread[] array = threadQueue.ToArray();
-			foreach (WorkerThread wt in array)
+			foreach (WorkerThread wt in threadQueue)
 				wt.start();
 		}
 

@@ -13,9 +13,9 @@ namespace AsteroidsEvolved.World
 	class Scene
 	{
 		private Texture2D background;
-
 		private Camera camera;
-		private Ship ship;
+
+		private List<Ship> ships = new List<Ship>();
 		private List<Asteroid> asteroids = new List<Asteroid>();
         private List<Rocket> rockets = new List<Rocket>();
 		private Mutex asteroidsMutex = new Mutex(), rocketsMutex = new Mutex();
@@ -35,27 +35,14 @@ namespace AsteroidsEvolved.World
             GameParameters.sbatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             GameParameters.sbatch.End();
 
-			ship.draw(camera);
+			foreach (Ship ship in ships)
+				ship.draw(camera);
 
-			foreach (Asteroid asteroid in asteroids.ToArray())
+			foreach (Asteroid asteroid in asteroids)
 				asteroid.draw(camera);
 
-            foreach (Rocket rocket in rockets.ToArray())
+            foreach (Rocket rocket in rockets)
                 rocket.draw(camera);
-		}
-
-
-
-		public Ship getShip()
-		{
-			return ship;
-		}
-
-
-
-		public void setShip(Ship newShip)
-		{
-			ship = newShip;
 		}
 
 
@@ -81,6 +68,13 @@ namespace AsteroidsEvolved.World
             rockets.Add(rocket);
 			releaseRocketsMutex();
         }
+
+
+
+		public void addShip(Ship ship)
+		{
+			ships.Add(ship);
+		}
 
 
 
@@ -115,8 +109,6 @@ namespace AsteroidsEvolved.World
 
 		public List<Ship> getShips()
 		{
-			List<Ship> ships = new List<Ship>();
-			ships.Add(ship);
 			return ships;
 		}
 

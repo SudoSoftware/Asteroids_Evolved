@@ -18,14 +18,27 @@ namespace AsteroidsEvolved.Threading.WorkItems
 		public override void execute()
 		{
 			//test for collision between ship and asteroids
-			scene.requestAsteroidsMutex();
-			Ship ship = scene.getShip();
-			foreach (Asteroid asteroid in scene.getAsteroids())
-				if (ship.intersects(asteroid))
-					ship.handleIntersection(asteroid);
-			scene.releaseAsteroidsMutex();
-
+			testForShipAsteroidCollision();
+			
 			//test for collision between rockets and asteroids
+			testForRocketAsteroidCollision();
+		}
+
+
+
+		private void testForShipAsteroidCollision()
+		{
+			//scene.requestAsteroidsMutex();
+			foreach (Ship ship in scene.getShips())
+				foreach (Asteroid asteroid in scene.getAsteroids())
+					if (ship.intersects(asteroid))
+						ship.handleIntersection(asteroid);
+			//scene.releaseAsteroidsMutex();
+		}
+
+
+		private void testForRocketAsteroidCollision()
+		{
 		}
 	}
 }

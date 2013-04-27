@@ -83,7 +83,7 @@ namespace AsteroidsEvolved
 
     	public void Update (GameTime time)
     	{
-    	    foreach (Screen x in screenqueue.ToArray())
+    	    foreach (Screen x in screenqueue)
     	        x.Update (time);
 
             input.Update();
