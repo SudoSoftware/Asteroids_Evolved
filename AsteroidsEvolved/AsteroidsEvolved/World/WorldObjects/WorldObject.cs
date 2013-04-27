@@ -59,22 +59,7 @@ namespace AsteroidsEvolved.World.WorldObjects
 			{
 				//find the main ship currently entirely on the screen
 				if (insideWorldBounds(manifests[j].getBoundingBox()))
-				{
-					float offsetX = (manifests[j].position.X >= 0) ?
-                        manifests[j].position.X- GameParameters.World.BOUNDS.Width : manifests[j].position.X + GameParameters.World.BOUNDS.Width;
-
-					float offsetY = (manifests[j].position.Y >= 0) ?
-                        manifests[j].position.Y - GameParameters.World.BOUNDS.Height : manifests[j].position.Y + GameParameters.World.BOUNDS.Height;
-
-					manifests[(j + 1) % manifests.Count].position.X = manifests[j].position.X;
-					manifests[(j + 1) % manifests.Count].position.Y = offsetY;
-
-					manifests[(j + 2) % manifests.Count].position.X = offsetX;
-					manifests[(j + 2) % manifests.Count].position.Y = offsetY;
-
-					manifests[(j + 3) % manifests.Count].position.X = offsetX;
-					manifests[(j + 3) % manifests.Count].position.Y = manifests[j].position.Y;
-				}
+					rearrangeManifests(j);
 
 				manifests[j].update();
 			}
@@ -105,10 +90,30 @@ namespace AsteroidsEvolved.World.WorldObjects
 		}
 
 
+		protected void rearrangeManifests(int masterManifest)
+		{
+			float offsetX = (manifests[masterManifest].position.X >= 0) ?
+						manifests[masterManifest].position.X - GameParameters.World.BOUNDS.Width
+						: manifests[masterManifest].position.X + GameParameters.World.BOUNDS.Width;
+
+			float offsetY = (manifests[masterManifest].position.Y >= 0) ?
+				manifests[masterManifest].position.Y - GameParameters.World.BOUNDS.Height
+				: manifests[masterManifest].position.Y + GameParameters.World.BOUNDS.Height;
+
+			manifests[(masterManifest + 1) % manifests.Count].position.X = manifests[masterManifest].position.X;
+			manifests[(masterManifest + 1) % manifests.Count].position.Y = offsetY;
+
+			manifests[(masterManifest + 2) % manifests.Count].position.X = offsetX;
+			manifests[(masterManifest + 2) % manifests.Count].position.Y = offsetY;
+
+			manifests[(masterManifest + 3) % manifests.Count].position.X = offsetX;
+			manifests[(masterManifest + 3) % manifests.Count].position.Y = manifests[masterManifest].position.Y;
+		}
+
+
 
 		public bool intersects(WorldObject obj)
 		{
-			System.Diagnostics.Debug.WriteLine("testing for intersection...");
 			return manifests[0].getBoundingBox().Intersects(obj.manifests[0].getBoundingBox());
 		}
 
@@ -116,7 +121,7 @@ namespace AsteroidsEvolved.World.WorldObjects
 
 		public virtual void handleIntersection(WorldObject obj)
 		{
-			System.Diagnostics.Debug.WriteLine("intersection handled by World Object");
+			System.Diagnostics.Debug.WriteLine("WorldObject handling intersection between " + this + " and " + obj);
 		}
 
 

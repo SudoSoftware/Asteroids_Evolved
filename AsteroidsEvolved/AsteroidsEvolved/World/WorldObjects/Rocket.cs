@@ -6,21 +6,25 @@ namespace AsteroidsEvolved.World.WorldObjects
 {
 	class Rocket : WorldObject
 	{
-        public Vector2 movementVector = new Vector2(0, 0);
-        public Vector2 directionVector = new Vector2(0, 0);
-
+		private Vector2 movementVector, directionVector;
+		private Ship owner;
         private TimeSpan destructTimer = new TimeSpan();
 
-		public Rocket(Scene scene, Model model, Vector3 location, Vector2 inertia, Vector2 heading) :
+
+		public Rocket(Scene scene, Model model, Ship owner, Vector3 location, Vector2 inertia, Vector2 heading) :
 			base(scene, model, location, GameParameters.Rocket.SIZE)
 		{
             directionVector = heading;
             directionVector.Normalize();
 
+			this.owner = owner;
+
             rotation.Z = (float)Math.Atan2(-directionVector.Y, directionVector.X) - MathHelper.PiOver2;
 
-            movementVector = inertia + directionVector*GameParameters.Rocket.SPEED;
+            movementVector = inertia + directionVector * GameParameters.Rocket.SPEED;
 		}
+
+
 
         public override void update(System.TimeSpan elapsedGameTime)
         {

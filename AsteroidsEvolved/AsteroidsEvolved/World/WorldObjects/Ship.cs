@@ -23,52 +23,19 @@ namespace AsteroidsEvolved
         public TimeSpan lastShot = new TimeSpan();
         public TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
 
-        public List<WorldObject> rocketList = new List<WorldObject>();
-        public WorldObjectUpdater rocketPool;
-
 
 		public Ship(Scene scene, Model model) :
 			base(scene, model, new Vector3(), GameParameters.Ship.SIZE)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
-
-            //rocketPool = new WorldObjectUpdater(ref rocketList);
-			ThreadPool.getInstance().enqueueWorkItem(rocketPool);
 		}
 
 
 
 		public override void update(TimeSpan elapsedGameTime)
 		{
-			if (GameParameters.keyboardState.IsKeyDown(UserInput.UpKey))
-				accelerate(elapsedGameTime);
-
-            if (GameParameters.keyboardState.IsKeyDown(UserInput.LeftKey))
-            {
-                turnLeft(elapsedGameTime);
-                rotation.Y = MathHelper.ToRadians(10f);
-            }
-            else if (GameParameters.keyboardState.IsKeyDown(UserInput.RightKey))
-            {
-                turnRight(elapsedGameTime);
-                rotation.Y = MathHelper.ToRadians(-10f);
-            }
-            else
-                rotation.Y = 0f;
-
-            if (GameParameters.keyboardState.IsKeyDown(UserInput.DownKey))
-                movementVector = new Vector2();
-
-            if (GameParameters.keyboardState.IsKeyDown(UserInput.FireKey))
-                fire(elapsedGameTime);
-
-            lastShot += elapsedGameTime.Duration();
-
-            //speed = Math.Max(speed - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
-            //movementVector = movementVector * Math.Max(speed - (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.SLOW_RATE, 0);
-
-
-            System.Diagnostics.Debug.WriteLine(elapsedGameTime.TotalMilliseconds + "	" + movementVector + "	" + movementVector.Length());
+			handleNavigation(elapsedGameTime);
+			handleFiring(elapsedGameTime);
 
 			translate(movementVector.X, -movementVector.Y);
 
@@ -77,9 +44,42 @@ namespace AsteroidsEvolved
 
 
 
+		public void handleNavigation(TimeSpan elapsedGameTime)
+		{
+			if (GameParameters.keyboardState.IsKeyDown(UserInput.UpKey))
+				accelerate(elapsedGameTime);
+
+			if (GameParameters.keyboardState.IsKeyDown(UserInput.LeftKey))
+			{
+				turnLeft(elapsedGameTime);
+				rotation.Y = MathHelper.ToRadians(10f);
+			}
+			else if (GameParameters.keyboardState.IsKeyDown(UserInput.RightKey))
+			{
+				turnRight(elapsedGameTime);
+				rotation.Y = MathHelper.ToRadians(-10f);
+			}
+			else
+				rotation.Y = 0f;
+
+			if (GameParameters.keyboardState.IsKeyDown(UserInput.DownKey))
+				movementVector = new Vector2();
+		}
+
+
+
+		public void handleFiring(TimeSpan elapsedGameTime)
+		{
+			if (GameParameters.keyboardState.IsKeyDown(UserInput.FireKey))
+				fire(elapsedGameTime);
+
+			lastShot += elapsedGameTime.Duration();
+		}
+
+
+
 		public void turnLeft(TimeSpan elapsedGameTime)
 		{
-			System.Diagnostics.Debug.WriteLine("turning left");
 			rotation.Z += (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.TURN_RATE;
 
 			double theta = Math.Atan2(directionVector.X, directionVector.Y);
@@ -93,7 +93,6 @@ namespace AsteroidsEvolved
 
 		public void turnRight(TimeSpan elapsedGameTime)
 		{
-			System.Diagnostics.Debug.WriteLine("turning right");
 			rotation.Z -= (float)elapsedGameTime.TotalMilliseconds * GameParameters.Ship.TURN_RATE;
 
             double theta = Math.Atan2(directionVector.X, directionVector.Y);
@@ -107,8 +106,6 @@ namespace AsteroidsEvolved
 
 		public void accelerate(TimeSpan elapsedGameTime)
 		{
-			System.Diagnostics.Debug.WriteLine("accelerating");
-
             movementVector += directionVector * GameParameters.Ship.ACCELERATION;
 
             if (movementVector.Length() > GameParameters.World.SPEED_LIMIT)
@@ -126,9 +123,8 @@ namespace AsteroidsEvolved
             {
                 System.Diagnostics.Debug.WriteLine("firing");
 
-                Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), manifests[0].position, movementVector, directionVector);
+                Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), this, manifests[0].position, movementVector, directionVector);
                 scene.addRocket(rocket);
-                rocketList.Add(rocket);
 				pew.Play();
 
                 lastShot = new TimeSpan();

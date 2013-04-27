@@ -12,7 +12,7 @@ namespace AsteroidsEvolved
 		public enum InputType
 		{
 			UP, DOWN, LEFT, RIGHT,
-			FIRE, ESCAPE
+			FIRE, ESCAPE, TELEPORT
 		}
 
 
@@ -21,12 +21,7 @@ namespace AsteroidsEvolved
 		protected DateTime lastInputTime;
 
 
-        public static Keys LeftKey;
-        public static Keys RightKey;
-        public static Keys UpKey;
-        public static Keys DownKey;
-        public static Keys EscKey;
-        public static Keys FireKey;
+		public static Keys EscKey, LeftKey, RightKey, UpKey, DownKey, FireKey, TeleportKey;
 
 
 		public UserInput() :
@@ -102,8 +97,28 @@ namespace AsteroidsEvolved
 
 		protected virtual void UpdateState()
 		{
-			checkKeyboard(Keyboard.GetState());
-			checkGamepad(GamePad.GetState(PlayerIndex.One));
+			KeyboardState keyboardState = Keyboard.GetState();
+
+			if (keyboardState.IsKeyDown(EscKey))
+				currentState.Add(InputType.ESCAPE);
+
+			if (keyboardState.IsKeyDown(UpKey))
+				currentState.Add(InputType.UP);
+
+			if (keyboardState.IsKeyDown(DownKey))
+				currentState.Add(InputType.DOWN);
+
+			if (keyboardState.IsKeyDown(LeftKey))
+				currentState.Add(InputType.LEFT);
+
+			if (keyboardState.IsKeyDown(RightKey))
+				currentState.Add(InputType.RIGHT);
+
+			if (keyboardState.IsKeyDown(FireKey) || keyboardState.IsKeyDown(Keys.Enter))
+				currentState.Add(InputType.FIRE);
+
+			if (keyboardState.IsKeyDown(TeleportKey))
+				currentState.Add(InputType.TELEPORT);
 		}
 
 
@@ -125,52 +140,6 @@ namespace AsteroidsEvolved
 		public bool onNow(InputType type)
 		{
 			return currentState.Contains(type);
-		}
-
-
-
-		private void checkKeyboard(KeyboardState keyboardState)
-		{
-			if (keyboardState.IsKeyDown(EscKey))
-				currentState.Add(InputType.ESCAPE);
-
-			if (keyboardState.IsKeyDown(UpKey))
-				currentState.Add(InputType.UP);
-
-			if (keyboardState.IsKeyDown(DownKey))
-				currentState.Add(InputType.DOWN);
-
-			if (keyboardState.IsKeyDown(LeftKey))
-				currentState.Add(InputType.LEFT);
-
-			if (keyboardState.IsKeyDown(RightKey))
-				currentState.Add(InputType.RIGHT);
-
-			if (keyboardState.IsKeyDown(FireKey) || keyboardState.IsKeyDown(Keys.Enter))
-				currentState.Add(InputType.FIRE);
-		}
-
-
-
-		private void checkGamepad(GamePadState gamepadState)
-		{
-			if (gamepadState.Buttons.Back == ButtonState.Pressed)
-				currentState.Add(InputType.ESCAPE);
-
-			if (gamepadState.Buttons.Y == ButtonState.Pressed || gamepadState.ThumbSticks.Left.Y > 0)
-				currentState.Add(InputType.UP);
-
-			if (gamepadState.Buttons.A == ButtonState.Pressed || gamepadState.ThumbSticks.Left.Y < 0)
-				currentState.Add(InputType.DOWN);
-
-			if (gamepadState.Buttons.X == ButtonState.Pressed || gamepadState.ThumbSticks.Left.X < 0)
-				currentState.Add(InputType.LEFT);
-
-			if (gamepadState.Buttons.B == ButtonState.Pressed || gamepadState.ThumbSticks.Left.X > 0)
-				currentState.Add(InputType.RIGHT);
-
-			if (gamepadState.Triggers.Left == 1 || gamepadState.Triggers.Right == 1)
-				currentState.Add(InputType.FIRE);
 		}
 
 

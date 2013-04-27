@@ -28,9 +28,9 @@ namespace AsteroidsEvolved
             GameParameters.Player2.reset_vars();
 
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
+			ThreadPool.getInstance().enqueueWorkItem(new CollisionDetector(scene));
             addShip();
             addAsteroids();
-			ThreadPool.getInstance().enqueueWorkItem(new CollisionDetector(scene));
 
 			ThreadPool.getInstance().startWork();
         }
@@ -58,15 +58,6 @@ namespace AsteroidsEvolved
             Asteroid asteroid = new Asteroid(scene, manager.RM.Content.Load<Model>(GameParameters.Asteroid.MODEL), new Vector3(200, 200, 0));
             scene.addAsteroid(asteroid);
 			ThreadPool.getInstance().enqueueWorkItem(new AsteroidsUpdater(scene));
-        }
-
-
-
-        public void addRocket()
-        {
-            Rocket rocket = new Rocket(scene, manager.RM.Content.Load<Model>(GameParameters.Rocket.MODEL), new Vector3(200, 200, 0), new Vector2(0, 0), new Vector2(1, -1));
-            scene.addRocket(rocket);
-			ThreadPool.getInstance().enqueueWorkItem(new RocketUpdater(scene));
         }
 
 
