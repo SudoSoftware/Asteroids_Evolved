@@ -29,9 +29,18 @@ namespace AsteroidsEvolved
         {
             public Mode player_mode;
 
+            public int score = 0;
+            public int lives = 3;
+
             public Player (Mode init_mode)
             {
                 player_mode = init_mode;
+            }
+
+            public void reset_vars ()
+            {
+                score = 0;
+                lives = 3;
             }
         }
 

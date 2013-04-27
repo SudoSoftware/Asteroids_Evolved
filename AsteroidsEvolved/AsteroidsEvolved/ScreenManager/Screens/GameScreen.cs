@@ -19,17 +19,13 @@ namespace AsteroidsEvolved
     class GameScreen : Screen
     {
         Scene scene;
-
-        int score;
-        int lives;
         public static Texture2D life_texture;
 
         public GameScreen(ScreenManager manager, Screen exit_screen)
             : base(manager, exit_screen)
         {
-            // Set initial score and life count.
-            score = 0;
-            lives = 3;
+            GameParameters.Player1.reset_vars();
+            GameParameters.Player2.reset_vars();
 
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
             addShip();
@@ -83,14 +79,14 @@ namespace AsteroidsEvolved
             manager.RM.SpriteB.Begin();
             manager.RM.SpriteB.DrawString(
                 (SpriteFont)manager.RM.FontHash["IntroFont"],
-                score.ToString(),
+                GameParameters.Player1.score.ToString(),
                 GameParameters.World.score_position,
                 Color.AntiqueWhite
                 );
 
             Vector2 lifepos = GameParameters.World.life_position;
 
-            for (int i = 0; i < lives - 1; ++i)
+            for (int i = 0; i < GameParameters.Player1.lives - 1; ++i)
             {
                 manager.RM.SpriteB.Draw(
                     life_texture,
