@@ -35,13 +35,13 @@ namespace AsteroidsEvolved.World
             GameParameters.sbatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             GameParameters.sbatch.End();
 
-			foreach (Ship ship in ships)
+			foreach (Ship ship in ships.ToArray())
 				ship.draw(camera);
 
-			foreach (Asteroid asteroid in asteroids)
+			foreach (Asteroid asteroid in asteroids.ToArray())
 				asteroid.draw(camera);
 
-            foreach (Rocket rocket in rockets)
+            foreach (Rocket rocket in rockets.ToArray())
                 rocket.draw(camera);
 		}
 

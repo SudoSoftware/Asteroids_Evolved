@@ -21,7 +21,7 @@ namespace AsteroidsEvolved
         {
             this.AddItem(
                 new AddScreenButton("New Game", manager, typeof(GameScreen),
-                    new Object[] { manager, this, GameParameters.selected_mode }
+                    new Object[] { manager, this }
                 )
             );
 

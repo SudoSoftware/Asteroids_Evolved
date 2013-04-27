@@ -20,17 +20,13 @@ namespace AsteroidsEvolved
     {
         Scene scene;
 
-        GameParameters.Mode mode;
-
         int score;
         int lives;
         public static Texture2D life_texture;
 
-        public GameScreen(ScreenManager manager, Screen exit_screen, GameParameters.Mode mode)
+        public GameScreen(ScreenManager manager, Screen exit_screen)
             : base(manager, exit_screen)
         {
-            this.mode = mode;
-
             // Set initial score and life count.
             score = 0;
             lives = 3;

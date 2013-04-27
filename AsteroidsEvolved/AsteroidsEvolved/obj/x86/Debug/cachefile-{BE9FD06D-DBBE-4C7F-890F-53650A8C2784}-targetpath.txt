@@ -1,0 +1,19 @@
+Content\audio\04. Another Mysterious Pipe Appeared.xnb
+Content\audio\04. Another Mysterious Pipe Appeared.wma
+Content\audio\pew.xnb
+Content\Models\p1_wedge.xnb
+Content\Models\asteroid10.xnb
+Content\Models\LargeRocket.xnb
+Content\Models\ShockwaveRocket.xnb
+Content\Models\UFO2.xnb
+Content\Textures\wedge_p1_diff_v1.xnb
+Content\Textures\starfield.xnb
+Content\Textures\ion.xnb
+Content\Textures\life.xnb
+Content\fonts\LcarsFont.xnb
+Content\fonts\MenuFont.xnb
+Content\fonts\MenuItem.xnb
+Content\fonts\temporaryFont.xnb
+Content\fonts\TitleFont.xnb
+Content\fonts\IntroFont.xnb
+Content\textures\wedge_p1_diff_v1_0.xnb

@@ -13,13 +13,30 @@ namespace AsteroidsEvolved
         public static readonly Point TARGET_RESOLUTION = new Point(1920, 1080);
         public static readonly Microsoft.Xna.Framework.Rectangle screenSize = new Microsoft.Xna.Framework.Rectangle(0, 0, TARGET_RESOLUTION.X, TARGET_RESOLUTION.Y);
 
-		public static Mode selected_mode = Mode.SP;
-        public enum Mode
+
+        // Player Settings
+		public enum Mode
         {
-            SP=0,
-            MP=1,
-            AI=2
+            //Not Applicable
+            NA=0,
+            // Human Player
+            HU=1,
+            // Computer Player
+            AI=3
         }
+
+        public class Player
+        {
+            public Mode player_mode;
+
+            public Player (Mode init_mode)
+            {
+                player_mode = init_mode;
+            }
+        }
+
+        public static Player Player1 = new Player(Mode.HU);
+        public static Player Player2 = new Player(Mode.NA);
 
 
 

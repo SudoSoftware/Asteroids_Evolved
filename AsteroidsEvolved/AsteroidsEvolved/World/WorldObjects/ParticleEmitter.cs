@@ -7,5 +7,7 @@ namespace AsteroidsEvolved.World.WorldObjects
 {
     class ParticleEmitter
     {
+        public int emission_rate;
+        public int maximum_particles;
     }
 }

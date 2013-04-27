@@ -17,12 +17,13 @@ namespace AsteroidsEvolved
             );
 
             this.AddItem(
-                new ModeButton()
+                new ModeButton("Player 1:", GameParameters.Player1)
                 );
 
-            //this.AddItem(
-            //    new CustomTexturesButton(manager.RM)
-            //);
+            this.AddItem(
+                new ModeButton("Player 2:", GameParameters.Player2)
+                );
+
 
             this.AddItem(new MenuQuitButton("Quit", this));
         }

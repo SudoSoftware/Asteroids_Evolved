@@ -1,0 +1,25 @@
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\audio\04. Another Mysterious Pipe Appeared.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\audio\pew.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Models\p1_wedge.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Models\asteroid10.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Models\LargeRocket.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Models\ShockwaveRocket.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Models\UFO2.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Textures\wedge_p1_diff_v1.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Textures\starfield.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Textures\ion.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\Textures\life.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\fonts\LcarsFont.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\fonts\MenuFont.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\fonts\MenuItem.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\fonts\temporaryFont.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\fonts\TitleFont.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\fonts\IntroFont.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\textures\wedge_p1_diff_v1_0.xnb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\Content\audio\04. Another Mysterious Pipe Appeared.wma
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\AsteroidsEvolved.exe
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\bin\x86\Debug\AsteroidsEvolved.pdb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\obj\x86\Debug\AsteroidsEvolved.exe
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\obj\x86\Debug\AsteroidsEvolved.pdb
+C:\Users\foobar\Desktop\Asteroids_Evolved\AsteroidsEvolved\AsteroidsEvolved\obj\x86\Debug\AsteroidsEvolved.csprojResolveAssemblyReference.cache

@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AsteroidsEvolved;
 
 namespace AsteroidsEvolved
 {
     class ModeButton : ScrollButton
     {
-        public ModeButton()
-            : base(new List<String>() {"Single Player", "Multi Player", "HAL (AI) Mode"})
+        String player_name;
+        GameParameters.Player player;
+
+        public ModeButton(String player_name, GameParameters.Player player)
+            : base(new List<String>() {"None", "Human Player", "HAL 9000"})
         {
-            current_index = (int)GameParameters.selected_mode;
-            display_text = "Game Mode: " + options[(int)GameParameters.selected_mode];
+            this.player_name = player_name;
+            this.player = player;
+
+            current_index = (int)player.player_mode;
+            display_text = player_name + options[(int)player.player_mode];
         }
 
         public override void HandleInput(Microsoft.Xna.Framework.GameTime time, UserInput input)
@@ -24,36 +31,36 @@ namespace AsteroidsEvolved
             else if (input.justPressed(UserInput.InputType.LEFT))
             {
                 ScrollLeft();
-                display_text = "Game Mode: " + options[current_index];
+                display_text = player_name + options[current_index];
             }
             else if (input.justPressed(UserInput.InputType.RIGHT))
             {
                 ScrollRight();
-                display_text = "Game Mode: " + options[current_index];
+                display_text = player_name + options[current_index];
             }
         }
 
         public override void RunAction()
         {
-            GameParameters.selected_mode = (GameParameters.Mode) current_index;
+            player.player_mode = (GameParameters.Mode) current_index;
 
             // MAGIC NUMBERS !!!!
             switch (current_index)
             {
                     // Single Player
                 case 0:
-                    GameParameters.selected_mode = GameParameters.Mode.SP;
+                    player.player_mode = GameParameters.Mode.NA;
                     break;
 
                     // Mulit Player
                 case 1:
-                    GameParameters.selected_mode = GameParameters.Mode.MP;
+                    player.player_mode = GameParameters.Mode.HU;
                     break;
 
                     // I'm sorry, Dave. I'm afraid I can't let you know
                     // what this case is.
                 case 2:
-                    GameParameters.selected_mode = GameParameters.Mode.AI;
+                    player.player_mode = GameParameters.Mode.AI;
                     break;
             }
         }
