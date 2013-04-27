@@ -29,7 +29,7 @@ namespace AsteroidsEvolved
         public Song current_song;
 
         // Input Class
-        UserInput input;
+		HumanInput input;
 
         // The screen which currently has focus.
         public Screen Focus
@@ -57,7 +57,7 @@ namespace AsteroidsEvolved
 
             screenqueue = new List<Screen>();
 
-            input = new UserInput();
+			input = (HumanInput)GameParameters.Player1.userInput;
         }
 
     	public void AddScreen (Screen new_screen)

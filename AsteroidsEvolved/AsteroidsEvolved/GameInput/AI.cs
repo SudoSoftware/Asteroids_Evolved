@@ -5,7 +5,11 @@ using System.Text;
 
 namespace AsteroidsEvolved.GameInput
 {
-	class AI
+	class AI : UserInput
 	{
+		protected override void UpdateState()
+		{
+			//AI code here
+		}
 	}
 }

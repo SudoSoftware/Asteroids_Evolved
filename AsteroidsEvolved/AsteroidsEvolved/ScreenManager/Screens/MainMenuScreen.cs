@@ -46,7 +46,7 @@ namespace AsteroidsEvolved
 
             if (menu_theme == null)
                 menu_theme = manager.RM.Content.Load<Song>(
-                    "default/" + GameParameters.DEFAULT_MENU_THEME
+                    "default/" + GameParameters.Audio.DEFAULT_MENU_THEME
                 );
         }
 
@@ -58,7 +58,7 @@ namespace AsteroidsEvolved
             manager.current_song = menu_theme;
         }
 
-        public override void  HandleInput(GameTime time, UserInput input)
+		public override void HandleInput(GameTime time, HumanInput input)
         {
  	        base.HandleInput(time, input);
 

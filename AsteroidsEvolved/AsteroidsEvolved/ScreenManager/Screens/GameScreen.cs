@@ -37,7 +37,7 @@ namespace AsteroidsEvolved
         }
 
 
-        public override void HandleInput(GameTime time, UserInput input)
+		public override void HandleInput(GameTime time, HumanInput input)
         {
             // Add control code here.
             base.HandleInput(time, input);

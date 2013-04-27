@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameInput\AI.cs" />
+    <Compile Include="GameInput\HumanInput.cs" />
     <Compile Include="GameInput\Player.cs" />
     <Compile Include="PersistanceManager.cs" />
     <Compile Include="ScreenManager\Base\ResourceManager.cs" />

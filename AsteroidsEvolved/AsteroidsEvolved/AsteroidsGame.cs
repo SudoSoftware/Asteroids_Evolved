@@ -51,19 +51,6 @@ namespace AsteroidsEvolved
 
 
 
-		private void setDefaultKeyBindings()
-		{
-			// Set up default key bindings.
-            UserInput.LeftKey = Keys.Left;
-            UserInput.RightKey = Keys.Right;
-            UserInput.UpKey = Keys.Up;
-            UserInput.DownKey = Keys.Down;
-            UserInput.EscKey = Keys.Escape;
-            UserInput.FireKey = Keys.Space;
-		}
-
-
-
 		private void initializeScreens(Texture2D background)
 		{
 			Vector2 SCREEN_PARAMETERS =
@@ -74,14 +61,14 @@ namespace AsteroidsEvolved
 
 			MenuStyle style =
 				new MenuStyle(
-					GameParameters.DEFAULT_TITLE_FACTOR * SCREEN_PARAMETERS,
-					GameParameters.DEFAULT_MENU_FACTOR * SCREEN_PARAMETERS,
-					GameParameters.DEFAULT_MENU_ITEM_DISPLACEMENT * SCREEN_PARAMETERS,
+					GameParameters.Menu.DEFAULT_TITLE_FACTOR * SCREEN_PARAMETERS,
+					GameParameters.Menu.DEFAULT_MENU_FACTOR * SCREEN_PARAMETERS,
+					GameParameters.Menu.DEFAULT_MENU_ITEM_DISPLACEMENT * SCREEN_PARAMETERS,
 					"TitleFont",
 					"MenuFont",
-					GameParameters.DEFAULT_TITLE_COLOR,
-					GameParameters.DEFAULT_MENU_COLOR,
-					GameParameters.DEFAULT_SELECTED_ITEM_COLOR
+					GameParameters.Menu.DEFAULT_TITLE_COLOR,
+					GameParameters.Menu.DEFAULT_MENU_COLOR,
+					GameParameters.Menu.DEFAULT_SELECTED_ITEM_COLOR
 				);
 
 			MainMenuScreen main_menu =
@@ -103,6 +90,21 @@ namespace AsteroidsEvolved
 		}
 
 
+
+		private void setDefaultKeyBindings()
+		{
+			HumanInput player1keys = (HumanInput)GameParameters.Player1.userInput;
+
+			player1keys.LeftKey = GameParameters.DefaultKeyBindings.Player1.LeftKey;
+			player1keys.RightKey = GameParameters.DefaultKeyBindings.Player1.RightKey;
+			player1keys.UpKey = GameParameters.DefaultKeyBindings.Player1.UpKey;
+			player1keys.DownKey = GameParameters.DefaultKeyBindings.Player1.DownKey;
+			player1keys.EscKey = GameParameters.DefaultKeyBindings.Player1.EscKey;
+			player1keys.FireKey = GameParameters.DefaultKeyBindings.Player1.FireKey;
+			player1keys.TeleportKey = GameParameters.DefaultKeyBindings.Player1.TeleportKey;
+		}
+
+
 	
 		protected override void LoadContent()
 		{ } //content already loaded in Initialize function
@@ -118,8 +120,8 @@ namespace AsteroidsEvolved
         
 		protected override void Update(GameTime gameTime)
 		{
-			GameParameters.Player1.userInput.Update();
-			GameParameters.Player2.userInput.Update();
+			GameParameters.Player1.update();
+			GameParameters.Player2.update();
 
             manager.Update(gameTime);
 

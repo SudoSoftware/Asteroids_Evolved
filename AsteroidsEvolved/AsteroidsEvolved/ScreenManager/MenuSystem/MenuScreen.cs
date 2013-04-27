@@ -52,7 +52,7 @@ namespace AsteroidsEvolved
                 item.SetActive(active);
         }
 
-        public override void HandleInput(GameTime time, UserInput input)
+		public override void HandleInput(GameTime time, HumanInput input)
         {
             base.HandleInput(time, input);
 

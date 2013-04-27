@@ -1,12 +1,12 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace AsteroidsEvolved.GameInput
 {
 	class Player
 	{
 		public GameParameters.Mode player_mode;
-		public UserInput userInput = new UserInput(); //todo: this is temporary
+		public UserInput userInput;
 
 		public int score = 0;
 		public int lives = 3;
@@ -17,6 +17,17 @@ namespace AsteroidsEvolved.GameInput
 		public Player(GameParameters.Mode init_mode)
 		{
 			player_mode = init_mode;
+
+			switch (init_mode)
+			{
+				case GameParameters.Mode.HU:
+				userInput = new HumanInput();
+				break;
+
+				case GameParameters.Mode.AI:
+				userInput = new AI();
+				break;
+			}
 		}
 
 		public void reset_vars()
@@ -39,6 +50,12 @@ namespace AsteroidsEvolved.GameInput
 			life_increment = -life_increment;
 
 			return this;
+		}
+
+		public void update()
+		{
+			if (player_mode != GameParameters.Mode.NA)
+				userInput.Update();
 		}
 	}
 }

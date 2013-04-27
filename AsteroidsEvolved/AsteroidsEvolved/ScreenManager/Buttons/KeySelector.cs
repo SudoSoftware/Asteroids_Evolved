@@ -20,7 +20,7 @@ namespace AsteroidsEvolved
             label_name = init_text;
         }
 
-        public override void  HandleInput(GameTime time, UserInput input)
+		public override void HandleInput(GameTime time, HumanInput input)
         {
             Keys[] temp = Keyboard.GetState().GetPressedKeys();
 

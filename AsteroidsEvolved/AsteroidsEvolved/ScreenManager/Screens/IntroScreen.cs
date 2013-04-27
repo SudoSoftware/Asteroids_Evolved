@@ -38,7 +38,7 @@ namespace AsteroidsEvolved
         {
             if (MainMenuScreen.menu_theme == null)
                 MainMenuScreen.menu_theme =
-                    manager.RM.Content.Load<Song>(GameParameters.DEFAULT_MENU_THEME);
+                    manager.RM.Content.Load<Song>(GameParameters.Audio.DEFAULT_MENU_THEME);
 
             MediaPlayer.Play(MainMenuScreen.menu_theme);
             manager.current_song = MainMenuScreen.menu_theme;

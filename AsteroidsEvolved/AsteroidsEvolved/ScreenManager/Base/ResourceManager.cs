@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using AsteroidsEvolved;
 using AsteroidsEvolved.World;
@@ -87,24 +82,10 @@ namespace AsteroidsEvolved
         public void LoadResources(String prefix)
         {
             //load game textures
-            //CentipedeGame.background = this.Content.Load<Texture2D>(prefix + "textures/starfield");
-            //Centipede.texture = this.Content.Load<Texture2D>(prefix + "textures/Spider");
-            //Flea.texture = this.Content.Load<Texture2D>(prefix + "textures/Centipede");
-            //Mushroom.normalTexture = this.Content.Load<Texture2D>(prefix + "textures/Mushroom");
-            //Mushroom.poisonedTexture = this.Content.Load<Texture2D>(prefix + "textures/PMushroom");
-            //Powerup.texture = this.Content.Load<Texture2D>(prefix + "textures/US coin");
-            //Rocket.primaryTexture = this.Content.Load<Texture2D>(prefix + "textures/phaser");
-            //Rocket.secondaryTexture = this.Content.Load<Texture2D>(prefix + "textures/photon torpedo");
-            //Scorpion.texture = this.Content.Load<Texture2D>(prefix + "textures/Scorpion");
-            //Shooter.texture = this.Content.Load<Texture2D>(prefix + "textures/Shooter");
-            //Spider.texture = this.Content.Load<Texture2D>(prefix + "textures/Flea");
-            GameScreen.life_texture = this.Content.Load<Texture2D>(prefix + "textures/life");
-
-            //load all game fonts
-            //HeadsUpDisplay.font = Content.Load<SpriteFont>(prefix + "temporaryFont");
+			GameScreen.life_texture = this.Content.Load<Texture2D>(prefix + "textures/life");
 
             // Load up Soundtrack
-            MainMenuScreen.menu_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_MENU_THEME);
+            MainMenuScreen.menu_theme = Content.Load<Song>(prefix + GameParameters.Audio.DEFAULT_MENU_THEME);
             //CentipedeGame.game_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_GAME_SONG);
 			Ship.pew = Content.Load<SoundEffect>(prefix + "audio/pew");
 
@@ -112,24 +93,24 @@ namespace AsteroidsEvolved
             Background = Content.Load<Texture2D>(prefix + "textures/starfield"); // prefix + GameParameters.DEFAULT_MENU_BACKGROUND);
 
             if (FontHash.ContainsKey("TitleFont"))
-                FontHash["TitleFont"] = Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_TITLE_FONT);
+				FontHash["TitleFont"] = Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_TITLE_FONT);
             else
-                FontHash.Add("TitleFont", Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_TITLE_FONT));
+				FontHash.Add("TitleFont", Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_TITLE_FONT));
 
             if (FontHash.ContainsKey("MenuFont"))
-                FontHash["MenuFont"] = Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_MENU_FONT);
+				FontHash["MenuFont"] = Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_MENU_FONT);
             else
-                FontHash.Add("MenuFont", Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_MENU_FONT));
+				FontHash.Add("MenuFont", Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_MENU_FONT));
 
             if (FontHash.ContainsKey("LcarsFont"))
-                FontHash["LcarsFont"] = Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_LCARS_FONT);
+				FontHash["LcarsFont"] = Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_LCARS_FONT);
             else
-                FontHash.Add("LcarsFont", Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_LCARS_FONT));
+				FontHash.Add("LcarsFont", Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_LCARS_FONT));
             if (FontHash.ContainsKey("IntroFont"))
 
-                FontHash["IntroFont"] = Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_INTRO_FONT);
+				FontHash["IntroFont"] = Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_INTRO_FONT);
             else
-                FontHash.Add("IntroFont", Content.Load<SpriteFont>(prefix + GameParameters.DEFAULT_INTRO_FONT));
+				FontHash.Add("IntroFont", Content.Load<SpriteFont>(prefix + GameParameters.Menu.DEFAULT_INTRO_FONT));
         }
     }
 }

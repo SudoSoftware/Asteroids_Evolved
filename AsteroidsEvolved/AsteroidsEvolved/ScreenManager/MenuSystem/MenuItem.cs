@@ -23,7 +23,7 @@ namespace AsteroidsEvolved
             active = setbool;
         }
 
-    	public virtual void HandleInput (GameTime time, UserInput input)
+		public virtual void HandleInput(GameTime time, HumanInput input)
 	    {
     	}
 

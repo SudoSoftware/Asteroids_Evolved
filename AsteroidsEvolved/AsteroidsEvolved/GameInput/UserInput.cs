@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AsteroidsEvolved.GameInput
 {
-	class UserInput
+	abstract class UserInput
 	{
 		public enum InputType
 		{
@@ -13,12 +13,9 @@ namespace AsteroidsEvolved.GameInput
 		}
 
 
-		protected List<InputType> lastState = new List<InputType>();
+		private List<InputType> lastState = new List<InputType>();
 		protected List<InputType> currentState = new List<InputType>();
-		protected DateTime lastInputTime;
-
-
-		public static Keys EscKey, LeftKey, RightKey, UpKey, DownKey, FireKey, TeleportKey;
+		private DateTime lastInputTime;
 
 
 		public UserInput() :
@@ -39,38 +36,6 @@ namespace AsteroidsEvolved.GameInput
 
 
 
-        public void SetInputKey(InputType input, Keys key)
-        {
-            switch (input)
-            {
-                case InputType.LEFT:
-                LeftKey = key;
-                break;
-
-                case InputType.RIGHT:
-                RightKey = key;
-                break;
-
-                case InputType.UP:
-                UpKey = key;
-                break;
-
-                case InputType.DOWN:
-                DownKey = key;
-                break;
-
-                case InputType.ESCAPE:
-                EscKey = key;
-                break;
-
-                case InputType.FIRE:
-                FireKey = key;
-                break;
-            }
-        }
-
-
-
 		public void Update()
 		{
 			lastState.Clear();
@@ -85,6 +50,10 @@ namespace AsteroidsEvolved.GameInput
 
 
 
+		protected abstract void UpdateState();
+
+
+
 		public void resetLastInputTime()
 		{
 			lastInputTime = DateTime.Now;
@@ -92,36 +61,12 @@ namespace AsteroidsEvolved.GameInput
 
 
 
-		protected virtual void UpdateState()
-		{
-			KeyboardState keyboardState = Keyboard.GetState();
-
-			if (keyboardState.IsKeyDown(EscKey))
-				currentState.Add(InputType.ESCAPE);
-
-			if (keyboardState.IsKeyDown(UpKey))
-				currentState.Add(InputType.UP);
-
-			if (keyboardState.IsKeyDown(DownKey))
-				currentState.Add(InputType.DOWN);
-
-			if (keyboardState.IsKeyDown(LeftKey))
-				currentState.Add(InputType.LEFT);
-
-			if (keyboardState.IsKeyDown(RightKey))
-				currentState.Add(InputType.RIGHT);
-
-			if (keyboardState.IsKeyDown(FireKey) || keyboardState.IsKeyDown(Keys.Enter))
-				currentState.Add(InputType.FIRE);
-
-			if (keyboardState.IsKeyDown(TeleportKey))
-				currentState.Add(InputType.TELEPORT);
-		}
-
-
-
 		public bool justPressed(InputType type)
 		{
+			if (currentState.Count > 0)
+				System.Diagnostics.Debug.WriteLine("CURRENT STATE WIN " + onNow(type) + "	" + !onLastTime(type));
+			if (onNow(type) && !onLastTime(type))
+				System.Diagnostics.Debug.WriteLine("***************************************");
 			return onNow(type) && !onLastTime(type);
 		}
 
