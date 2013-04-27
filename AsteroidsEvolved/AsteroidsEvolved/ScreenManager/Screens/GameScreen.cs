@@ -13,6 +13,7 @@ using AsteroidsEvolved.World;
 using AsteroidsEvolved.World.WorldObjects;
 using AsteroidsEvolved.Threading;
 using AsteroidsEvolved.Threading.WorkItems;
+using AsteroidsEvolved.GameInput;
 
 namespace AsteroidsEvolved
 {
@@ -46,7 +47,7 @@ namespace AsteroidsEvolved
 
         public void addShip()
         {
-            Ship ship = new Ship(scene, manager.RM.Content.Load<Model>(GameParameters.Ship.MODEL));
+            Ship ship = new Ship(scene, manager.RM.Content.Load<Model>(GameParameters.Ship.MODEL), GameParameters.Player1); //todo: set up multiple ships
             scene.addShip(ship);
 			ThreadPool.getInstance().enqueueWorkItem(new ShipUpdater(scene));
         }

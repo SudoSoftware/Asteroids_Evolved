@@ -9,6 +9,7 @@ using AsteroidsEvolved.World.WorldObjects;
 using AsteroidsEvolved.Threading;
 using AsteroidsEvolved.Threading.WorkItems;
 using AsteroidsEvolved;
+using AsteroidsEvolved.GameInput;
 
 namespace AsteroidsEvolved
 {
@@ -117,7 +118,8 @@ namespace AsteroidsEvolved
         
 		protected override void Update(GameTime gameTime)
 		{
-			GameParameters.keyboardState = Keyboard.GetState();
+			GameParameters.Player1.userInput.Update();
+			GameParameters.Player2.userInput.Update();
 
             manager.Update(gameTime);
 

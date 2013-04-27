@@ -107,6 +107,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameInput\AI.cs" />
+    <Compile Include="GameInput\Player.cs" />
     <Compile Include="PersistanceManager.cs" />
     <Compile Include="ScreenManager\Base\ResourceManager.cs" />
     <Compile Include="ScreenManager\Base\Screen.cs" />
@@ -144,7 +146,7 @@
     <Compile Include="Threading\WorkItems\ShipUpdater.cs" />
     <Compile Include="Threading\WorkItems\WorkItem.cs" />
     <Compile Include="Threading\WorkItems\WorldObjectUpdater.cs" />
-    <Compile Include="UserInput.cs" />
+    <Compile Include="GameInput\UserInput.cs" />
     <Compile Include="World\Camera.cs" />
     <Compile Include="GameParameters.cs" />
     <Compile Include="World\Scene.cs" />
