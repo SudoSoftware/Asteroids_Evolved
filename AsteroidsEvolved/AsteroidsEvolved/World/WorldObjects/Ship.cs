@@ -8,6 +8,7 @@ using AsteroidsEvolved.World;
 using AsteroidsEvolved.Threading.WorkItems;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using AsteroidsEvolved.Threading;
 
 namespace AsteroidsEvolved
 {
@@ -17,6 +18,7 @@ namespace AsteroidsEvolved
         public Vector2 directionVector = new Vector2(0, -1);
 
         public Vector2 launcherPos = new Vector2();
+		public static SoundEffect pew;
 
         public TimeSpan lastShot = new TimeSpan();
         public TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
@@ -31,7 +33,7 @@ namespace AsteroidsEvolved
 			rotation.X = MathHelper.ToRadians(90.0f);
 
             rocketPool = new WorldObjectUpdater(ref rocketList);
-            GameParameters.threading.enqueueWorkItem(rocketPool);
+			ThreadPool.getInstance().enqueueWorkItem(rocketPool);
 		}
 
 
@@ -127,9 +129,18 @@ namespace AsteroidsEvolved
                 Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), manifests[0].position, movementVector, directionVector);
                 scene.addRocket(rocket);
                 rocketList.Add(rocket);
+				pew.Play();
 
                 lastShot = new TimeSpan();
             }
         }
+
+
+
+		public override void handleIntersection(WorldObject obj)
+		{
+			System.Diagnostics.Debug.WriteLine("SHIP INTERSECTING!");
+			scene.killItem(this);
+		}
 	}
 }

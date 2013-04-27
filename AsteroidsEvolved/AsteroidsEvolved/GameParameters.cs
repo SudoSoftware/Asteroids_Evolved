@@ -13,15 +13,13 @@ namespace AsteroidsEvolved
         public static readonly Point TARGET_RESOLUTION = new Point(1920, 1080);
         public static readonly Microsoft.Xna.Framework.Rectangle screenSize = new Microsoft.Xna.Framework.Rectangle(0, 0, TARGET_RESOLUTION.X, TARGET_RESOLUTION.Y);
 
-
-
+		public static Mode selected_mode = Mode.SP;
         public enum Mode
         {
             SP=0,
             MP=1,
             AI=2
         }
-        public static Mode selected_mode = Mode.SP;
 
 
 
@@ -72,12 +70,9 @@ namespace AsteroidsEvolved
             public static readonly Vector2 life_increment = new Vector2(25, 0);
 		}
 
-
-
 		public static KeyboardState keyboardState = Keyboard.GetState();
         public static SpriteBatch sbatch;
         public static ContentManager cmanager;
-        public static ThreadPool threading;
 
         //menu parameters
         public static readonly Vector2 DEFAULT_TITLE_FACTOR = new Vector2((float)2.1 / 8, (float)1.0 / 20);

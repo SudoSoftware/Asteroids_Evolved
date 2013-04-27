@@ -12,14 +12,13 @@ namespace AsteroidsEvolved.World
 {
 	class Scene
 	{
-		public static SoundEffect pew;
 		private Texture2D background;
-		private Mutex asteroidsMutex = new Mutex(), rocketsMutex = new Mutex();
 
 		private Camera camera;
 		private Ship ship;
 		private List<Asteroid> asteroids = new List<Asteroid>();
         private List<Rocket> rockets = new List<Rocket>();
+		private Mutex asteroidsMutex = new Mutex(), rocketsMutex = new Mutex();
 
 
 		public Scene(Camera camera, Texture2D background)
@@ -81,8 +80,6 @@ namespace AsteroidsEvolved.World
 			requestRocketsMutex();
             rockets.Add(rocket);
 			releaseRocketsMutex();
-
-            pew.Play();
         }
 
 

@@ -106,7 +106,7 @@ namespace AsteroidsEvolved
             // Load up Soundtrack
             MainMenuScreen.menu_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_MENU_THEME);
             //CentipedeGame.game_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_GAME_SONG);
-			Scene.pew = Content.Load<SoundEffect>(prefix + "audio/pew");
+			Ship.pew = Content.Load<SoundEffect>(prefix + "audio/pew");
 
             // Load up all menu resources.
             Background = Content.Load<Texture2D>(prefix + "textures/starfield"); // prefix + GameParameters.DEFAULT_MENU_BACKGROUND);

@@ -13,6 +13,7 @@ namespace AsteroidsEvolved.World.WorldObjects
 		protected Model model;
 		protected Matrix modelScale;
 		private BoundingBox modelBounds;
+		private bool isAlive = true;
 
 		protected Vector3 rotation;
 		protected List<Manifestation> manifests = new List<Manifestation>();
@@ -113,7 +114,7 @@ namespace AsteroidsEvolved.World.WorldObjects
 
 
 
-		public void handleIntersection(WorldObject obj)
+		public virtual void handleIntersection(WorldObject obj)
 		{
 			System.Diagnostics.Debug.WriteLine("intersection handled by World Object");
 		}

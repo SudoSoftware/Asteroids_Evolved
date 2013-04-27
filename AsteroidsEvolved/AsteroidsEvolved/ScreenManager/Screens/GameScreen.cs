@@ -19,7 +19,6 @@ namespace AsteroidsEvolved
     class GameScreen : Screen
     {
         Scene scene;
-        ThreadPool threading = ThreadPool.getInstance();
 
         GameParameters.Mode mode;
 
@@ -30,9 +29,6 @@ namespace AsteroidsEvolved
         public GameScreen(ScreenManager manager, Screen exit_screen, GameParameters.Mode mode)
             : base(manager, exit_screen)
         {
-            GameParameters.threading = threading;
-            threading.startWork(); //comment out to switch back to regular XNA cycle
-
             this.mode = mode;
 
             // Set initial score and life count.
@@ -42,7 +38,9 @@ namespace AsteroidsEvolved
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
             addShip();
             addAsteroids();
-			threading.enqueueWorkItem(new CollisionDetector(scene));
+			ThreadPool.getInstance().enqueueWorkItem(new CollisionDetector(scene));
+
+			ThreadPool.getInstance().startWork();
         }
 
 
@@ -61,7 +59,7 @@ namespace AsteroidsEvolved
 
             scene.setShip(ship);
             objs.Add(ship);
-            threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
+			ThreadPool.getInstance().enqueueWorkItem(new WorldObjectUpdater(ref objs));
         }
 
 
@@ -73,7 +71,7 @@ namespace AsteroidsEvolved
 
             scene.addAsteroid(asteroid);
             objs.Add(asteroid);
-            threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
+			ThreadPool.getInstance().enqueueWorkItem(new WorldObjectUpdater(ref objs));
         }
 
 
@@ -85,7 +83,7 @@ namespace AsteroidsEvolved
 
             scene.addRocket(rocket);
             objs.Add(rocket);
-            threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
+			ThreadPool.getInstance().enqueueWorkItem(new WorldObjectUpdater(ref objs));
         }
 
 
@@ -123,7 +121,7 @@ namespace AsteroidsEvolved
 
         public override void ExitScreen()
         {
-            threading.terminate();
+            ThreadPool.getInstance().terminate();
             base.ExitScreen();
         }
     }
