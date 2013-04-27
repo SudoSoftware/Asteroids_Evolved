@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using AsteroidsEvolved;
+using AsteroidsEvolved.GameInput;
 
 namespace AsteroidsEvolved
 {
     class ModeButton : ScrollButton
     {
         String player_name;
-        GameParameters.Player player;
+        Player player;
 
-        public ModeButton(String player_name, GameParameters.Player player)
+        public ModeButton(String player_name, Player player)
             : base(new List<String>() {"None", "Human Player", "HAL 9000"})
         {
             this.player_name = player_name;

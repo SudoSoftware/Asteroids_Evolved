@@ -9,25 +9,28 @@ using AsteroidsEvolved.Threading.WorkItems;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using AsteroidsEvolved.Threading;
+using AsteroidsEvolved.GameInput;
 
 namespace AsteroidsEvolved
 {
 	class Ship : WorldObject
 	{
+		public static SoundEffect pew;
+
+		private Player player;
 		private Vector2 movementVector = new Vector2(0, 0);
 		private Vector2 directionVector = new Vector2(0, -1);
 
 		private Vector2 launcherPos = new Vector2();
-		public static SoundEffect pew;
-
 		private DateTime lastShot = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
 		private TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
 
 
-		public Ship(Scene scene, Model model) :
+		public Ship(Scene scene, Model model, Player player) :
 			base(scene, model, new Vector3(), GameParameters.Ship.SIZE)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
+			this.player = player;
 		}
 
 
@@ -46,15 +49,15 @@ namespace AsteroidsEvolved
 
 		public void handleNavigation(TimeSpan elapsedGameTime)
 		{
-			if (GameParameters.keyboardState.IsKeyDown(UserInput.UpKey))
+			if (player.userInput.onNow(UserInput.InputType.UP))
 				accelerate(elapsedGameTime);
 
-			if (GameParameters.keyboardState.IsKeyDown(UserInput.LeftKey))
+			if (player.userInput.onNow(UserInput.InputType.LEFT))
 			{
 				turnLeft(elapsedGameTime);
 				rotation.Y = MathHelper.ToRadians(10f);
 			}
-			else if (GameParameters.keyboardState.IsKeyDown(UserInput.RightKey))
+			else if (player.userInput.onNow(UserInput.InputType.RIGHT))
 			{
 				turnRight(elapsedGameTime);
 				rotation.Y = MathHelper.ToRadians(-10f);
@@ -62,15 +65,15 @@ namespace AsteroidsEvolved
 			else
 				rotation.Y = 0f;
 
-			if (GameParameters.keyboardState.IsKeyDown(UserInput.DownKey))
-				movementVector = new Vector2();
+			//if (GameParameters.keyboardState.IsKeyDown(UserInput.DownKey))
+			//	movementVector = new Vector2();
 		}
 
 
 
 		public void handleFiring(TimeSpan elapsedGameTime)
 		{
-			if (GameParameters.keyboardState.IsKeyDown(UserInput.FireKey))
+			if (player.userInput.onNow(UserInput.InputType.FIRE))
 				fire(elapsedGameTime);
 
 			lastShot += elapsedGameTime.Duration();

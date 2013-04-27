@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using AsteroidsEvolved.Threading;
+using AsteroidsEvolved.GameInput;
 
 namespace AsteroidsEvolved
 {
@@ -25,48 +26,8 @@ namespace AsteroidsEvolved
             AI=2
         }
 
-        public class Player
-        {
-            public Mode player_mode;
-
-            public int score = 0;
-            public int lives = 3;
-            public Vector2 score_position = new Vector2(50, 50);
-            public Vector2 life_position = new Vector2(50, 125);
-            public Vector2 life_increment = new Vector2(25, 0);
-
-            public Player (Mode init_mode)
-            {
-                player_mode = init_mode;
-            }
-
-            public void reset_vars ()
-            {
-                score = 0;
-                lives = 3;
-            }
-
-            public Player mirror()
-            {
-                score_position = new Vector2(
-                    1600,
-                    50);
-
-                life_position = new Vector2(
-                    1600,
-                    125
-                    );
-
-                life_increment = -life_increment;
-
-                return this;
-            }
-        }
-
         public static Player Player1 = new Player(Mode.HU);
         public static Player Player2 = (new Player(Mode.NA)).mirror();
-
-
 
 		public class Ship
 		{
@@ -111,7 +72,6 @@ namespace AsteroidsEvolved
 			public static readonly float SPEED_LIMIT = 32f;
 		}
 
-		public static KeyboardState keyboardState = Keyboard.GetState();
         public static SpriteBatch sbatch;
         public static ContentManager cmanager;
 
