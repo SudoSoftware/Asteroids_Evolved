@@ -28,8 +28,6 @@ namespace AsteroidsEvolved
 			graphics.IsFullScreen = true;
 			graphics.PreferMultiSampling = true;
 			Content.RootDirectory = "Content";
-
-            
 		}
 
 		
@@ -51,11 +49,7 @@ namespace AsteroidsEvolved
             UserInput.UpKey = Keys.Up;
             UserInput.DownKey = Keys.Down;
             UserInput.EscKey = Keys.Escape;
-
-            //UserInput.alt_LeftKey = Keys.A;
-            //UserInput.alt_RightKey = Keys.D;
-            //UserInput.alt_UpKey = Keys.W;
-            //UserInput.alt_DownKey = Keys.D;
+            UserInput.FireKey = Keys.Space;
 
             Vector2 SCREEN_PARAMETERS =
                 new Vector2(

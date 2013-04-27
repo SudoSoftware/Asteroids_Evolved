@@ -16,9 +16,9 @@ namespace AsteroidsEvolved
                 )
             );
 
-            //this.AddItem(
-            //    new DifficultyButton()
-            //    );
+            this.AddItem(
+                new ModeButton()
+                );
 
             //this.AddItem(
             //    new CustomTexturesButton(manager.RM)

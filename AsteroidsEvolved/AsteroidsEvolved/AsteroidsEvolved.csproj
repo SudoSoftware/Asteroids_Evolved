@@ -114,6 +114,9 @@
     <Compile Include="ScreenManager\Base\Soundtrack.cs" />
     <Compile Include="ScreenManager\Base\SoundtrackManager.cs" />
     <Compile Include="ScreenManager\Buttons\AddScreenButton.cs" />
+    <Compile Include="ScreenManager\Buttons\ModeButton.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ScreenManager\Buttons\KeySelector.cs" />
     <Compile Include="ScreenManager\Buttons\MenuQuitButton.cs" />
     <Compile Include="ScreenManager\Buttons\ScrollButton.cs" />

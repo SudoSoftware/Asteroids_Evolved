@@ -21,15 +21,19 @@ namespace AsteroidsEvolved
         Scene scene;
         ThreadPool threading = ThreadPool.getInstance();
 
+        GameParameters.Mode mode;
+
         int score;
         int lives;
         public static Texture2D life_texture;
 
-        public GameScreen(ScreenManager manager, Screen exit_screen)
+        public GameScreen(ScreenManager manager, Screen exit_screen, GameParameters.Mode mode)
             : base(manager, exit_screen)
         {
             GameParameters.threading = threading;
             threading.startWork(); //comment out to switch back to regular XNA cycle
+
+            this.mode = mode;
 
             // Set initial score and life count.
             score = 0;
@@ -38,6 +42,13 @@ namespace AsteroidsEvolved
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
             addShip();
             addAsteroids();
+        }
+
+
+        public override void  HandleInput(GameTime time, UserInput input)
+        {
+            // Add control code here.
+            base.HandleInput(time, input);
         }
 
 

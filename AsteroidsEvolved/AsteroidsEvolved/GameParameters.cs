@@ -13,6 +13,18 @@ namespace AsteroidsEvolved
         public static readonly Point TARGET_RESOLUTION = new Point(1920, 1080);
         public static readonly Microsoft.Xna.Framework.Rectangle screenSize = new Microsoft.Xna.Framework.Rectangle(0, 0, TARGET_RESOLUTION.X, TARGET_RESOLUTION.Y);
 
+
+
+        public enum Mode
+        {
+            SP=0,
+            MP=1,
+            AI=2
+        }
+        public static Mode selected_mode = Mode.SP;
+
+
+
 		public class Ship
 		{
 			public static readonly String MODEL = "Models/p1_wedge";

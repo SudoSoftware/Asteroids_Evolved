@@ -38,15 +38,15 @@ namespace AsteroidsEvolved
 
 		public override void update(TimeSpan elapsedGameTime)
 		{
-			if (GameParameters.keyboardState.IsKeyDown(Keys.Up))
+			if (GameParameters.keyboardState.IsKeyDown(UserInput.UpKey))
 				accelerate(elapsedGameTime);
 
-            if (GameParameters.keyboardState.IsKeyDown(Keys.Left))
+            if (GameParameters.keyboardState.IsKeyDown(UserInput.LeftKey))
             {
                 turnLeft(elapsedGameTime);
                 rotation.Y = MathHelper.ToRadians(10f);
             }
-            else if (GameParameters.keyboardState.IsKeyDown(Keys.Right))
+            else if (GameParameters.keyboardState.IsKeyDown(UserInput.RightKey))
             {
                 turnRight(elapsedGameTime);
                 rotation.Y = MathHelper.ToRadians(-10f);
@@ -54,10 +54,10 @@ namespace AsteroidsEvolved
             else
                 rotation.Y = 0f;
 
-            if (GameParameters.keyboardState.IsKeyDown(Keys.Down))
+            if (GameParameters.keyboardState.IsKeyDown(UserInput.DownKey))
                 movementVector = new Vector2();
 
-            if (GameParameters.keyboardState.IsKeyDown(Keys.Space))
+            if (GameParameters.keyboardState.IsKeyDown(UserInput.FireKey))
                 fire(elapsedGameTime);
 
             lastShot += elapsedGameTime.Duration();
