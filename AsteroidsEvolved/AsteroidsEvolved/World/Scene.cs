@@ -6,18 +6,20 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using System.Threading;
 
 namespace AsteroidsEvolved.World
 {
 	class Scene
 	{
-        private Texture2D background;
+		public static SoundEffect pew;
+		private Texture2D background;
+		private Mutex asteroidsMutex = new Mutex(), rocketsMutex = new Mutex();
 
 		private Camera camera;
 		private Ship ship;
 		private List<Asteroid> asteroids = new List<Asteroid>();
         private List<Rocket> rockets = new List<Rocket>();
-        public static SoundEffect pew;
 
 
 		public Scene(Camera camera, Texture2D background)
@@ -61,7 +63,9 @@ namespace AsteroidsEvolved.World
 
 		public void addAsteroid(Asteroid asteroid)
 		{
+			requestAsteroidsMutex();
 			asteroids.Add(asteroid);
+			releaseAsteroidsMutex();
 		}
         
 
@@ -74,7 +78,10 @@ namespace AsteroidsEvolved.World
                 // Do nothing instead.
                 return;
 
+			requestRocketsMutex();
             rockets.Add(rocket);
+			releaseRocketsMutex();
+
             pew.Play();
         }
 
@@ -82,11 +89,57 @@ namespace AsteroidsEvolved.World
 
         public void killItem(WorldObject obj)
         {
+			requestAsteroidsMutex();
             if (obj.GetType() == typeof(Asteroid))
                 asteroids.Remove((Asteroid)obj);
+			releaseAsteroidsMutex();
 
+			requestRocketsMutex();
             if (obj.GetType() == typeof(Rocket))
                 rockets.Remove((Rocket)obj);
+			releaseRocketsMutex();
         }
+
+
+
+		public List<Asteroid> getAsteroids()
+		{
+			return asteroids;
+		}
+
+
+
+		private List<Rocket> getRockets()
+		{
+			return rockets;
+		}
+
+
+
+		public void requestAsteroidsMutex()
+		{
+			asteroidsMutex.WaitOne();
+		}
+
+
+
+		public void releaseAsteroidsMutex()
+		{
+			asteroidsMutex.ReleaseMutex();
+		}
+
+
+
+		public void requestRocketsMutex()
+		{
+			rocketsMutex.WaitOne();
+		}
+
+
+
+		public void releaseRocketsMutex()
+		{
+			rocketsMutex.ReleaseMutex();
+		}
 	}
 }

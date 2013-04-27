@@ -42,6 +42,7 @@ namespace AsteroidsEvolved
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
             addShip();
             addAsteroids();
+			threading.enqueueWorkItem(new CollisionDetector(scene));
         }
 
 
@@ -85,8 +86,6 @@ namespace AsteroidsEvolved
             scene.addRocket(rocket);
             objs.Add(rocket);
             threading.enqueueWorkItem(new WorldObjectUpdater(ref objs));
-
-
         }
 
 
@@ -118,7 +117,6 @@ namespace AsteroidsEvolved
             }
 
             manager.RM.SpriteB.End();
-
         }
 
 

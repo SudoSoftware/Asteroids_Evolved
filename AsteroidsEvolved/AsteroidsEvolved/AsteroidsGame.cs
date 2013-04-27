@@ -37,56 +37,68 @@ namespace AsteroidsEvolved
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameParameters.cmanager = Content;
             GameParameters.sbatch = spriteBatch;
-            Texture2D background = Content.Load<Texture2D>(GameParameters.World.BACKGROUND);
 
             manager = new ScreenManager(this, graphics, Content, spriteBatch);
             manager.RM.LoadResources("");
             MediaPlayer.IsRepeating = true;
 
-            // Set up default key bindings.
+			setDefaultKeyBindings();
+			initializeScreens(Content.Load<Texture2D>(GameParameters.World.BACKGROUND));
+
+			base.Initialize();
+		}
+
+
+
+		private void setDefaultKeyBindings()
+		{
+			// Set up default key bindings.
             UserInput.LeftKey = Keys.Left;
             UserInput.RightKey = Keys.Right;
             UserInput.UpKey = Keys.Up;
             UserInput.DownKey = Keys.Down;
             UserInput.EscKey = Keys.Escape;
             UserInput.FireKey = Keys.Space;
-
-            Vector2 SCREEN_PARAMETERS =
-                new Vector2(
-                    GameParameters.TARGET_RESOLUTION.X,
-                    GameParameters.TARGET_RESOLUTION.Y
-                );
-
-            MenuStyle style =
-                new MenuStyle(
-                    GameParameters.DEFAULT_TITLE_FACTOR * SCREEN_PARAMETERS,
-                    GameParameters.DEFAULT_MENU_FACTOR * SCREEN_PARAMETERS,
-                    GameParameters.DEFAULT_MENU_ITEM_DISPLACEMENT * SCREEN_PARAMETERS,
-                    "TitleFont",
-                    "MenuFont",
-                    GameParameters.DEFAULT_TITLE_COLOR,
-                    GameParameters.DEFAULT_MENU_COLOR,
-                    GameParameters.DEFAULT_SELECTED_ITEM_COLOR
-                );
-
-            MainMenuScreen main_menu =
-                new MainMenuScreen(manager, new ExitScreen(manager, null), style);
-            IntroScreen intro_screen = new IntroScreen(
-                manager,
-                main_menu,
-                new Vector2(
-                    GameParameters.TARGET_RESOLUTION.X * (float)1/8,
-                    GameParameters.TARGET_RESOLUTION.Y * (float)3/8
-                    )
-                    );
+		}
 
 
-            manager.AddScreen(new BackgroundScreen(manager, background));
 
-            manager.AddScreen(intro_screen);
-            manager.FocusScreen(intro_screen);
+		private void initializeScreens(Texture2D background)
+		{
+			Vector2 SCREEN_PARAMETERS =
+				new Vector2(
+					GameParameters.TARGET_RESOLUTION.X,
+					GameParameters.TARGET_RESOLUTION.Y
+				);
 
-			base.Initialize();
+			MenuStyle style =
+				new MenuStyle(
+					GameParameters.DEFAULT_TITLE_FACTOR * SCREEN_PARAMETERS,
+					GameParameters.DEFAULT_MENU_FACTOR * SCREEN_PARAMETERS,
+					GameParameters.DEFAULT_MENU_ITEM_DISPLACEMENT * SCREEN_PARAMETERS,
+					"TitleFont",
+					"MenuFont",
+					GameParameters.DEFAULT_TITLE_COLOR,
+					GameParameters.DEFAULT_MENU_COLOR,
+					GameParameters.DEFAULT_SELECTED_ITEM_COLOR
+				);
+
+			MainMenuScreen main_menu =
+				new MainMenuScreen(manager, new ExitScreen(manager, null), style);
+			IntroScreen intro_screen = new IntroScreen(
+				manager,
+				main_menu,
+				new Vector2(
+					GameParameters.TARGET_RESOLUTION.X * (float)1 / 8,
+					GameParameters.TARGET_RESOLUTION.Y * (float)3 / 8
+					)
+					);
+
+
+			manager.AddScreen(new BackgroundScreen(manager, background));
+
+			manager.AddScreen(intro_screen);
+			manager.FocusScreen(intro_screen);
 		}
 
 

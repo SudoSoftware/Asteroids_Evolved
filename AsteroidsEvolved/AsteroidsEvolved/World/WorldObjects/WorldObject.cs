@@ -24,6 +24,8 @@ namespace AsteroidsEvolved.World.WorldObjects
             this.scene = scene;
         }
 
+
+
 		public WorldObject(Model model, Vector3 initialLocation, Vector3 desiredBounds)
 		{
 			this.model = model;
@@ -99,6 +101,21 @@ namespace AsteroidsEvolved.World.WorldObjects
 					mesh.Draw();
 				}
 			}
+		}
+
+
+
+		public bool intersects(WorldObject obj)
+		{
+			System.Diagnostics.Debug.WriteLine("testing for intersection...");
+			return manifests[0].getBoundingBox().Intersects(obj.manifests[0].getBoundingBox());
+		}
+
+
+
+		public void handleIntersection(WorldObject obj)
+		{
+			System.Diagnostics.Debug.WriteLine("intersection handled by World Object");
 		}
 
 
