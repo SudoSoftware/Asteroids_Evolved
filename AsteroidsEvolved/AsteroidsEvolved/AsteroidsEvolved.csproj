@@ -111,8 +111,6 @@
     <Compile Include="ScreenManager\Base\ResourceManager.cs" />
     <Compile Include="ScreenManager\Base\Screen.cs" />
     <Compile Include="ScreenManager\Base\ScreenManager.cs" />
-    <Compile Include="ScreenManager\Base\Soundtrack.cs" />
-    <Compile Include="ScreenManager\Base\SoundtrackManager.cs" />
     <Compile Include="ScreenManager\Buttons\AddScreenButton.cs" />
     <Compile Include="ScreenManager\Buttons\ModeButton.cs">
       <SubType>Code</SubType>

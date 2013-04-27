@@ -14,7 +14,7 @@ namespace AsteroidsEvolved
         public static readonly Microsoft.Xna.Framework.Rectangle screenSize = new Microsoft.Xna.Framework.Rectangle(0, 0, TARGET_RESOLUTION.X, TARGET_RESOLUTION.Y);
 
 
-        // Player Settings
+        // Player modes.
 		public enum Mode
         {
             //Not Applicable
@@ -25,6 +25,7 @@ namespace AsteroidsEvolved
             AI=2
         }
 
+        //M0ar player settings.
         public class Player
         {
             public Mode player_mode;
