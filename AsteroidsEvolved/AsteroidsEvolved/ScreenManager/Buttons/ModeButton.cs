@@ -58,7 +58,7 @@ namespace AsteroidsEvolved
                     break;
 
                     // I'm sorry, Dave. I'm afraid I can't let you know
-                    // what this case is.
+                    // what this case does.
                 case 2:
                     player.player_mode = GameParameters.Mode.AI;
                     break;

@@ -22,7 +22,7 @@ namespace AsteroidsEvolved
             // Human Player
             HU=1,
             // Computer Player
-            AI=3
+            AI=2
         }
 
         public class Player
@@ -31,6 +31,9 @@ namespace AsteroidsEvolved
 
             public int score = 0;
             public int lives = 3;
+            public Vector2 score_position = new Vector2(50, 50);
+            public Vector2 life_position = new Vector2(50, 125);
+            public Vector2 life_increment = new Vector2(25, 0);
 
             public Player (Mode init_mode)
             {
@@ -42,10 +45,26 @@ namespace AsteroidsEvolved
                 score = 0;
                 lives = 3;
             }
+
+            public Player mirror()
+            {
+                score_position = new Vector2(
+                    1600,
+                    50);
+
+                life_position = new Vector2(
+                    1600,
+                    125
+                    );
+
+                life_increment = -life_increment;
+
+                return this;
+            }
         }
 
         public static Player Player1 = new Player(Mode.HU);
-        public static Player Player2 = new Player(Mode.NA);
+        public static Player Player2 = (new Player(Mode.NA)).mirror();
 
 
 
@@ -91,9 +110,6 @@ namespace AsteroidsEvolved
             public static readonly String BACKGROUND = "Textures/starfield";
 			public static readonly Rectangle BOUNDS = new Rectangle(-1920 / 2, -1080 / 2, 1920, 1080);
 			public static readonly float SPEED_LIMIT = 32f;
-            public static readonly Vector2 score_position = new Vector2(50, 50);
-            public static readonly Vector2 life_position = new Vector2(50, 125);
-            public static readonly Vector2 life_increment = new Vector2(25, 0);
 		}
 
 		public static KeyboardState keyboardState = Keyboard.GetState();

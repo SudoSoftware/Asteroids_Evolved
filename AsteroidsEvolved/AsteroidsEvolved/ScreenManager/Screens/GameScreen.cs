@@ -77,26 +77,51 @@ namespace AsteroidsEvolved
             
             // Draw scores and lives.
             manager.RM.SpriteB.Begin();
-            manager.RM.SpriteB.DrawString(
-                (SpriteFont)manager.RM.FontHash["IntroFont"],
-                GameParameters.Player1.score.ToString(),
-                GameParameters.World.score_position,
-                Color.AntiqueWhite
-                );
-
-            Vector2 lifepos = GameParameters.World.life_position;
-
-            for (int i = 0; i < GameParameters.Player1.lives - 1; ++i)
+            if (GameParameters.Player1.player_mode != GameParameters.Mode.NA)
             {
-                manager.RM.SpriteB.Draw(
-                    life_texture,
-                    lifepos,
+                manager.RM.SpriteB.DrawString(
+                    (SpriteFont)manager.RM.FontHash["IntroFont"],
+                    GameParameters.Player1.score.ToString(),
+                    GameParameters.Player1.score_position,
                     Color.AntiqueWhite
                     );
 
-                lifepos += GameParameters.World.life_increment;
+                Vector2 lifepos = GameParameters.Player1.life_position;
+
+                for (int i = 0; i < GameParameters.Player1.lives - 1; ++i)
+                {
+                    manager.RM.SpriteB.Draw(
+                        life_texture,
+                        lifepos,
+                        Color.AntiqueWhite
+                        );
+
+                    lifepos += GameParameters.Player1.life_increment;
+                }
             }
 
+            if (GameParameters.Player2.player_mode != GameParameters.Mode.NA)
+            {
+                manager.RM.SpriteB.DrawString(
+                    (SpriteFont)manager.RM.FontHash["IntroFont"],
+                    GameParameters.Player2.score.ToString(),
+                    GameParameters.Player2.score_position,
+                    Color.AntiqueWhite
+                    );
+
+                Vector2 lifepos = GameParameters.Player2.life_position;
+
+                for (int i = 0; i < GameParameters.Player2.lives - 1; ++i)
+                {
+                    manager.RM.SpriteB.Draw(
+                        life_texture,
+                        lifepos,
+                        Color.AntiqueWhite
+                        );
+
+                    lifepos += GameParameters.Player2.life_increment;
+                }
+            }
             manager.RM.SpriteB.End();
         }
 
