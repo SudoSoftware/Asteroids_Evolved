@@ -106,9 +106,18 @@ namespace AsteroidsEvolved.World
 
 
 
-		private List<Rocket> getRockets()
+		public List<Rocket> getRockets()
 		{
 			return rockets;
+		}
+
+
+
+		public List<Ship> getShips()
+		{
+			List<Ship> ships = new List<Ship>();
+			ships.Add(ship);
+			return ships;
 		}
 
 

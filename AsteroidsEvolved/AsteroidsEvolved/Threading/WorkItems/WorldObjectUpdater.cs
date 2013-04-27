@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using AsteroidsEvolved.World.WorldObjects;
+using AsteroidsEvolved.World;
 
 namespace AsteroidsEvolved.Threading.WorkItems
 {
-	class WorldObjectUpdater : WorkItem
+	abstract class WorldObjectUpdater : WorkItem
 	{
-        private List<WorldObject> objs;
 		private DateTime lastExecuted = DateTime.Now;
+		protected Scene scene;
 
 
-		public WorldObjectUpdater(ref List<WorldObject> objs)
+		public WorldObjectUpdater(Scene scene)
 		{
-			this.objs = objs;
+			this.scene = scene;
 		}
 
 
@@ -20,11 +20,11 @@ namespace AsteroidsEvolved.Threading.WorkItems
 		public override void execute()
 		{
 			DateTime now = DateTime.Now;
-
-			foreach (WorldObject obj in objs.ToArray())
-				obj.update(now - lastExecuted);
-
+			updateObjects(now - lastExecuted);
 			lastExecuted = now;
 		}
+
+
+		public abstract void updateObjects(TimeSpan elapsedTime);
 	}
 }

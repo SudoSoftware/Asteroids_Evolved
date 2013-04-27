@@ -32,7 +32,7 @@ namespace AsteroidsEvolved
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
 
-            rocketPool = new WorldObjectUpdater(ref rocketList);
+            //rocketPool = new WorldObjectUpdater(ref rocketList);
 			ThreadPool.getInstance().enqueueWorkItem(rocketPool);
 		}
 

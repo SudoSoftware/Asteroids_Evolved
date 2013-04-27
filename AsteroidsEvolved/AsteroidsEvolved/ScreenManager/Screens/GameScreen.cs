@@ -59,7 +59,7 @@ namespace AsteroidsEvolved
 
             scene.setShip(ship);
             objs.Add(ship);
-			ThreadPool.getInstance().enqueueWorkItem(new WorldObjectUpdater(ref objs));
+			ThreadPool.getInstance().enqueueWorkItem(new ShipUpdater(scene));
         }
 
 
@@ -71,7 +71,7 @@ namespace AsteroidsEvolved
 
             scene.addAsteroid(asteroid);
             objs.Add(asteroid);
-			ThreadPool.getInstance().enqueueWorkItem(new WorldObjectUpdater(ref objs));
+			ThreadPool.getInstance().enqueueWorkItem(new AsteroidsUpdater(scene));
         }
 
 
@@ -83,7 +83,7 @@ namespace AsteroidsEvolved
 
             scene.addRocket(rocket);
             objs.Add(rocket);
-			ThreadPool.getInstance().enqueueWorkItem(new WorldObjectUpdater(ref objs));
+			ThreadPool.getInstance().enqueueWorkItem(new RocketUpdater(scene));
         }
 
 
