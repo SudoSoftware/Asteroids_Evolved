@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using AsteroidsEvolved.World.WorldObjects;
 using AsteroidsEvolved.World;
 using AsteroidsEvolved.Threading.WorkItems;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace AsteroidsEvolved
 {

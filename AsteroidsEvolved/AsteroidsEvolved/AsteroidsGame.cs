@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using AsteroidsEvolved.World;
 using AsteroidsEvolved.World.WorldObjects;
 using AsteroidsEvolved.Threading;
@@ -26,6 +28,8 @@ namespace AsteroidsEvolved
 			graphics.IsFullScreen = true;
 			graphics.PreferMultiSampling = true;
 			Content.RootDirectory = "Content";
+
+            
 		}
 
 		
@@ -39,6 +43,7 @@ namespace AsteroidsEvolved
 
             manager = new ScreenManager(this, graphics, Content, spriteBatch);
             manager.RM.LoadResources("");
+            MediaPlayer.IsRepeating = true;
 
             // Set up default key bindings.
             UserInput.LeftKey = Keys.Left;
@@ -119,7 +124,6 @@ namespace AsteroidsEvolved
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			//scene.draw();
             manager.Draw();
 
 			base.Draw(gameTime);

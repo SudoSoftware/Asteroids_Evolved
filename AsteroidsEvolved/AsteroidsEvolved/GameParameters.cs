@@ -55,6 +55,9 @@ namespace AsteroidsEvolved
             public static readonly String BACKGROUND = "Textures/starfield";
 			public static readonly Rectangle BOUNDS = new Rectangle(-1920 / 2, -1080 / 2, 1920, 1080);
 			public static readonly float SPEED_LIMIT = 32f;
+            public static readonly Vector2 score_position = new Vector2(50, 50);
+            public static readonly Vector2 life_position = new Vector2(50, 125);
+            public static readonly Vector2 life_increment = new Vector2(25, 0);
 		}
 
 

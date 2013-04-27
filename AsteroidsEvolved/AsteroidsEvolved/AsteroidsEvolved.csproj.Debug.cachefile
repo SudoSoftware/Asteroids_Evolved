@@ -1,3 +1,4 @@
+Content\audio\04. Another Mysterious Pipe Appeared.xnb
 Content\Models\p1_wedge.xnb
 Content\Models\asteroid10.xnb
 Content\Models\LargeRocket.xnb
@@ -11,7 +12,8 @@ Content\fonts\MenuFont.xnb
 Content\fonts\MenuItem.xnb
 Content\fonts\temporaryFont.xnb
 Content\fonts\TitleFont.xnb
-Content\textures\wedge_p1_diff_v1_0.xnb
-Content\audio\04. Another Mysterious Pipe Appeared.xnb
 Content\fonts\IntroFont.xnb
+Content\textures\wedge_p1_diff_v1_0.xnb
+Content\Textures\life.xnb
+Content\audio\pew.xnb
 Content\audio\04. Another Mysterious Pipe Appeared.wma

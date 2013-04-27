@@ -21,11 +21,20 @@ namespace AsteroidsEvolved
         Scene scene;
         ThreadPool threading = ThreadPool.getInstance();
 
+        int score;
+        int lives;
+        public static Texture2D life_texture;
+
         public GameScreen(ScreenManager manager, Screen exit_screen)
             : base(manager, exit_screen)
         {
             GameParameters.threading = threading;
             threading.startWork(); //comment out to switch back to regular XNA cycle
+
+            // Set initial score and life count.
+            score = 0;
+            lives = 3;
+
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
             addShip();
             addAsteroids();
@@ -74,6 +83,31 @@ namespace AsteroidsEvolved
         public override void Draw()
         {
             scene.draw();
+            
+            // Draw scores and lives.
+            manager.RM.SpriteB.Begin();
+            manager.RM.SpriteB.DrawString(
+                (SpriteFont)manager.RM.FontHash["IntroFont"],
+                score.ToString(),
+                GameParameters.World.score_position,
+                Color.AntiqueWhite
+                );
+
+            Vector2 lifepos = GameParameters.World.life_position;
+
+            for (int i = 0; i < lives - 1; ++i)
+            {
+                manager.RM.SpriteB.Draw(
+                    life_texture,
+                    lifepos,
+                    Color.AntiqueWhite
+                    );
+
+                lifepos += GameParameters.World.life_increment;
+            }
+
+            manager.RM.SpriteB.End();
+
         }
 
 

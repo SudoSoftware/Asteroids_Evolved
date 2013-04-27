@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using AsteroidsEvolved.World.WorldObjects;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace AsteroidsEvolved.World
 {
@@ -15,6 +17,7 @@ namespace AsteroidsEvolved.World
 		private Ship ship;
 		private List<Asteroid> asteroids = new List<Asteroid>();
         private List<Rocket> rockets = new List<Rocket>();
+        public static SoundEffect pew;
 
 
 		public Scene(Camera camera, Texture2D background)
@@ -72,6 +75,7 @@ namespace AsteroidsEvolved.World
                 return;
 
             rockets.Add(rocket);
+            pew.Play();
         }
 
 

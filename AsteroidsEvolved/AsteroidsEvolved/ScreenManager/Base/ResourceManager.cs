@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using AsteroidsEvolved;
+using AsteroidsEvolved.World;
 
 namespace AsteroidsEvolved
 {
@@ -97,6 +98,7 @@ namespace AsteroidsEvolved
             //Scorpion.texture = this.Content.Load<Texture2D>(prefix + "textures/Scorpion");
             //Shooter.texture = this.Content.Load<Texture2D>(prefix + "textures/Shooter");
             //Spider.texture = this.Content.Load<Texture2D>(prefix + "textures/Flea");
+            GameScreen.life_texture = this.Content.Load<Texture2D>(prefix + "textures/life");
 
             //load all game fonts
             //HeadsUpDisplay.font = Content.Load<SpriteFont>(prefix + "temporaryFont");
@@ -104,7 +106,7 @@ namespace AsteroidsEvolved
             // Load up Soundtrack
             MainMenuScreen.menu_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_MENU_THEME);
             //CentipedeGame.game_theme = Content.Load<Song>(prefix + GameParameters.DEFAULT_GAME_SONG);
-			//Shooter.rocketSpawnSound = Content.Load<SoundEffect>(prefix + GameParameters.DEFAULT_SHOOT_SOUND);
+			Scene.pew = Content.Load<SoundEffect>(prefix + "audio/pew");
 
             // Load up all menu resources.
             Background = Content.Load<Texture2D>(prefix + "textures/starfield"); // prefix + GameParameters.DEFAULT_MENU_BACKGROUND);
