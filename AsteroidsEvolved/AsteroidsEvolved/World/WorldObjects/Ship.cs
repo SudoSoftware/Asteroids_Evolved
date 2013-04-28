@@ -48,6 +48,7 @@ namespace AsteroidsEvolved
 			HumanInput hi = (HumanInput)player.userInput;
 
 			System.Diagnostics.Debug.WriteLine(this.GetHashCode() + "	" + player.PlayerMode + "	" + hi.UpKey);
+
 			if (player.userInput.onNow(UserInput.InputType.UP))
 				accelerate(elapsedGameTime);
 

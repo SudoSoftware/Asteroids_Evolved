@@ -15,8 +15,8 @@ namespace AsteroidsEvolved
         public static readonly Microsoft.Xna.Framework.Rectangle screenSize = new Microsoft.Xna.Framework.Rectangle(0, 0, TARGET_RESOLUTION.X, TARGET_RESOLUTION.Y);
 		public static SpriteBatch sbatch;
 		public static ContentManager cmanager;
-		public static Player Player1 = new Player(Mode.HU);
-		public static Player Player2 = new Player(Mode.NA).mirror();
+		public static Player Player1 = new Player(1, Mode.HU);
+		public static Player Player2 = new Player(2, Mode.NA).mirror();
 
 
         // Player modes.
