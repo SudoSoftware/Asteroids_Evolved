@@ -10,7 +10,7 @@ namespace AsteroidsEvolved
         {
         }
 
-		public override void HandleInput(GameTime time, HumanInput input)
+		public override void HandleInput(GameTime time, UserInput input)
         {
             manager.GM.Exit();
         }

@@ -20,6 +20,8 @@ namespace AsteroidsEvolved.World
         private List<Rocket> rockets = new List<Rocket>();
 		private Mutex shipMutex = new Mutex(), asteroidsMutex = new Mutex(), rocketsMutex = new Mutex();
 
+		public static SoundEffect pew;
+
 
 		public Scene(Camera camera, Texture2D background)
 		{
@@ -64,10 +66,9 @@ namespace AsteroidsEvolved.World
         {
             // We can't have a whole bunch of rockets on the screen.
             if (rockets.Count >= 5)
-                //rockets.Remove(rockets[0]);
-                // Do nothing instead.
                 return;
 
+			pew.Play();
 			requestRocketsMutex();
             rockets.Add(rocket);
 			releaseRocketsMutex();

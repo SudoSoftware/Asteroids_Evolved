@@ -13,17 +13,21 @@ namespace AsteroidsEvolved.GameInput
 			get { return player_mode; }
 			set
 			{
+				player_mode = value;
+
 				switch (value)
 				{
 					case GameParameters.Mode.HU:
-						player_mode = value;
-						userInput = new HumanInput();
-						set_keybindings();
+					userInput = new HumanInput();
+					set_keybindings();
 					break;
 
 					case GameParameters.Mode.AI:
-						player_mode = value;
-						userInput = new AI();
+					userInput = new AI();
+					break;
+
+					default:
+					userInput = null;
 					break;
 				}
 			}

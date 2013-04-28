@@ -37,7 +37,7 @@ namespace AsteroidsEvolved
 
         }
 
-		public virtual void HandleInput(GameTime time, HumanInput input)
+		public virtual void HandleInput(GameTime time, UserInput input)
         {
             if (input.justPressed(UserInput.InputType.ESCAPE))
                 ExitScreen();

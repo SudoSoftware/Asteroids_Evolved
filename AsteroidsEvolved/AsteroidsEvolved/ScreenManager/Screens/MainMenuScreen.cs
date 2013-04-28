@@ -15,7 +15,7 @@ namespace AsteroidsEvolved
         {
             this.AddItem(
                 new AddScreenButton("New Game", manager, typeof(GameScreen),
-                    new Object[] { manager, this }
+                    new Object[] { manager, this, false }
                 )
             );
 
@@ -58,17 +58,17 @@ namespace AsteroidsEvolved
             manager.current_song = menu_theme;
         }
 
-		public override void HandleInput(GameTime time, HumanInput input)
+		public override void HandleInput(GameTime time, UserInput input)
         {
  	        base.HandleInput(time, input);
 
             // Handle non-input
             if (input.GetTimeSinceLastInput().Seconds >= 10)
             {
-                //Screen s = new CentipedeGame(manager, this, true);
-                //this.hidden_p = true;
-                //manager.AddScreen(s);
-                //manager.FocusScreen(s);
+				Screen s = new GameScreen(manager, this, true);
+				this.hidden_p = true;
+				manager.AddScreen(s);
+				manager.FocusScreen(s);
             }
         }
     }

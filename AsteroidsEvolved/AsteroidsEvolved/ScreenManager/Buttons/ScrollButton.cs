@@ -70,7 +70,7 @@ class ScrollButton : MenuItem
         {
         }
 
-		public override void HandleInput(GameTime time, HumanInput input)
+		public override void HandleInput(GameTime time, UserInput input)
         {
             if (options.Count == 0)
                 return;

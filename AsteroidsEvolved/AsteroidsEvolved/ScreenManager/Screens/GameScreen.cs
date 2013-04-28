@@ -22,9 +22,24 @@ namespace AsteroidsEvolved
         Scene scene;
         public static Texture2D life_texture;
 
-        public GameScreen(ScreenManager manager, Screen exit_screen)
+		GameParameters.Mode prevval_1;
+		GameParameters.Mode prevval_2;
+		bool attract;
+
+        public GameScreen(ScreenManager manager, Screen exit_screen, bool attract)
             : base(manager, exit_screen)
         {
+			prevval_1 = GameParameters.Player1.PlayerMode;
+			prevval_2 = GameParameters.Player2.PlayerMode;
+
+			this.attract = attract;
+			if (attract)
+			{
+				GameParameters.Player1.PlayerMode = GameParameters.Mode.AI;
+				GameParameters.Player2.PlayerMode = GameParameters.Mode.NA;
+				manager.input = GameParameters.Player1.userInput;
+			}
+
             GameParameters.Player1.reset_vars();
 			GameParameters.Player2.reset_vars();
 
@@ -37,7 +52,7 @@ namespace AsteroidsEvolved
         }
 
 
-		public override void HandleInput(GameTime time, HumanInput input)
+		public override void HandleInput(GameTime time, UserInput input)
         {
 			GameParameters.Player2.update();
             base.HandleInput(time, input);
@@ -144,6 +159,14 @@ namespace AsteroidsEvolved
         public override void ExitScreen()
         {
             ThreadPool.getInstance().terminate();
+
+			if (attract)
+			{
+				GameParameters.Player1.PlayerMode = prevval_1;
+				GameParameters.Player2.PlayerMode = prevval_2;
+				manager.input = GameParameters.Player1.userInput;
+			}
+
             base.ExitScreen();
         }
     }

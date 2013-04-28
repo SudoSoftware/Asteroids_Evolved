@@ -20,7 +20,7 @@ namespace AsteroidsEvolved
 			display_text = player_name + options[(int)player.PlayerMode];
         }
 
-		public override void HandleInput(Microsoft.Xna.Framework.GameTime time, HumanInput input)
+		public override void HandleInput(Microsoft.Xna.Framework.GameTime time, UserInput input)
         {
             if (options.Count == 0)
                 return;

@@ -23,7 +23,7 @@ namespace AsteroidsEvolved
             selected_index = menu_items.Count-1;
         }
 
-		public override void HandleInput(Microsoft.Xna.Framework.GameTime time, HumanInput input)
+		public override void HandleInput(Microsoft.Xna.Framework.GameTime time, UserInput input)
         {
             if (input.justPressed(UserInput.InputType.ESCAPE))
                 ExitScreen();

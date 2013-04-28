@@ -29,7 +29,7 @@ namespace AsteroidsEvolved
         public Song current_song;
 
         // Input Class
-		HumanInput input;
+		public UserInput input;
 
         // The screen which currently has focus.
         public Screen Focus

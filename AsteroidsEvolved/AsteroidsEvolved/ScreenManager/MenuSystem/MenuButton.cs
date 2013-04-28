@@ -21,7 +21,7 @@ namespace AsteroidsEvolved
         {
         }
 
-		public override void HandleInput(GameTime time, HumanInput input)
+		public override void HandleInput(GameTime time, UserInput input)
         {
             if (input.justPressed(UserInput.InputType.FIRE))
                 RunAction();

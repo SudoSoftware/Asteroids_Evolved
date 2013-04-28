@@ -15,8 +15,6 @@ namespace AsteroidsEvolved
 {
 	class Ship : WorldObject
 	{
-		public static SoundEffect pew;
-
 		private Player player;
 		private Vector2 movementVector = new Vector2(0, 0);
 		private Vector2 directionVector = new Vector2(0, -1);
@@ -45,10 +43,6 @@ namespace AsteroidsEvolved
 
 		public void handleNavigation(TimeSpan elapsedGameTime)
 		{
-			HumanInput hi = (HumanInput)player.userInput;
-
-			System.Diagnostics.Debug.WriteLine(this.GetHashCode() + "	" + player.PlayerMode + "	" + hi.UpKey);
-
 			if (player.userInput.onNow(UserInput.InputType.UP))
 				accelerate(elapsedGameTime);
 
@@ -124,7 +118,6 @@ namespace AsteroidsEvolved
 
 			Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), this, manifests[0].position, movementVector, directionVector);
 			scene.addRocket(rocket);
-			pew.Play();
         }
 
 

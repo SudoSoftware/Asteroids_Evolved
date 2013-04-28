@@ -19,6 +19,13 @@ namespace AsteroidsEvolved.World.WorldObjects
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
+		List<Manifestation> MANIFESTS
+		{
+			get { return manifests; }
+		}
+		
+
+
 		public WorldObject(Scene scene, Model model, Vector3 initialLocation, float size):
 			this(model, initialLocation, new Vector3(size, size, size))
 		{
