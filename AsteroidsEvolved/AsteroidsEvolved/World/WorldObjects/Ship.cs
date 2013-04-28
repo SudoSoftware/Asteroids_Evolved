@@ -21,13 +21,13 @@ namespace AsteroidsEvolved
 		private Vector2 movementVector = new Vector2(0, 0);
 		private Vector2 directionVector = new Vector2(0, -1);
 
-		private Vector2 launcherPos = new Vector2();
+		//private Vector2 launcherPos = new Vector2();
 		private DateTime lastShot = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
 		private TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
 
 
-		public Ship(Scene scene, Model model, Player player) :
-			base(scene, model, new Vector3(), GameParameters.Ship.SIZE)
+		public Ship(Scene scene, Model model, Vector3 position, Player player) :
+			base(scene, model, position, GameParameters.Ship.SIZE)
 		{
 			rotation.X = MathHelper.ToRadians(90.0f);
 			this.player = player;

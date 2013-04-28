@@ -5,8 +5,28 @@ namespace AsteroidsEvolved.GameInput
 {
 	class Player
 	{
-		public GameParameters.Mode player_mode;
+		private GameParameters.Mode player_mode;
 		public UserInput userInput;
+
+		public GameParameters.Mode PlayerMode
+		{
+			get { return player_mode; }
+			set
+			{
+				switch (value)
+				{
+					case GameParameters.Mode.HU:
+						player_mode = value;
+						userInput = new HumanInput();
+					break;
+
+					case GameParameters.Mode.AI:
+					player_mode = value;
+						userInput = new AI();
+					break;
+				}
+			}
+		}
 
 		public int score = 0;
 		public int lives = 3;

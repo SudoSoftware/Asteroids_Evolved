@@ -26,11 +26,11 @@ namespace AsteroidsEvolved
             : base(manager, exit_screen)
         {
             GameParameters.Player1.reset_vars();
-            GameParameters.Player2.reset_vars();
+			GameParameters.Player2.reset_vars();
 
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
 			ThreadPool.getInstance().enqueueWorkItem(new CollisionDetector(scene));
-            addShip();
+			addShips();
             addAsteroids();
 
 			ThreadPool.getInstance().startWork();
@@ -45,11 +45,23 @@ namespace AsteroidsEvolved
 
 
 
-        public void addShip()
-        {
-            Ship ship = new Ship(scene, manager.RM.Content.Load<Model>(GameParameters.Ship.MODEL), GameParameters.Player1); //todo: set up multiple ships
-            scene.addShip(ship);
+		public void addShips()
+		{
+			addShip(GameParameters.Player1, new Vector3());
+			addShip(GameParameters.Player2, new Vector3(80, 80, 0));
 			ThreadPool.getInstance().enqueueWorkItem(new ShipUpdater(scene));
+		}
+
+
+
+        public void addShip(Player player, Vector3 location)
+        {
+			System.Diagnostics.Debug.WriteLine(player.PlayerMode);
+			if (player.PlayerMode == GameParameters.Mode.NA)
+				return;
+			
+            Ship ship = new Ship(scene, manager.RM.Content.Load<Model>(GameParameters.Ship.MODEL), location, player);
+            scene.addShip(ship);
         }
 
 
@@ -69,7 +81,7 @@ namespace AsteroidsEvolved
             
             // Draw scores and lives.
             manager.RM.SpriteB.Begin();
-            if (GameParameters.Player1.player_mode != GameParameters.Mode.NA)
+			if (GameParameters.Player1.PlayerMode != GameParameters.Mode.NA)
             {
                 manager.RM.SpriteB.DrawString(
                     (SpriteFont)manager.RM.FontHash["IntroFont"],
@@ -92,7 +104,7 @@ namespace AsteroidsEvolved
                 }
             }
 
-            if (GameParameters.Player2.player_mode != GameParameters.Mode.NA)
+			if (GameParameters.Player2.PlayerMode != GameParameters.Mode.NA)
             {
                 manager.RM.SpriteB.DrawString(
                     (SpriteFont)manager.RM.FontHash["IntroFont"],

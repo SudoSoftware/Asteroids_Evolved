@@ -16,8 +16,8 @@ namespace AsteroidsEvolved
             this.player_name = player_name;
             this.player = player;
 
-            current_index = (int)player.player_mode;
-            display_text = player_name + options[(int)player.player_mode];
+            current_index = (int)player.PlayerMode;
+			display_text = player_name + options[(int)player.PlayerMode];
         }
 
 		public override void HandleInput(Microsoft.Xna.Framework.GameTime time, HumanInput input)
@@ -41,25 +41,25 @@ namespace AsteroidsEvolved
 
         public override void RunAction()
         {
-            player.player_mode = (GameParameters.Mode) current_index;
+			player.PlayerMode = (GameParameters.Mode)current_index;
 
             // MAGIC NUMBERS !!!!
             switch (current_index)
             {
                     // Single Player
                 case 0:
-                    player.player_mode = GameParameters.Mode.NA;
+					player.PlayerMode = GameParameters.Mode.NA;
                     break;
 
-                    // Mulit Player
+                    // Multi Player
                 case 1:
-                    player.player_mode = GameParameters.Mode.HU;
+					player.PlayerMode = GameParameters.Mode.HU;
                     break;
 
                     // I'm sorry, Dave. I'm afraid I can't let you know
                     // what this case does.
                 case 2:
-                    player.player_mode = GameParameters.Mode.AI;
+					player.PlayerMode = GameParameters.Mode.AI;
                     break;
             }
         }

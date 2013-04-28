@@ -35,13 +35,13 @@ namespace AsteroidsEvolved.World
             GameParameters.sbatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             GameParameters.sbatch.End();
 
-			foreach (Ship ship in ships.ToArray())
+			foreach (Ship ship in ships)
 				ship.draw(camera);
 
-			foreach (Asteroid asteroid in asteroids.ToArray())
+			foreach (Asteroid asteroid in asteroids)
 				asteroid.draw(camera);
 
-            foreach (Rocket rocket in rockets.ToArray())
+            foreach (Rocket rocket in rockets)
                 rocket.draw(camera);
 		}
 
@@ -74,6 +74,7 @@ namespace AsteroidsEvolved.World
 		public void addShip(Ship ship)
 		{
 			ships.Add(ship);
+			System.Diagnostics.Debug.WriteLine(ships.Count);
 		}
 
 
