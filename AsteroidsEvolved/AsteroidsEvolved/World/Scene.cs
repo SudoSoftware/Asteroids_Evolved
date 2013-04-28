@@ -37,18 +37,14 @@ namespace AsteroidsEvolved.World
             GameParameters.sbatch.Draw(background, new Rectangle(0, 0, 1920, 1080), Color.White);
             GameParameters.sbatch.End();
 
-			foreach (Ship ship in ships)
-				ship.draw(camera);
-
-			//requestAsteroidsMutex();
-			foreach (Asteroid asteroid in asteroids)
-				asteroid.draw(camera);
-			//releaseRocketsMutex();
-
-			//requestRocketsMutex();
-            foreach (Rocket rocket in rockets)
-                rocket.draw(camera);
-			//releaseRocketsMutex();
+			for (int j = 0; j < ships.Count; j++)
+				ships[j].draw(camera);
+			
+			for (int j = 0; j < asteroids.Count; j++)
+				asteroids[j].draw(camera);
+			
+            for (int j = 0; j < rockets.Count; j++)
+                rockets[j].draw(camera);
 		}
 
 
@@ -65,13 +61,14 @@ namespace AsteroidsEvolved.World
         public void addRocket(Rocket rocket)
         {
             // We can't have a whole bunch of rockets on the screen.
-            if (rockets.Count >= 5)
-                return;
+          //  if (rockets.Count >= 5)
+            //    return;
 
-			pew.Play();
 			requestRocketsMutex();
             rockets.Add(rocket);
 			releaseRocketsMutex();
+
+			pew.Play();
         }
 
 
@@ -81,7 +78,6 @@ namespace AsteroidsEvolved.World
 			shipMutex.WaitOne();
 			ships.Add(ship);
 			shipMutex.ReleaseMutex();
-			System.Diagnostics.Debug.WriteLine(ships.Count);
 		}
 
 

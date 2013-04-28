@@ -45,6 +45,7 @@ namespace AsteroidsEvolved
 
             scene = new Scene(new Camera(manager.RM.Graphics), manager.RM.Background);
 			ThreadPool.getInstance().enqueueWorkItem(new CollisionDetector(scene));
+			ThreadPool.getInstance().enqueueWorkItem(new RocketUpdater(scene));
 			addShips();
             addAsteroids();
 

@@ -114,8 +114,6 @@ namespace AsteroidsEvolved
 
         public void fire(TimeSpan elapsedGameTime)
         {
-			System.Diagnostics.Debug.WriteLine("firing");
-
 			Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), this, manifests[0].position, movementVector, directionVector);
 			scene.addRocket(rocket);
         }
@@ -124,7 +122,6 @@ namespace AsteroidsEvolved
 
 		public override void handleIntersection(WorldObject obj)
 		{
-			System.Diagnostics.Debug.WriteLine("SHIP INTERSECTING!");
 			scene.killItem(this);
 		}
 	}

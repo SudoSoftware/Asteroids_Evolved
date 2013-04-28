@@ -15,9 +15,11 @@ namespace AsteroidsEvolved.Threading.WorkItems
 
 		public override void updateObjects(TimeSpan elapsedTime)
 		{
+			scene.requestRocketsMutex();
 			List<Rocket> rockets = scene.getRockets();
 			foreach (Rocket rocket in rockets)
 				rocket.update(elapsedTime);
+			scene.releaseRocketsMutex();
 		}
 	}
 }

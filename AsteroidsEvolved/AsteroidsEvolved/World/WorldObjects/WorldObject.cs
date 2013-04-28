@@ -19,13 +19,6 @@ namespace AsteroidsEvolved.World.WorldObjects
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
-		List<Manifestation> MANIFESTS
-		{
-			get { return manifests; }
-		}
-		
-
-
 		public WorldObject(Scene scene, Model model, Vector3 initialLocation, float size):
 			this(model, initialLocation, new Vector3(size, size, size))
 		{
@@ -49,8 +42,8 @@ namespace AsteroidsEvolved.World.WorldObjects
 			modelBounds.Max *= scale;
 
 			System.Diagnostics.Debug.WriteLine("Constructing new " + this);
-			System.Diagnostics.Debug.WriteLine(desiredBounds + "	" + modelBounds);
-			System.Diagnostics.Debug.WriteLine(modelBounds.Max - modelBounds.Min);
+			//System.Diagnostics.Debug.WriteLine(desiredBounds + "	" + modelBounds);
+			//System.Diagnostics.Debug.WriteLine(modelBounds.Max - modelBounds.Min);
 
 			manifests.Add(new Manifestation(initialLocation, this));
 			for (int j = 0; j < 3; j++)

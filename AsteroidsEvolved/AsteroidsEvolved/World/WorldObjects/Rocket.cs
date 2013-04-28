@@ -30,8 +30,8 @@ namespace AsteroidsEvolved.World.WorldObjects
         {
             destructTimer += elapsedGameTime.Duration();
 
-            if (destructTimer > GameParameters.Rocket.lifeDuration)
-                scene.killItem(this);
+            //if (destructTimer > GameParameters.Rocket.lifeDuration)
+            //    scene.killItem(this);
 
             translate(
                 movementVector.X,
