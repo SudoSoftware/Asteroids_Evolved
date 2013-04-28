@@ -65,7 +65,7 @@ namespace AsteroidsEvolved
 		{
 			public static readonly String MODEL = "Models/p1_wedge";
 			public static readonly float SIZE = 24;
-			public static readonly float ACCELERATION = 0.15f;
+			public static readonly float ACCELERATION = 0.09f;
 			public static readonly float TURN_RATE = 0.002f;
 		}
 
@@ -101,7 +101,7 @@ namespace AsteroidsEvolved
         {
             public static readonly String BACKGROUND = "Textures/starfield";
 			public static readonly Rectangle BOUNDS = new Rectangle(-1920 / 2, -1080 / 2, 1920, 1080);
-			public static readonly float SPEED_LIMIT = 32f;
+			public static readonly float SPEED_LIMIT = 24f;
 		}
 
 

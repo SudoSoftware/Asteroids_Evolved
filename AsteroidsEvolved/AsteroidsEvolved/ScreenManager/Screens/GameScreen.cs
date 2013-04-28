@@ -47,8 +47,8 @@ namespace AsteroidsEvolved
 
 		public void addShips()
 		{
-			addShip(GameParameters.Player1, new Vector3());
-			addShip(GameParameters.Player2, new Vector3(80, 80, 0));
+			addShip(GameParameters.Player1, new Vector3(-50, 0, 0));
+			addShip(GameParameters.Player2, new Vector3(50, 0, 0));
 			ThreadPool.getInstance().enqueueWorkItem(new ShipUpdater(scene));
 		}
 
@@ -68,8 +68,18 @@ namespace AsteroidsEvolved
 
         public void addAsteroids()
         {
-            Asteroid asteroid = new Asteroid(scene, manager.RM.Content.Load<Model>(GameParameters.Asteroid.MODEL), new Vector3(200, 200, 0));
-            scene.addAsteroid(asteroid);
+			MyRandom rand = new MyRandom();
+
+			for (int i = 0 ; i < 4 ; ++i)
+				scene.addAsteroid(
+					new Asteroid(
+						scene,
+						manager.RM.Content.Load<Model>(GameParameters.Asteroid.MODEL),
+						new Vector3((int)rand.nextRange(-960, 960) + 100, (int)rand.nextRange(-512, 512) + 100, 0),
+						rand.nextCircleVector()
+						)
+					);
+
 			ThreadPool.getInstance().enqueueWorkItem(new AsteroidsUpdater(scene));
         }
 
