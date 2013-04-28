@@ -59,11 +59,11 @@ namespace AsteroidsEvolved.GameInput
 		public Player mirror()
 		{
 			score_position = new Vector2(
-				1600,
+				1500,
 				50);
 
 			life_position = new Vector2(
-				1600,
+				1500,
 				125
 				);
 

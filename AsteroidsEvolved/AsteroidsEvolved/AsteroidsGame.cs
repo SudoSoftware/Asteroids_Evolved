@@ -93,15 +93,44 @@ namespace AsteroidsEvolved
 
 		private void setDefaultKeyBindings()
 		{
+			setPlayer1Bindings();
+			setPlayer2Bindings();
+		}
+
+
+
+		private void setPlayer1Bindings()
+		{
+			if (GameParameters.Player1.PlayerMode != GameParameters.Mode.HU)
+				return;
+
 			HumanInput player1keys = (HumanInput)GameParameters.Player1.userInput;
 
-			player1keys.LeftKey = GameParameters.DefaultKeyBindings.Player1.LeftKey;
-			player1keys.RightKey = GameParameters.DefaultKeyBindings.Player1.RightKey;
-			player1keys.UpKey = GameParameters.DefaultKeyBindings.Player1.UpKey;
-			player1keys.DownKey = GameParameters.DefaultKeyBindings.Player1.DownKey;
-			player1keys.EscKey = GameParameters.DefaultKeyBindings.Player1.EscKey;
-			player1keys.FireKey = GameParameters.DefaultKeyBindings.Player1.FireKey;
-			player1keys.TeleportKey = GameParameters.DefaultKeyBindings.Player1.TeleportKey;
+			player1keys.LeftKey = GameParameters.DefaultKeyBindings.Player1.LEFT;
+			player1keys.RightKey = GameParameters.DefaultKeyBindings.Player1.RIGHT;
+			player1keys.UpKey = GameParameters.DefaultKeyBindings.Player1.UP;
+			player1keys.DownKey = GameParameters.DefaultKeyBindings.Player1.DOWN;
+			player1keys.EscKey = GameParameters.DefaultKeyBindings.Player1.ESCAPE;
+			player1keys.FireKey = GameParameters.DefaultKeyBindings.Player1.FIRE;
+			player1keys.TeleportKey = GameParameters.DefaultKeyBindings.Player1.TELEPORT;
+		}
+
+
+
+		private void setPlayer2Bindings()
+		{
+			if (GameParameters.Player2.PlayerMode != GameParameters.Mode.HU)
+				return;
+
+			HumanInput player2keys = (HumanInput)GameParameters.Player2.userInput;
+
+			player2keys.LeftKey = GameParameters.DefaultKeyBindings.Player2.LEFT;
+			player2keys.RightKey = GameParameters.DefaultKeyBindings.Player2.RIGHT;
+			player2keys.UpKey = GameParameters.DefaultKeyBindings.Player2.UP;
+			player2keys.DownKey = GameParameters.DefaultKeyBindings.Player2.DOWN;
+			player2keys.EscKey = GameParameters.DefaultKeyBindings.Player2.ESCAPE;
+			player2keys.FireKey = GameParameters.DefaultKeyBindings.Player2.FIRE;
+			player2keys.TeleportKey = GameParameters.DefaultKeyBindings.Player2.TELEPORT;
 		}
 
 

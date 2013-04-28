@@ -13,7 +13,7 @@ namespace AsteroidsEvolved.GameInput
 		}
 
 
-		private List<InputType> lastState = new List<InputType>();
+		protected List<InputType> lastState = new List<InputType>();
 		protected List<InputType> currentState = new List<InputType>();
 		private DateTime lastInputTime;
 

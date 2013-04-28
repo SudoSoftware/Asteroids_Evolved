@@ -21,10 +21,6 @@ namespace AsteroidsEvolved
 		private Vector2 movementVector = new Vector2(0, 0);
 		private Vector2 directionVector = new Vector2(0, -1);
 
-		//private Vector2 launcherPos = new Vector2();
-		private DateTime lastShot = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
-		private TimeSpan fireDelayTime = new TimeSpan(0, 0, 0, 0, 250);
-
 
 		public Ship(Scene scene, Model model, Vector3 position, Player player) :
 			base(scene, model, position, GameParameters.Ship.SIZE)
@@ -49,6 +45,9 @@ namespace AsteroidsEvolved
 
 		public void handleNavigation(TimeSpan elapsedGameTime)
 		{
+			HumanInput hi = (HumanInput)player.userInput;
+
+			System.Diagnostics.Debug.WriteLine(this.GetHashCode() + "	" + player.PlayerMode + "	" + hi.UpKey);
 			if (player.userInput.onNow(UserInput.InputType.UP))
 				accelerate(elapsedGameTime);
 
@@ -73,10 +72,8 @@ namespace AsteroidsEvolved
 
 		public void handleFiring(TimeSpan elapsedGameTime)
 		{
-			if (player.userInput.onNow(UserInput.InputType.FIRE))
+			if (player.userInput.justPressed(UserInput.InputType.FIRE))
 				fire(elapsedGameTime);
-
-			lastShot += elapsedGameTime.Duration();
 		}
 
 
@@ -122,18 +119,11 @@ namespace AsteroidsEvolved
 
         public void fire(TimeSpan elapsedGameTime)
         {
-			if ((DateTime.Now - lastShot) >= fireDelayTime)
-			{
-				System.Diagnostics.Debug.WriteLine("firing");
+			System.Diagnostics.Debug.WriteLine("firing");
 
-				Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), this, manifests[0].position, movementVector, directionVector);
-				scene.addRocket(rocket);
-				pew.Play();
-
-				lastShot = DateTime.Now;
-			}
-			else
-				System.Diagnostics.Debug.WriteLine("too fast");
+			Rocket rocket = new Rocket(scene, GameParameters.cmanager.Load<Model>(GameParameters.Rocket.MODEL), this, manifests[0].position, movementVector, directionVector);
+			scene.addRocket(rocket);
+			pew.Play();
         }
 
 

@@ -16,7 +16,7 @@ namespace AsteroidsEvolved
 		public static SpriteBatch sbatch;
 		public static ContentManager cmanager;
 		public static Player Player1 = new Player(Mode.HU);
-		public static Player Player2 = new Player(Mode.NA);
+		public static Player Player2 = new Player(Mode.NA).mirror();
 
 
         // Player modes.
@@ -36,34 +36,27 @@ namespace AsteroidsEvolved
 		{
 			public struct Player1
 			{
-				public static Keys LeftKey = Keys.Left;
-				public static Keys RightKey = Keys.Right;
-				public static Keys UpKey = Keys.Up;
-				public static Keys DownKey = Keys.Down;
-				public static Keys EscKey = Keys.Escape;
-				public static Keys FireKey = Keys.Space;
-				public static Keys TeleportKey = Keys.T;
+				public static readonly Keys LEFT = Keys.Left;
+				public static readonly Keys RIGHT = Keys.Right;
+				public static readonly Keys UP = Keys.Up;
+				public static readonly Keys DOWN = Keys.Down;
+				public static readonly Keys ESCAPE = Keys.Escape;
+				public static readonly Keys FIRE = Keys.Space;
+				public static readonly Keys TELEPORT = Keys.T;
 			}
 
 
 
 			public struct Player2
 			{
-				public static Keys LeftKey = Keys.A;
-				public static Keys RightKey = Keys.D;
-				public static Keys UpKey = Keys.W;
-				public static Keys DownKey = Keys.S;
-				public static Keys EscKey = Keys.Escape;
-				public static Keys FireKey = Keys.RightControl;
-				public static Keys TeleportKey = Keys.NumPad0;
+				public static readonly Keys LEFT = Keys.A;
+				public static readonly Keys RIGHT = Keys.D;
+				public static readonly Keys UP = Keys.W;
+				public static readonly Keys DOWN = Keys.S;
+				public static readonly Keys ESCAPE = Keys.Escape;
+				public static readonly Keys FIRE = Keys.P;
+				public static readonly Keys TELEPORT = Keys.NumPad0;
 			}
-		}
-
-
-
-		public struct Player2Keys
-		{
-			
 		}
 
 

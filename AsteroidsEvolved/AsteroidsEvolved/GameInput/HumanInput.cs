@@ -7,6 +7,12 @@ namespace AsteroidsEvolved.GameInput
 	{
 		public Keys EscKey, LeftKey, RightKey, UpKey, DownKey, FireKey, TeleportKey;
 
+		public HumanInput()
+		{
+			lastState.Clear();
+			currentState.Clear();
+		}
+
 
 		protected override void UpdateState()
 		{

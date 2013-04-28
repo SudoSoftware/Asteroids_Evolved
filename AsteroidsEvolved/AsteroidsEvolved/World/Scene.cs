@@ -18,7 +18,7 @@ namespace AsteroidsEvolved.World
 		private List<Ship> ships = new List<Ship>();
 		private List<Asteroid> asteroids = new List<Asteroid>();
         private List<Rocket> rockets = new List<Rocket>();
-		private Mutex asteroidsMutex = new Mutex(), rocketsMutex = new Mutex();
+		private Mutex shipMutex = new Mutex(), asteroidsMutex = new Mutex(), rocketsMutex = new Mutex();
 
 
 		public Scene(Camera camera, Texture2D background)
@@ -38,11 +38,15 @@ namespace AsteroidsEvolved.World
 			foreach (Ship ship in ships)
 				ship.draw(camera);
 
+			//requestAsteroidsMutex();
 			foreach (Asteroid asteroid in asteroids)
 				asteroid.draw(camera);
+			//releaseRocketsMutex();
 
+			//requestRocketsMutex();
             foreach (Rocket rocket in rockets)
                 rocket.draw(camera);
+			//releaseRocketsMutex();
 		}
 
 
@@ -73,7 +77,9 @@ namespace AsteroidsEvolved.World
 
 		public void addShip(Ship ship)
 		{
+			shipMutex.WaitOne();
 			ships.Add(ship);
+			shipMutex.ReleaseMutex();
 			System.Diagnostics.Debug.WriteLine(ships.Count);
 		}
 
