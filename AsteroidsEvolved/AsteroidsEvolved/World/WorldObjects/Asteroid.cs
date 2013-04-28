@@ -35,5 +35,14 @@ namespace AsteroidsEvolved.World.WorldObjects
 
 			base.update(elapsedGameTime);
 		}
+
+
+
+		public override void handleIntersection(WorldObject obj)
+		{
+			if (obj.GetType() == typeof(Rocket))
+				modelScale *= Matrix.CreateScale(0.9f);
+
+		}
 	}
 }

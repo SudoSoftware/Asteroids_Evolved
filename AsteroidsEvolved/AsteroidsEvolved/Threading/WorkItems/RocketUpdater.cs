@@ -17,8 +17,17 @@ namespace AsteroidsEvolved.Threading.WorkItems
 		{
 			scene.requestRocketsMutex();
 			List<Rocket> rockets = scene.getRockets();
+			List<Rocket> expiredRockets = new List<Rocket>();
 			foreach (Rocket rocket in rockets)
+			{
 				rocket.update(elapsedTime);
+				if (!rocket.isAlive())
+					expiredRockets.Add(rocket);
+			}
+
+			
+			foreach (Rocket deadRocket in expiredRockets)
+				rockets.Remove(deadRocket);
 			scene.releaseRocketsMutex();
 		}
 	}

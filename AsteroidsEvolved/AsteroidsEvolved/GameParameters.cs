@@ -42,7 +42,7 @@ namespace AsteroidsEvolved
 				public static readonly Keys DOWN = Keys.Down;
 				public static readonly Keys ESCAPE = Keys.Escape;
 				public static readonly Keys FIRE = Keys.Space;
-				public static readonly Keys TELEPORT = Keys.T;
+				public static readonly Keys TELEPORT = Keys.NumPad0;
 			}
 
 
@@ -54,8 +54,8 @@ namespace AsteroidsEvolved
 				public static readonly Keys UP = Keys.W;
 				public static readonly Keys DOWN = Keys.S;
 				public static readonly Keys ESCAPE = Keys.Escape;
-				public static readonly Keys FIRE = Keys.P;
-				public static readonly Keys TELEPORT = Keys.NumPad0;
+				public static readonly Keys FIRE = Keys.F;
+				public static readonly Keys TELEPORT = Keys.T;
 			}
 		}
 
@@ -74,9 +74,11 @@ namespace AsteroidsEvolved
 		public struct Rocket
 		{
 			public static readonly String MODEL = "Models/ShockwaveRocket"; //ShockwaveRocket looks better than LargeRocket
-			public static readonly float SIZE = 8;
-            public static readonly float SPEED = 2f;
-            public static readonly TimeSpan lifeDuration = new TimeSpan(0, 0, 5);
+			public static readonly Vector3 SIZE = new Vector3(8f, 30f, 8f);
+            public static readonly float SPEED = 5f;
+			public static readonly float ROTATION_SPEED = 0.002f;
+
+            public static readonly TimeSpan lifeDuration = new TimeSpan(0, 0, 3);
 		}
 
 

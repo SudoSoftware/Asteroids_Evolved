@@ -14,6 +14,7 @@ namespace AsteroidsEvolved.World
 	{
 		private Texture2D background;
 		private Camera camera;
+		public static Scene instance;
 
 		private List<Ship> ships = new List<Ship>();
 		private List<Asteroid> asteroids = new List<Asteroid>();
@@ -27,6 +28,7 @@ namespace AsteroidsEvolved.World
 		{
 			this.camera = camera;
             this.background = background;
+			instance = this;
 		}
 
 
@@ -61,8 +63,8 @@ namespace AsteroidsEvolved.World
         public void addRocket(Rocket rocket)
         {
             // We can't have a whole bunch of rockets on the screen.
-          //  if (rockets.Count >= 5)
-            //    return;
+            if (rockets.Count >= 10)
+                return;
 
 			requestRocketsMutex();
             rockets.Add(rocket);

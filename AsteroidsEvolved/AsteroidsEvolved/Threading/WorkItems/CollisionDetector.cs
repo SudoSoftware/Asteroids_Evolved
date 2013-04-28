@@ -39,6 +39,19 @@ namespace AsteroidsEvolved.Threading.WorkItems
 
 		private void testForRocketAsteroidCollision()
 		{
+			scene.requestRocketsMutex();
+			foreach (Rocket rocket in scene.getRockets())
+			{
+				foreach (Asteroid asteroid in scene.getAsteroids())
+				{
+					if (rocket.intersects(asteroid))
+					{
+						rocket.handleIntersection(asteroid);
+						asteroid.handleIntersection(rocket);
+					}
+				}
+			}
+			scene.releaseRocketsMutex();
 		}
 	}
 }

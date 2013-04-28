@@ -13,22 +13,20 @@ namespace AsteroidsEvolved.World.WorldObjects
 		protected Model model;
 		protected Matrix modelScale;
 		private BoundingBox modelBounds;
-		private bool isAlive = true;
 
 		protected Vector3 rotation;
 		protected List<Manifestation> manifests = new List<Manifestation>();
 
 
 		public WorldObject(Scene scene, Model model, Vector3 initialLocation, float size):
-			this(model, initialLocation, new Vector3(size, size, size))
+			this(scene, model, initialLocation, new Vector3(size, size, size))
+		{ }
+
+
+
+		public WorldObject(Scene scene, Model model, Vector3 initialLocation, Vector3 desiredBounds)
 		{
-            this.scene = scene;
-        }
-
-
-
-		public WorldObject(Model model, Vector3 initialLocation, Vector3 desiredBounds)
-		{
+			this.scene = scene;
 			this.model = model;
 			modelBounds = createBoundingBox();
 
@@ -114,7 +112,11 @@ namespace AsteroidsEvolved.World.WorldObjects
 
 		public bool intersects(WorldObject obj)
 		{
-			return manifests[0].getBoundingBox().Intersects(obj.manifests[0].getBoundingBox());
+			bool intersects = false;
+			for (int j = 0; j < manifests.Count; j++)
+				if (manifests[j].getBoundingBox().Intersects(obj.manifests[j].getBoundingBox()))
+					intersects = true;
+			return intersects;
 		}
 
 
@@ -179,6 +181,13 @@ namespace AsteroidsEvolved.World.WorldObjects
 		protected Matrix getRotationMatrix()
 		{
 			return Matrix.CreateRotationX(rotation.X) * Matrix.CreateRotationY(rotation.Y) * Matrix.CreateRotationZ(rotation.Z);
+		}
+
+
+
+		public Vector3 getPosOfFirstManifest()
+		{
+			return manifests[0].position;
 		}
 
 

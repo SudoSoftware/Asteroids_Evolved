@@ -9,6 +9,7 @@ namespace AsteroidsEvolved.World.WorldObjects
 		private Vector2 movementVector, directionVector;
 		private Ship owner;
         private TimeSpan destructTimer = new TimeSpan();
+		private bool alive = true;
 
 
 		public Rocket(Scene scene, Model model, Ship owner, Vector3 location, Vector2 inertia, Vector2 heading) :
@@ -28,21 +29,39 @@ namespace AsteroidsEvolved.World.WorldObjects
 
         public override void update(System.TimeSpan elapsedGameTime)
         {
-            destructTimer += elapsedGameTime.Duration();
-
-            //if (destructTimer > GameParameters.Rocket.lifeDuration)
-            //    scene.killItem(this);
+            destructTimer += elapsedGameTime;
 
             translate(
                 movementVector.X,
                 -movementVector.Y
                 );
 
+			if (alive)
+				alive = destructTimer < GameParameters.Rocket.lifeDuration;
+
             // Rockets spin as well as move.
-            float val = (float)(0.002 * elapsedGameTime.TotalMilliseconds);
+            float val = (float)(GameParameters.Rocket.ROTATION_SPEED * elapsedGameTime.TotalMilliseconds);
             rotation.Y += val;
 
             base.update(elapsedGameTime);
         }
+
+
+
+		public bool isAlive()
+		{
+			return alive;
+		}
+
+
+
+		public override void handleIntersection(WorldObject obj)
+		{
+			if (obj.GetType() == typeof(Asteroid))
+			{
+				owner.getPlayer().score += 10;
+				alive = false;
+			}
+		}
 	}
 }

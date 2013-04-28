@@ -124,5 +124,12 @@ namespace AsteroidsEvolved
 		{
 			scene.killItem(this);
 		}
+
+
+
+		public Player getPlayer()
+		{
+			return player;
+		}
 	}
 }
